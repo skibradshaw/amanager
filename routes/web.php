@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('new_page');
 });
+
+Auth::routes();
+//Properties
+Route::get('properties/{property_id}','PropertyController@show');
+
+//Apartments
+Route::get('properties/{propoerty_id}/apartments','ApartmentController@index');
+Route::get('properties/{property_id}/apartments/{apartment_id}','ApartmentController@show');
+

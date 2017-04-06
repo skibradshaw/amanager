@@ -22,3 +22,36 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Property::class,function (Faker\Generator $faker){
+	return [
+		'name' => 'Carlton Scott'
+	];
+});
+
+
+$autoIncrement = autoIncrement();
+
+
+$factory->define(App\Apartment::class, function (Faker\Generator $faker) use ($autoIncrement){
+
+
+	
+	$autoIncrement->next();
+	$number = $autoIncrement->current();
+	return [
+		'name' => 'CS'.$number,
+		'number' => $number,
+		'property_id' => factory(App\Property::class)->create()->id
+	];
+
+});
+
+	function autoIncrement()
+	{
+	    for ($i = 0; $i < 1000; $i++) {
+	        yield $i;
+	    }
+	}
+
+	
