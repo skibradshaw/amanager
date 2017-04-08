@@ -41,7 +41,7 @@ class ApartmentController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function store(Property $property_id, Request $request)
+	public function store(Property $property, Request $request)
 	{
 		$this->validate($request,[
 				'name' => 'required',
@@ -50,13 +50,13 @@ class ApartmentController extends Controller
 
 		Apartment::create($request->all());
 
-		return redirect()->route('apartments.index');
+		return redirect()->route('apartments.index',$property);
 	}
 
-    public function show(Property $property_id,Apartment $apartment_id)
+    public function show(Property $property,Apartment $apartment)
     {
-    	$apartment = Apartment::find($apartment_id);
-    	$property = Property::find($property_id);
+    	// $apartment = Apartment::find($apartment_id);
+    	// $property = Property::find($property_id);
 
     	return view('apartments.show',[
     			'apartment' => $apartment,
@@ -70,11 +70,10 @@ class ApartmentController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Property $property,Apartment $apartment)
 	{
-		$apartment = Apartment::find($id);
 
-		return view('apartments.edit', compact('apartment'));
+		return view('apartments.edit',['property' => $property,'apartment' => $apartment]);
 	}
 
 	/**
@@ -83,13 +82,11 @@ class ApartmentController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Property $property, Apartment $apartment,Request $request)
 	{
-		$apartment = Apartment::findOrFail($id);
+		$apartment->update($request->all());
 
-		$apartment->update($data);
-
-		return Redirect::route('apartments.index');
+		return redirect()->route('apartments.index',$property);
 	}
 
 	/**

@@ -16,10 +16,16 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-//Properties
-Route::get('properties/{property_id}','PropertyController@show');
+// //Properties
 
-//Apartments
-Route::get('properties/{propoerty_id}/apartments','ApartmentController@index');
-Route::get('properties/{property_id}/apartments/{apartment_id}','ApartmentController@show');
 
+// //Apartments
+
+//Leases
+Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/add_tenant',['as' => 'properties.apartements.leases.add_tenant','uses' => 'LeaseController@addTenant']);
+
+//Resource Routes
+Route::resource('properties','PropertyController');
+Route::resource('properties/{property}/apartments','ApartmentController');
+Route::resource('properties/{property}/apartments/{apartment}/leases','LeaseController');
+Route::resource('tenants','TenantController');

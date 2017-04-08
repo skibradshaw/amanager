@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -25,20 +27,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Property::class,function (Faker\Generator $faker){
 	return [
-		'name' => 'Carlton Scott'
+		'name' => 'Carlton Scott',
+		'abbreviation' => 'CS'
 	];
 });
 
 
-$autoIncrement = autoIncrement();
+$factory->define(App\Apartment::class, function (Faker\Generator $faker) {
 
-
-$factory->define(App\Apartment::class, function (Faker\Generator $faker) use ($autoIncrement){
-
-
-	
-	$autoIncrement->next();
-	$number = $autoIncrement->current();
+	$number = App\Apartment::max('number')+1;
 	return [
 		'name' => 'CS'.$number,
 		'number' => $number,
@@ -47,11 +44,24 @@ $factory->define(App\Apartment::class, function (Faker\Generator $faker) use ($a
 
 });
 
-	function autoIncrement()
-	{
-	    for ($i = 0; $i < 1000; $i++) {
-	        yield $i;
-	    }
-	}
+$factory->define(App\Tenant::class, function (Faker\Generator $faker){
+	return [
+		'firstname' => $faker->firstName,
+		'lastname' => $faker->lastName,
+		'email' => $faker->email,
+		'password' => bcrypt($faker->sentence),
+		'phone' => $faker->phoneNumber,
+	];
+});
+
+$factory->define(App\Lease::class,function (Faker\Generator $faker){
+
+	return [
+		'apartment_id' => factory(App\Apartment::class)->create()->id,
+		'start' => Carbon::parse('first day of next month'),
+		'end' => Carbon::parse('first day of next month')->addYear()->subDay(),
+		// 'tenants' => factory(App\Tenant::class,3)->create()->toArray()
+	];
+});
 
 	
