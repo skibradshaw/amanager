@@ -60,6 +60,10 @@ $factory->define(App\Lease::class,function (Faker\Generator $faker){
 		'apartment_id' => factory(App\Apartment::class)->create()->id,
 		'start' => Carbon::parse('first day of next month'),
 		'end' => Carbon::parse('first day of next month')->addYear()->subDay(),
+		'monthly_rent' => 80000;
+		'pet_rent' => 10000;
+		'deposit' => 80000;
+		'pet_deposit' => 10000;
 		// 'tenants' => factory(App\Tenant::class,3)->create()->toArray()
 	];
 });

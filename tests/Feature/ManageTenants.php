@@ -12,6 +12,17 @@ class ManageTenantsTest extends TestCase
     use DatabaseMigrations;
 
 	/** @test */
+	function user_can_view_all_tenants()
+	{
+	    $this->disableExceptionHandling();
+	    $response = $this->get('/tenants');
+
+	    $response->assertStatus(200);
+	    $response->assertViewHas('tenants');
+
+	}
+
+	/** @test */
 	function user_can_view_create_form()
 	{
 		$this->disableExceptionHandling();
