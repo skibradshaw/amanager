@@ -18,4 +18,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    protected $guarded = [];
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = \Hash::make($value);
+    }
+
 }

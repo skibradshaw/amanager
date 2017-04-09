@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use App\Lease;
+use App\LeaseDetail;
 use App\Property;
+use App\Repositories\HelperRepository;
 use App\Tenant;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LeaseController extends Controller
@@ -14,9 +17,11 @@ class LeaseController extends Controller
     public function create(Property $property, Apartment $apartment)
     {
         return view('leases.create',[
-                'property' => $property,
-                'apartment' => $apartment
+            'title' => 'Create a New Lease: Apartment ' . $apartment->name, 
+            'apartment' => $apartment,
+            'property' => $property,
             ]);
+
     }
 
     public function store(Property $property, Apartment $apartment, Request $request)
@@ -24,15 +29,23 @@ class LeaseController extends Controller
     	$this->validate($request,[
                 'start' => 'required | date',
                 'end' => 'required | date',
-                'tenants' => 'required | array'
+                'monthly_rent' => 'required|numeric',
+                'pet_rent' => 'numeric',
+                'deposit' => 'numeric',
+                'pet_deposit' => 'numeric'
             ]);
+        $input = $request->except('tenants');
+        $input['start'] = Carbon::parse($input['start']);
+        $input['end'] = Carbon::parse($input['end']);
+        if(!$apartment->checkAvailability($input['start'],$input['end'])) return redirect()->back()->with('error', 'These dates are not available!');
 
-    	$lease = Lease::create($request->except('tenants'));
+    	$lease = Lease::create($input);
     	$apartment->leases()->save($lease);
-    	$tenants = collect($request->input('tenants'));
-	
-    	$lease->tenants()->attach($tenants->pluck('id'));
-    	return $request->all();
+        $this->createLeaseDetails($lease);
+        //Add Tenants @TODO: Move to Separate Method
+    	// $tenants = collect($request->input('tenants'));	
+    	// $lease->tenants()->attach($tenants->pluck('id'));
+    	return redirect()->route('leases.show',[$property,$apartment,$lease]);
     }
 
     public function show(Property $property, Apartment $apartment, Lease $lease)
@@ -51,5 +64,102 @@ class LeaseController extends Controller
         return $tenant;
     }
 
+    public function createLeaseDetails(Lease $lease)
+    {
+        //Create Lease Details
+        $start = $lease->start;
+        $end = $lease->end;
+        $inc = \DateInterval::createFromDateString('first day of next month');
+        $p = new \DatePeriod($start,$inc,$end);
+        
+        foreach($p as $d)
+        {
+            // echo $p . " - " . $d . "<br>";
+            // dd($p);
+            $helper = new HelperRepository;
+            $d = Carbon::instance($d);
+            $lease_detail = new LeaseDetail;
+            $lease_detail->month = $d->format('n');
+            $lease_detail->year = $d->format('Y');
+            // echo $end->month . " " . $end->year . " + " . $d->format('n') . " " . $d->format('Y');
+            //If the startdate has the same month and year as the current month, calculate a partial
+            if($start->month == $d->format('n') && $start->year == $d->format('Y')) {
+                // $multiplier = (date('t',strtotime($d->format('Y-m-d')))-($start->day-1))/date('t',strtotime($d->format('Y-m-d')));
+                $multiplier = $helper->fractionalMonths($start,Carbon::parse('last day of ' . $d->format('F') . " " . $d->year));
+                $lease_detail->start = $start;
+                $lease_detail->end = Carbon::parse('last day of ' . $d->format('F') . " " . $d->year);
+                // echo "Remaining Days/Total Days in Month (" . date('t',strtotime($d->format('Y-m-d'))) . " - " . ($start->day-1) . "/" .  date('t',strtotime($d->format('Y-m-d'))) . ") Mulitiplier: ";
+            }
+            //Else If the enddate has the same month and year as this month, calculate for partial          
+            elseif($end->month == $d->format('n') && $end->year == $d->format('Y')) {
+                // $multiplier = ($end->day)/date('t',strtotime($d->format('Y-m-d')));
+                $multiplier = $helper->fractionalMonths(Carbon::parse('first day of ' . $d->format('F') . " " . $d->year),$end);
+                $lease_detail->start = Carbon::parse('first day of ' . $d->format('F') . " " . $d->year);
+                $lease_detail->end = $end;
+                // echo "# of Days in Last Month/Total Days in Month (" . ($end->day) . "/" .  date('t',strtotime($d->format('Y-m-d'))) . ") Mulitiplier: ";
+            }
+            //else calculate a full month
+            else {
+                //echo '- Full Month';
+                $multiplier = 1.0;
+                $lease_detail->start = Carbon::parse('first day of ' . $d->format('F') . " " . $d->year);
+                $lease_detail->end = Carbon::parse('last day of ' . $d->format('F') . " " . $d->year);
 
+            }
+            // echo $multiplier . "<br>";
+            $lease_detail->multiplier = $multiplier;
+            $lease_detail->monthly_rent = round(($lease->monthly_rent*$multiplier),0);
+            $lease_detail->monthly_pet_rent = round(($lease->pet_rent*$multiplier),0);
+
+            $lease->details()->save($lease_detail);
+        }
+
+    }
+
+    public function showTerminate(Property $property, Apartment $apartment, Lease $lease)
+    {
+        return view('leases.terminate',[
+            'title' => $lease->apartment->name . ' Lease: ' . $lease->start->format('n/j/Y') . ' - ' . $lease->end->format('n/j/Y'),
+            'lease' => $lease,
+            'property' => $property,
+            'apartment' => $apartment
+            ]);
+    }
+
+    public function terminate(Property $property, Apartment $apartment, Lease $lease, Request $request)
+    {
+        $input = $request->all();
+        $helper = new HelperRepository;
+        //Set the End Date
+        $lease->end = Carbon::parse($input['end']);
+        $lease->save();
+        
+        foreach($lease->details as $detail)
+        {
+            $detail_first_day = $detail->start;
+            $detail_last_day = $detail->end;
+            // echo $detail_last_day . ": ";
+            if($detail_last_day >= Carbon::parse('first day of ' .$lease->end->format('F') . " " . $lease->end->year))
+            {
+                if($detail_last_day <= Carbon::parse('last day of ' .$lease->end->format('F') . " " . $lease->end->year))
+                {
+                    //Modify Mulitiplier on Last Month
+                    $multiplier = $helper->fractionalMonths($detail->start,$lease->end);
+                    $detail->end = $lease->end;
+                    // echo "Modify Multiplier: " . $multiplier . "<br>";
+                    $detail->multiplier = $multiplier;
+                    $detail->monthly_rent = round(($lease->monthly_rent*$multiplier),2);
+                    $detail->monthly_pet_rent = round(($lease->pet_rent*$multiplier),2);
+                    $detail->save();
+                } else {
+                    //Delete Future Lease Details
+                    // echo "Delete Future Details<br>";
+                    $detail->delete();
+                }
+            }
+
+        }
+        
+        return redirect()->route('leases.show',[$property,$apartment,$lease]);        
+    }
 }

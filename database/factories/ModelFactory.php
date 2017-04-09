@@ -18,10 +18,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+		'firstname' => $faker->firstName,
+		'lastname' => $faker->lastName,
+		'email' => $faker->email,
+		'password' => bcrypt($faker->sentence),
+		'phone' => $faker->phoneNumber,
+		'is_admin' => 1
     ];
 });
 
@@ -30,6 +32,14 @@ $factory->define(App\Property::class,function (Faker\Generator $faker){
 		'name' => 'Carlton Scott',
 		'abbreviation' => 'CS'
 	];
+});
+
+$factory->state(App\Property::class,'active',function($faker){
+	return ['active' => 1];
+});
+
+$factory->state(App\Property::class,'inactive',function($faker){
+	return ['active' => 0];
 });
 
 
@@ -58,14 +68,58 @@ $factory->define(App\Lease::class,function (Faker\Generator $faker){
 
 	return [
 		'apartment_id' => factory(App\Apartment::class)->create()->id,
-		'start' => Carbon::parse('first day of next month'),
-		'end' => Carbon::parse('first day of next month')->addYear()->subDay(),
-		'monthly_rent' => 80000;
-		'pet_rent' => 10000;
-		'deposit' => 80000;
-		'pet_deposit' => 10000;
+		'start' => Carbon::parse('first day of last month')->format('n/j/Y'),
+		'end' => Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y'),
+		'monthly_rent' => 80000,
+		'pet_rent' => 10000,
+		'deposit' => 80000,
+		'pet_deposit' => 10000,
 		// 'tenants' => factory(App\Tenant::class,3)->create()->toArray()
 	];
 });
 
-	
+$factory->define(App\Payment::class,function (Faker\Generator $faker){
+	return [
+		'paid_date' => Carbon::parse('-1 week'),
+		// 'lease_id' => factory(App\Lease::class)->create()->id,
+		'tenant_id' => factory(App\Tenant::class)->create()->id,
+		'amount' => 50000,
+		'payment_type' => collect(App\Payment::$types)->random(),
+		'check_no' => '123456789'
+	];
+});
+
+$factory->state(App\Payment::class,'undeposited',function($faker){
+	return ['bank_deposit_id' => null];
+});
+
+$factory->state(App\Payment::class,'deposited',function($faker){
+	return ['bank_deposit_id' => factory(App\BankDeposit::class)->create()->id];
+});
+
+$factory->define(App\Fee::class,function(Faker\Generator $faker){
+	return [
+		'item_name' => collect(App\Fee::$types)->random(),
+		'note' => $faker->sentence,
+		'due_date' => Carbon::parse('+1 week'),
+		'amount' => 5000
+	];
+
+});
+
+$factory->define(App\BankDeposit::class, function(Faker\Generator $faker) {
+	$depositDate = Carbon::parse('-1 week');
+	(is_null(App\BankDeposit::min('deposit_date'))) ?: $depositDate = App\BankDeposit::min('deposit_date')->subWeeks(2);
+	return [
+		'user_id' => factory(App\User::class)->create(['is_admin' => 1]),
+		'deposit_date' => $depositDate,
+		'transaction_id' => $faker->md5,
+		'amount' => 500000
+	];
+});
+
+$factory->define(App\BankAccount::class,function(Faker\Generator $faker){
+	return [
+		'name' => $faker->bankAccountNumber
+	];
+});

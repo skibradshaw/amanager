@@ -14,15 +14,11 @@ class ApartmentController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Property $property)
 	{
-		//$apartments = Apartment::all();
-		$apartments = Apartment::where('active','=', 1)->get();
-		//return var_dump($apartments);
-		$properties = Property::all();
-		//$current_lease_id = $apartments->currentLease();
-		
-		return view('apartments.index', ['apartments' => $apartments,'properties' => $properties,'title' => 'Apartments']);
+        $apartments = Apartment::with(['property' => function($q){$q->orderBy('name');}])->where('property_id',$property->id)->orderBy('number')->get();
+        //$apartments = $apartments->property()->orderBy('properties.name')->get();
+        return view('apartments.index',['title' => $property->name . ': Apartments','property' => $property,'apartments' => $apartments]);
 	}    
 
 
@@ -31,9 +27,12 @@ class ApartmentController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function create(Property $property_id)
+	public function create(Property $property)
 	{
-		return view('apartments.create');
+        $properties = Property::pluck('abbreviation','id');
+        
+        return view('apartments.edit',['title' => 'Create Apartment: ' . $property->name,'property' => $property, 'properties' => $properties]);
+
 	}
 
 	/**
@@ -45,12 +44,13 @@ class ApartmentController extends Controller
 	{
 		$this->validate($request,[
 				'name' => 'required',
-				'number' => 'required'
+				'number' => 'required|unique:apartments,number,property_id,'.$property->id 
 			]);
 
-		Apartment::create($request->all());
-
-		return redirect()->route('apartments.index',$property);
+        $input = $request->all();
+        $input['name'] = $property->abbreviation . $input['number'];
+        $property->apartments()->create($input);
+        return redirect()->route('apartments.index',['id' => $property->id]);
 	}
 
     public function show(Property $property,Apartment $apartment)
@@ -73,7 +73,8 @@ class ApartmentController extends Controller
 	public function edit(Property $property,Apartment $apartment)
 	{
 
-		return view('apartments.edit',['property' => $property,'apartment' => $apartment]);
+		$properties = Property::active()->pluck('abbreviation','id');
+		return view('apartments.edit',['title' => 'Edit '.$apartment->name,'properties' => $properties, 'apartment' => $apartment]);
 	}
 
 	/**
@@ -95,22 +96,12 @@ class ApartmentController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		Apartment::destroy($id);
+	// public function destroy($id)
+	// {
+	// 	Apartment::destroy($id);
 
-		return redirect()->route('apartments.index');
-	}
+	// 	return redirect()->route('apartments.index');
+	// }
 
-	public function currentLease($id) {
-		$apartment = Apartment::find($id);
-		//echo $apartment->name;
-		//var_dump($apartment->leases);
 
-		foreach($apartment->leases as $lease) {
-			echo $lease->created_at;
-		}
-
-		
-	}
 }

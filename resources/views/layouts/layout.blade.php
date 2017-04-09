@@ -41,6 +41,9 @@
     @yield('content')
 
     </div>
+
+    @yield('modal')
+    
     <!-- /.container -->
     <!-- Core Javascript Vendor Files -->
     <script src="{{ asset('js/all.js') }}"></script>

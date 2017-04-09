@@ -26,6 +26,8 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+        Route::model('bank_account', \App\BankAccount::class);
+
     }
 
     /**
