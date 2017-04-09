@@ -8,17 +8,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">A-Manager</a>
+                <a class="navbar-brand" href="/"><img src="/img/logo.png"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <!-- Nav Bar Left -->
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Apartments</a>
+                        <ul class="dropdown-menu" role="menu">
+                          @foreach($properties as $property)
+                          <li><a href="{{route('apartments.index',[$property])}}">{{$property->name}}</a></li>
+                          <li class="divider"></li>
+                          @endforeach
+                          <li><a href="#">Add a New Property</a></li>                            
+                        </ul>
                     </li>
-                    <li>
-                        <a href="#">Services</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Active Tenants</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Unpaid Balances</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Undeposited Funds</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#">Contact</a>
@@ -33,7 +47,7 @@
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <i class="fa fa-user fa-lg"></i> {{ Auth::user()->firstname }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -44,10 +58,13 @@
                                         Logout
                                     </a>
 
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
+                                <li><a href="#">Manage Bank Accounts</a> </li>
+                                <li><a href="#">Manage Users</a></li>
                             </ul>
                         </li>
                     @endif

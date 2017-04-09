@@ -16,10 +16,10 @@ class PropertiesTableSeeder extends Seeder {
 				'name' => 'Stonegate',
 				'abbreviation' => 'SG'
 			]);
-			Property::create([
-				'name' => '1807 House',
-				'abbreviation' => '1807H'
-			]);
+			// Property::create([
+			// 	'name' => '1807 House',
+			// 	'abbreviation' => '1807H'
+			// ]);
 	}
 
 }

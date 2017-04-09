@@ -32,7 +32,7 @@
     Route::group(['middleware' => 'auth'],function() {
 		//Homepage
 		Route::get('/', function () {
-		    return view('new_page');
+		    return view('new_page',['title' => 'Home']);
 		});   	
 		// //Properties
 

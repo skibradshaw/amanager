@@ -113,7 +113,7 @@ $factory->define(App\BankDeposit::class, function(Faker\Generator $faker) {
 	return [
 		'user_id' => factory(App\User::class)->create(['is_admin' => 1]),
 		'deposit_date' => $depositDate,
-		'transaction_id' => $faker->md5,
+		'transaction_id' => $faker->randomAscii,
 		'amount' => 500000
 	];
 });

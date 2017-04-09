@@ -7,6 +7,14 @@
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
+  "dependencies": {
+    "font-awesome": "4.6.3",
+    "fullcalendar": "3.0.1",
+    "ionicons": "2.0.1",
+    "morris.js": "0.5.0",
+    "pace-progress": "1.0.2"
+  },
+
   "devDependencies": {
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",

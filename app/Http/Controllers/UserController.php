@@ -18,6 +18,7 @@ class UserController extends Controller
         $users = User::all();
         // return $users;
         return view('users.index',[
+          'title' => 'Manage Users',
           'users' => $users
           ]);
     }
@@ -76,6 +77,7 @@ class UserController extends Controller
     {
         // return $user;
         return view('users.partials.edit',[
+          'title' => 'Manage Users',
           'user' => $user
           ]);
     }

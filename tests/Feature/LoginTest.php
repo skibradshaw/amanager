@@ -64,6 +64,7 @@ class LoginTest extends TestCase
     public function logged_in_user_can_view_homepage()
     {
         // $this->seed('DatabaseSeeder');
+        $this->disableExceptionHandling();
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get('/');

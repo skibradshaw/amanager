@@ -7,3 +7,17 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import '../../../node_modules/font-awesome/scss/font-awesome.scss';
+//@import '../../../node_modules/formvalidation/dist/css/formValidation.min.css';
+//@import '../../../node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
+//@import 'datatables.min.css';
+
+
+/** Changes background color, height and margin of the border **/
+.navbar {
+    background: rgb(16, 15, 54);
+
+}
+.navbar-brand {
+	height: 60px;
+}

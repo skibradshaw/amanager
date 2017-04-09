@@ -26,8 +26,9 @@ class TenantController extends Controller
 				'lastname' => 'required',
 				'email' => 'required | email'
 			]);
-
-		$tenant = Tenant::create($request->all());
+		$input = $request->all();
+		$input['type'] = 'Tenant';
+		$tenant = Tenant::create($input);
 
 		return redirect()->route('tenants.show',$tenant)->with('status',$tenant->fullname . " successfully added..nice work!"); 
 
