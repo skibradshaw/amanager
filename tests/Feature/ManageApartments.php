@@ -1,6 +1,7 @@
 <?php
 use App\Apartment;
 use App\Property;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -40,7 +41,7 @@ class ManageApartmentTest extends TestCase
 	/** @test */
 	function user_can_view_all_apartments()
 	{
-	    // $this->disableExceptionHandling();
+	    $this->disableExceptionHandling();
 	    $admin = $this->getAdminUser();
 	    $property = factory(Property::class)->create();
 	    $apartments = factory(Apartment::class,50)->create(['property_id' => $property->id]);
@@ -119,6 +120,34 @@ class ManageApartmentTest extends TestCase
 	    $response->assertStatus(302);
 	    $response->assertRedirect('properties/'.$property->id.'/apartments');
 
+	}
+
+	/** @test */
+	function can_get_current_lease_for_apartment()
+	{
+		$apartment = factory(Apartment::class)->create(); 
+		$start = Carbon::parse('first day of last month')->format('n/j/Y');
+		$end = Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 100000,
+                'pet_rent' => 15000,
+                'deposit' => 200000,
+                'pet_deposit' => 15000	    		
+	    	]);
+
+		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+
+		$currentLease = $apartment->currentLease();
+
+		$this->assertNotNull($currentLease);
+		$this->assertEquals($lease->start,$currentLease->start);
+		$this->assertEquals($lease->id,$currentLease->id);
+
+	    
 	}
     
 }

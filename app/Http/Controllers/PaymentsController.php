@@ -24,6 +24,7 @@ class PaymentsController extends Controller
         $tenants = $lease->tenants->pluck('fullname','id');
         ($request->input('tenant_id')) ? $tenant = Tenant::find($request->input('tenant_id')) : $tenant = new Tenant;
         (!empty($request->input('type'))) ? $type = $request->input('type') : $type = '';
+        $paymentMethods = Payment::$methods;
         // if($lease->depositBalance() <> 0)
         // {
         //    $payment_types = ['Rent' => 'Rent','Fee' => 'Fee','Deposit' => 'Deposit'];        
@@ -34,11 +35,13 @@ class PaymentsController extends Controller
         //return $tenant;
         return view('payments.edit',[
             'title' => 'Record a Payment: ' . $lease->apartment->name . ' Lease: ' . $lease->start->format('n/j/y') . ' - ' . $lease->end->format('n/j/y')  ,
+            'property' => $property,
             'apartment' => $apartment, 'lease' => $lease, 
             'tenants' => $tenants, 
             'tenant' => $tenant,
             'payment_types' => $payment_types,
-            'payment_type' => $type
+            'payment_type' => $type,
+            'paymentMethods' => $paymentMethods
             ]);
     }	
     //
@@ -52,11 +55,14 @@ class PaymentsController extends Controller
     {
         //
          $this->validate($request,[
-                'amount' => 'required | numeric'        
+                'amount' => 'required | numeric',
+                'paid_date' => 'required | date'        
             ]);  
         $input = $request->all();
         $input['paid_date'] = Carbon::parse($input['paid_date']);
         $input['lease_id'] = $lease->id;
+        //Convert Amount from Dollars to Cents
+        $input['amount'] = round($input['amount']*100,0);
         $payment = Payment::create($input);
         // PaymentAllocation::create(['amount' => $input['amount'], 'month' => Carbon::parse($input['paid_date'])->month, 'year' => Carbon::parse($input['paid_date'])->year, 'payment_id' => $payment->id]);
         return redirect()->route('leases.show',[$property,$apartment,$lease])
@@ -75,6 +81,7 @@ class PaymentsController extends Controller
         //
        $tenants = $lease->tenants->pluck('fullname','id');
        $tenant = $payment->tenant;
+       $paymentMethods = Payment::$methods;
        // if($lease->depositBalance() <> 0)
        // {
        //     $payment_types = ['Rent' => 'Rent','Fee' => 'Fee','Deposit' => 'Deposit'];        
@@ -84,13 +91,15 @@ class PaymentsController extends Controller
        $payment_types = Payment::$types; 
        return view('payments.edit',[
             'title' => 'Edit a Payment: ' . $lease->apartment->name . ' Lease: ' . $lease->start->format('n/j/y') . ' - ' . $lease->end->format('n/j/y')  ,
+            'property' => $property,
             'apartment' => $apartment, 
             'lease' => $lease, 
             'tenants' => $tenants,
             'tenant' => $tenant,
             'payment' => $payment,
             'payment_types' => $payment_types,
-            'payment_type' => $payment->payment_type
+            'payment_type' => $payment->payment_type,
+            'paymentMethods' => $paymentMethods
             ]);
     }
 
@@ -111,6 +120,7 @@ class PaymentsController extends Controller
         ]);  
         $input = $request->all();
         $input['paid_date'] = Carbon::parse($input['paid_date']);
+        $input['amount'] = round($input['amount']*100,0);
         $payment->update($input);
         //Remove Current Allocations for a Payment and Create 1 Allocation for the Edited Payment
         // \App\PaymentAllocation::destroy($payment->allocations()->lists('id')->toArray());

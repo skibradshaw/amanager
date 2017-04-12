@@ -37,12 +37,40 @@
 
     <!-- Page Content -->
     <div class="container">
+    @if (session('status'))
+        <div class="alert alert-success text-center">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <h4>{!! session('status') !!}</h4>
+        </div>
+    @endif     
+    @if (session('error'))
+        <div class="alert alert-danger text-center">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <h4>{!! session('error') !!}</h4>
+        </div>
+    @endif 
 
     @yield('content')
 
     </div>
 
     @yield('modal')
+    {{-- Large Modal Trigger  --}}
+    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    {{-- Small Modal Trigger  --}}
+    <div class="modal fade" id="smallModal" tabindex="-1" role="dialog" aria-labelledby="smallModal">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
+
     
     <!-- /.container -->
     <!-- Core Javascript Vendor Files -->
@@ -50,7 +78,14 @@
     <!-- Application Specific Javascript -->
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
-    
+    <script>
+    // Closes success alerts after 5 secs.
+     window.setTimeout(function() {
+        $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 4000);
+    </script>
 </body>
 
 </html>

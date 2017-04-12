@@ -78,7 +78,7 @@ class ManageFeesTest extends TestCase
 		$response = $this->post('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/fees',[
 				'item_name' => collect(Fee::$types)->random(),
 				'note' => 'Fake Fee is assessed',
-				'amount' => 5000,
+				'amount' => 50.00,
 				'due_date' => '5/1/17'
 			]);
 
@@ -121,7 +121,7 @@ class ManageFeesTest extends TestCase
 
 		//Change Amount and Due Date
 		$response = $this->put('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/fees/'.$fee->id,[
-				'amount' => 40000,
+				'amount' => 400.00,
 				'due_date' => '4/1/2017'
 			]);
 

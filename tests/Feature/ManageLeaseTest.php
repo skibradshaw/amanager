@@ -121,7 +121,7 @@ class ManageLeaseTest extends TestCase
 	/** @test */
 	function user_can_view_lease()
 	{
-		// $this->disableExceptionHandling();		
+		$this->disableExceptionHandling();		
 		//Apartment
 		$apartment = factory(Apartment::class)->create(); 
 		$start = Carbon::parse('first day of next month')->format('n/j/Y');
@@ -191,10 +191,10 @@ class ManageLeaseTest extends TestCase
 	    		'start' => $start,
 	    		'end' => $end,
 	    		'apartment_id' => $apartment->id,
-                'monthly_rent' => 100000,
-                'pet_rent' => 15000,
-                'deposit' => 200000,
-                'pet_deposit' => 15000	    		
+                'monthly_rent' => 1050.50,
+                'pet_rent' => 150.00,
+                'deposit' => 2000.00,
+                'pet_deposit' => 150.00	    		
 	    	]);
 
 		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
@@ -211,7 +211,7 @@ class ManageLeaseTest extends TestCase
 		$this->assertEquals($expectedMonths,$newLease->details->sum('multiplier'));
 
 		//Assert the New Total is the expected total
-		$expectedRentTotal = $expectedMonths*100000;
+		$expectedRentTotal = ($expectedMonths*1050.50)*100;
 		$this->assertEquals($expectedRentTotal,$newLease->rent_total);
 		
 

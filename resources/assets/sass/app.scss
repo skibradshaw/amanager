@@ -8,9 +8,11 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import '../../../node_modules/font-awesome/scss/font-awesome.scss';
+@import '../../../node_modules/jquery-ui-dist/jquery-ui.css';
+//@import '../../../node_modules/datatables.net-dt/css/jquery.dataTables.css';
 //@import '../../../node_modules/formvalidation/dist/css/formValidation.min.css';
 //@import '../../../node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
-//@import 'datatables.min.css';
+@import 'dataTables.bootstrap.css';
 
 
 /** Changes background color, height and margin of the border **/
@@ -19,5 +21,22 @@
 
 }
 .navbar-brand {
-	height: 60px;
+	//height: 60px;
+	padding: 5px 15px;
+}
+
+.form-horizontal .control-label{
+    //text-align: left;
+    font-size: 16px;
+}
+
+
+.modal-body .row {
+   padding-left: 16px;
+   padding-right: 16px;
+}
+
+table.ledger th, table.ledger td {
+  font-size : 90%;
+
 }

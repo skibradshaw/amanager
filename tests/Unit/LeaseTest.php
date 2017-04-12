@@ -64,10 +64,10 @@ class LeaseTest extends TestCase
 	    		'start' => $start,
 	    		'end' => $end,
 	    		'apartment_id' => $apartment->id,
-                'monthly_rent' => 100000,
-                'pet_rent' => 15000,
-                'deposit' => 200000,
-                'pet_deposit' => 15000	    		
+                'monthly_rent' => 1000.00,
+                'pet_rent' => 150.00,
+                'deposit' => 2000.00,
+                'pet_deposit' => 150.00	    		
 	    	]);
 	    
 
@@ -76,15 +76,53 @@ class LeaseTest extends TestCase
 	    // dd($apartment->leases);
 	    $newLease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
 	    //Assert Lease Total Rent equals expected Total
-	    $expectedRentTotal = $numMonths*100000;
+	    $expectedRentTotal = ($numMonths*1000.00)*100;
 		$this->assertEquals($expectedRentTotal,$newLease->rent_total);	    
 
 		// Assert Lease Total Pet Rent equals expected Total
-		$expectedPetRentTotal = $numMonths*15000;
+		$expectedPetRentTotal = ($numMonths*150.00)*100;
 		$this->assertEquals($expectedPetRentTotal,$newLease->petrent_total);
 
 	}	
 
+	/** @test */
+	function can_get_open_balance_for_lease()
+	{
+		$this->disableExceptionHandling();
+		$apartment = factory(Apartment::class)->create(); 
+		$start = Carbon::parse('first day of this month')->subMonth()->format('n/j/Y'); 
+		$end = Carbon::parse('last day of this month')->addMonths(6)->format('n/j/Y');
+
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 1050.00,
+                'pet_rent' => 150.50,
+                'deposit' => 2000.00,
+                'pet_deposit' => 150.00	    		
+	    	]);
+
+	    $newLease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+
+	    $tenant = factory(App\Tenant::class)->create();
+	    $newLease->tenants()->attach($tenant->id);
+
+	    $payments = factory(App\Payment::class,3)->create([
+	    		'lease_id' => $newLease->id,
+	    		'tenant_id' => $tenant->id,
+	    		'amount' => 25000
+	    	]);
+
+	    // dd($newLease->openBalance());
+
+
+	    //Assert open balance matches expected.  
+	    //Rent is 1050.00/mo and Pet Rent is 150.50/mo and 2 months are due: 240100 cents.  
+	    //Payments are 25000 X 3 payments.  Expected = 240100-75000 = 165100 cents.
+	    $this->assertEquals(165100,$newLease->openBalance());
+	    
+	}
 	// /** @test */
 	// function tenants_are_required_to_create_lease()
 	// {
@@ -197,10 +235,45 @@ class LeaseTest extends TestCase
 		//Assert that the apartment is not available.
 		$this->assertEquals(false,$available);
 
+		$available = $apartment->checkAvailability('1/1/2017','4/30/2017');
+		//Assert that the apartment is available.	    
+		$this->assertEquals(false,$available);
+
 		//Check availability outside of the current lease dates
 		$available = $apartment->checkAvailability('4/1/2018','10/31/2018');
 		//Assert that the apartment is available.	    
 		$this->assertEquals(true,$available);
+		$available = $apartment->checkAvailability('1/1/2017','3/31/2017');
+		//Assert that the apartment is available.	    
+		$this->assertEquals(true,$available);
+
+	}
+
+	/** @test */
+	function can_get_lease_values_in_dollars()
+	{
+		//Create a Lease
+		$apartment = factory(Apartment::class)->create(); 
+		$start = Carbon::parse('first day of this month')->subMonth()->format('n/j/Y'); 
+		$end = Carbon::parse('last day of this month')->addMonths(6)->format('n/j/Y');
+
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 1000.00,
+                'pet_rent' => 150.00,
+                'deposit' => 2000.00,
+                'pet_deposit' => 150.00	    		
+	    	]);
+
+	    $lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+		//Assert format is as expected.	  
+		$this->assertEquals('$1,000.00',$lease->monthly_rent_in_dollars);  
+		$this->assertEquals('$150.00',$lease->pet_rent_in_dollars);
+		$this->assertEquals('$2,000.00',$lease->deposit_in_dollars);
+		$this->assertEquals('$150.00',$lease->pet_deposit_in_dollars); 
+
 	}
 
 }

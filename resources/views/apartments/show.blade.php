@@ -3,12 +3,52 @@
 @section('content')
         <div class="row">
             <div class="col-lg-12">
-                <h1>{{$apartment->name}}</h1>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primum Theophrasti, Strato, physicum se voluit; Hoc est vim afferre, Torquate, sensibus, extorquere ex animis cognitiones verborum, quibus inbuti sumus. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Cum autem negant ea quicquam ad beatam vitam pertinere, rursus naturam relinquunt. Ut necesse sit omnium rerum, quae natura vigeant, similem esse finem, non eundem. Et quidem, inquit, vehementer errat;</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.7</li>
-                    <li>jQuery v1.11.1</li>
-                </ul>
+                <h1>{{$title}}</h1>
+                @if(!empty($currentLease))
+                <p class="lead">{{$property->name . " " . $apartment->name}} currently has {{$currentLease->tenants->count()}}
+                @if(count($currentLease->tenants) == 1)
+                 tenant.
+                @else
+                 tenants.
+                @endif
+                </p>
+                
+                <div class="col-md-8">
+                <h3>Current Tenants</h3>
+                    <div class="list-group">
+                        @foreach($currentLease->tenants as $t)
+                        <span class="list-group-item">
+                            <h4 class="list-group-item-heading">{{$t->fullname}}</h4>
+                            <p class="list-group-item-text">
+                            Phone: {{$t->phone}}<br>
+                            <a href="mailto:{{$t->email}}">Email: {{$t->email}}</a>
+                            </p>
+                        </span>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Current Lease Details</h3>
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-calendar-o fa-fw"></i> <a href="{{route('leases.show',[$property,$apartment,$currentLease])}}"> Current Lease</a>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                                <strong>Dates:</strong> {{$currentLease->start->format('n/j/y') . "-" . $currentLease->end->format('n/j/y')}}<br>
+                                <strong>Monthly:</strong> {{$currentLease->monthly_rent_in_dollars}}<br>
+                                <strong>Pet Rent:</strong> {{$currentLease->pet_rent_in_dollars}}<br>
+                                <strong>Security Deposit:</strong> {{$currentLease->deposit_in_dollars}}<br>
+                                <strong>Pet Deposit:</strong> {{$currentLease->pet_deposit_in_dollars}}<br>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                @else
+                <p class="lead">{{$property->name . " " . $apartment->name}} does not currently have a lease in place.</p>
+                @endif
+
 
 
                 

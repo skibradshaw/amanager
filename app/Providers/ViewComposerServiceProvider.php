@@ -17,7 +17,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         
         view()->composer('layouts.nav',function($view){
             // $view->with('undepositedfunds',\App\Payment::whereRaw('bank_deposits_id IS NULL')->get()->sum('amount'));
-            $properties = \App\Property::all();
+            $navProperties = \App\Property::all();
             // $rents_due = 0;
             // $deposits_due = 0;
             // foreach ($properties as $p) {
@@ -27,7 +27,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             
             // $view->with('rents_due',$rents_due);
             // $view->with('deposits_due',$deposits_due);
-            $view->with('properties',$properties);
+            $view->with('navProperties',$navProperties);
 
         });
     }

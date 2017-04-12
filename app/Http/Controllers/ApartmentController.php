@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use App\Property;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -16,9 +17,24 @@ class ApartmentController extends Controller
 	 */
 	public function index(Property $property)
 	{
-        $apartments = Apartment::with(['property' => function($q){$q->orderBy('name');}])->where('property_id',$property->id)->orderBy('number')->get();
+        $apartments = Apartment::with('property')->whereHas('leases',function($q){
+        	$q->whereRaw("DATE('".Carbon::now()."') BETWEEN start AND end");
+        })->where('property_id',$property->id)
+        ->orderBy('number')
+        ->get();
+        $vacantApartments = Apartment::with('property')->vacant()
+	        ->where('property_id',$property->id)
+	        ->orderBy('number')
+	        ->get();
+	     $allApartments = $apartments->merge($vacantApartments);
         //$apartments = $apartments->property()->orderBy('properties.name')->get();
-        return view('apartments.index',['title' => $property->name . ': Apartments','property' => $property,'apartments' => $apartments]);
+        return view('apartments.index',[
+        	'title' => $property->name . ' Apartments',
+        	'property' => $property,
+        	'apartments' => $apartments,
+        	'vacantApartments' => $vacantApartments,
+        	'allApartments' => $allApartments
+        	]);
 	}    
 
 
@@ -57,10 +73,12 @@ class ApartmentController extends Controller
     {
     	// $apartment = Apartment::find($apartment_id);
     	// $property = Property::find($property_id);
-
+    	$currentLease = $apartment->currentLease();
     	return view('apartments.show',[
+    			'title' => $property->name . " " . $apartment->name,
     			'apartment' => $apartment,
     			'property' => $property,
+    			'currentLease' => $currentLease
     		]);
     }
 

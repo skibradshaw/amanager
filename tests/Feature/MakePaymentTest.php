@@ -1,5 +1,6 @@
 <?php
 use App\Apartment;
+use App\Lease;
 use App\Payment;
 use App\Tenant;
 use Carbon\Carbon;
@@ -24,10 +25,10 @@ class MakePaymentsTest extends TestCase
 	    		'start' => $start,
 	    		'end' => $end,
 	    		'apartment_id' => $apartment->id,
-                'monthly_rent' => 100000,
-                'pet_rent' => 15000,
-                'deposit' => 200000,
-                'pet_deposit' => 15000	    		
+                'monthly_rent' => 1000.00,
+                'pet_rent' => 150.00,
+                'deposit' => 2000.00,
+                'pet_deposit' => 150.00	    		
 	    	]);
 
 		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
@@ -58,7 +59,7 @@ class MakePaymentsTest extends TestCase
 	/** @test */
 	function user_can_make_a_payment_on_lease()
 	{
-		$this->disableExceptionHandling();
+		// $this->disableExceptionHandling();
 
 	    $lease = $this->getLease();
 		$tenant = factory(Tenant::class)->create();
@@ -67,14 +68,14 @@ class MakePaymentsTest extends TestCase
 	    $response = $this->post('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/payments',[
 	    		'tenant_id' => $tenant->id,
 	    		'payment_type' => 'Rent',
-	    		'amount' => 80000,
+	    		'amount' => 800.50,
 	    		'check_no' => 1234,
 	    		'paid_date' => Carbon::now()->format('n/j/Y'),	    		
 	    	]);
 
 	    $payment = $lease->payments()->where('paid_date',Carbon::parse(Carbon::now()->format('n/j/Y')))
 	    	->where('tenant_id',$tenant->id)
-	    	->where('amount',80000)
+	    	->where('amount',80050)
 	    	->where('payment_type','Rent')
 	    	->first();
 
@@ -89,7 +90,7 @@ class MakePaymentsTest extends TestCase
 	/** @test */
 	function user_can_view_form_to_edit_payment()
 	{
-		$this->disableExceptionHandling();
+		// $this->disableExceptionHandling();
 
 	    $lease = $this->getLease();
 		$tenant = factory(Tenant::class)->create();
@@ -112,7 +113,7 @@ class MakePaymentsTest extends TestCase
 	/** @test */
 	function user_can_update_payment()
 	{
-	    $this->disableExceptionHandling();
+	    // $this->disableExceptionHandling();
 
 	    $lease = $this->getLease();
 		$tenant = factory(Tenant::class)->create();
@@ -127,7 +128,7 @@ class MakePaymentsTest extends TestCase
 	    $orgPaidDate = $lease->start->addDays(10);
 	    //Change Amount and Paid Date
 	    $response = $this->put('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/payments/'.$payment->id, [
-	    		'amount' => 100000,
+	    		'amount' => 1000.00,
 	    		'paid_date' => $lease->start->addDays(30)
 	    	]);
 
@@ -148,6 +149,7 @@ class MakePaymentsTest extends TestCase
 	    $this->disableExceptionHandling();
 
 	    $lease = $this->getLease();
+;
 		$tenant = factory(Tenant::class)->create();
 	    $lease->tenants()->attach($tenant->id);		
 	    $payment = factory(Payment::class)->create([

@@ -26,7 +26,8 @@ class LeaseController extends Controller
 
     public function store(Property $property, Apartment $apartment, Request $request)
     {
-    	$this->validate($request,[
+    	
+        $this->validate($request,[
                 'start' => 'required | date',
                 'end' => 'required | date',
                 'monthly_rent' => 'required|numeric',
@@ -34,14 +35,22 @@ class LeaseController extends Controller
                 'deposit' => 'numeric',
                 'pet_deposit' => 'numeric'
             ]);
+
         $input = $request->except('tenants');
         $input['start'] = Carbon::parse($input['start']);
         $input['end'] = Carbon::parse($input['end']);
-        if(!$apartment->checkAvailability($input['start'],$input['end'])) return redirect()->back()->with('error', 'These dates are not available!');
+        if(!$apartment->checkAvailability($input['start'],$input['end'])) return redirect()->back()->with('error', 'These dates are not available!')->withInput($request->all());
 
+        //Convert Dollars to Cents for DB Storage
+        $input['monthly_rent'] = round($input['monthly_rent']*100,0);
+        $input['pet_rent'] = round($input['pet_rent']*100,0);
+        $input['deposit'] = round($input['deposit']*100,0);
+        $input['pet_deposit'] = round($input['pet_deposit']*100,0);
+        
     	$lease = Lease::create($input);
     	$apartment->leases()->save($lease);
         $this->createLeaseDetails($lease);
+
         //Add Tenants @TODO: Move to Separate Method
     	// $tenants = collect($request->input('tenants'));	
     	// $lease->tenants()->attach($tenants->pluck('id'));
@@ -50,7 +59,19 @@ class LeaseController extends Controller
 
     public function show(Property $property, Apartment $apartment, Lease $lease)
     {
+        $tenants = Tenant::all();
         return view('leases.show',[
+                'title' => $property->name . " " . $apartment->name . " Lease",
+                'property' => $property,
+                'apartment' => $apartment,
+                'lease' => $lease,
+                'tenants' => $tenants
+            ]);
+    }
+
+    public function showAddTenant(Property $property, Apartment $apartment, Lease $lease)
+    {
+        return view('leases.partials.add_tenant',[
                 'property' => $property,
                 'apartment' => $apartment,
                 'lease' => $lease

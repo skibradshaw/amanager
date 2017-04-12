@@ -2,7 +2,7 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -17,7 +17,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Apartments</a>
                         <ul class="dropdown-menu" role="menu">
-                          @foreach($properties as $property)
+                          @foreach($navProperties as $property)
                           <li><a href="{{route('apartments.index',[$property])}}">{{$property->name}}</a></li>
                           <li class="divider"></li>
                           @endforeach
@@ -29,14 +29,18 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Active Tenants</a></li>
                             <li class="divider"></li>
+                            <li><a href="#">Collection Report</a></li>
+                            <li class="divider"></li>
                             <li><a href="#">Unpaid Balances</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Undeposited Funds</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Vacant Apartments</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="#">Contact</a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- Navbar Right -->

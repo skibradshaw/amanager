@@ -20,15 +20,6 @@ class HelperRepository {
 		$total_months = ($interval->y * 12) + $interval->m;
 		$total_months += number_format($interval->d / 30, 1);
 	    
-	    // $total_months =  (Carbon::parse($begindate)->diffInMonths(Carbon::parse($enddate)))-1;
-	    
-	    // //fraction start
-	    // $start_mo_days = cal_days_in_month(CAL_GREGORIAN, $begindate->month, $begindate->year);
-	    // $total_months += round(($start_mo_days-($begindate->day - 1))/$start_mo_days, 1);
-
-	    // //fraction end
-	    // $end_mo_days = cal_days_in_month(CAL_GREGORIAN, $enddate->month, $enddate->year);
-	    // $total_months += round($enddate->day/$end_mo_days, 1);
 	    return $total_months;   
     }
 

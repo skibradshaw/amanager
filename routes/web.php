@@ -41,11 +41,12 @@
 
 		//Leases
 		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/add_tenant',['as' => 'leases.add_tenant','uses' => 'LeaseController@addTenant']);
+		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/add_tenant',['as' => 'leases.add_tenant.show','uses' => 'LeaseController@showAddTenant']);
 		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/terminate',['as' => 'leases.terminate.show','uses' => 'LeaseController@showTerminate']);
 		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/terminate',['as' => 'leases.terminate','uses' => 'LeaseController@terminate']);
 		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/pet_rent',['as' => 'leases.terminate.show','uses' => 'LeaseDetailController@showPetRent']);
-		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/pet_rent',['as' => 'leases.terminate.show','uses' => 'LeaseDetailController@storePetRent']);
-		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/single_pet_rent',['as' => 'leases.terminate.show','uses' => 'LeaseDetailController@storeSinglePetRent']);
+		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/pet_rent',['as' => 'leases.pet.show','uses' => 'LeaseDetailController@storePetRent']);
+		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/single_pet_rent',['as' => 'leases.pet.store','uses' => 'LeaseDetailController@storeSinglePetRent']);
 
 
 		//Deposits
