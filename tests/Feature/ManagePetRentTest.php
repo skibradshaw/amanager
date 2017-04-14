@@ -63,7 +63,7 @@ class ManagePetRentTest extends TestCase
 		$monthly_pet_rent = [];
 		foreach($lease->details as $d)
 		{
-			$monthly_pet_rent[$d->id] = 10000;
+			$monthly_pet_rent[$d->id] = 100.00;
 		}
 
 		//Update all Lease Details with new pet rent;

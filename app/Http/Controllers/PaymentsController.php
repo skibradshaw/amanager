@@ -62,11 +62,11 @@ class PaymentsController extends Controller
         $input['paid_date'] = Carbon::parse($input['paid_date']);
         $input['lease_id'] = $lease->id;
         //Convert Amount from Dollars to Cents
-        $input['amount'] = round($input['amount']*100,0);
+        $input['amount'] = round(preg_replace('/[^0-9\.\-]/i','', $input['amount'])*100,0);
         $payment = Payment::create($input);
         // PaymentAllocation::create(['amount' => $input['amount'], 'month' => Carbon::parse($input['paid_date'])->month, 'year' => Carbon::parse($input['paid_date'])->year, 'payment_id' => $payment->id]);
         return redirect()->route('leases.show',[$property,$apartment,$lease])
-        	->with('status','Added a $' . $payment->amount . ' Payment for ' . $payment->tenant->full_name . '!');
+        	->with('status','Added a ' . $payment->amount_in_dollars . ' Payment for ' . $payment->tenant->full_name . '!');
     }
 
     /**
@@ -116,11 +116,11 @@ class PaymentsController extends Controller
         //
         // return $request->all();
         $this->validate($request,[
-            'amount' => 'required | numeric'        
+            'amount' => 'required'        
         ]);  
         $input = $request->all();
         $input['paid_date'] = Carbon::parse($input['paid_date']);
-        $input['amount'] = round($input['amount']*100,0);
+        $input['amount'] = round(preg_replace('/[^0-9\.\-]/i','', $input['amount'])*100,0);
         $payment->update($input);
         //Remove Current Allocations for a Payment and Create 1 Allocation for the Edited Payment
         // \App\PaymentAllocation::destroy($payment->allocations()->lists('id')->toArray());

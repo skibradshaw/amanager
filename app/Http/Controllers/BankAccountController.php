@@ -10,15 +10,18 @@ class BankAccountController extends Controller
     //
 	public function index()
 	{
-		$banks = s::all();
-		return view('admin.bank_accounts.index',['title' => 'Manage Bank Accounts']);
+		$bankAccounts = BankAccount::all();
+		return view('admin.bank_accounts.index',[
+			'title' => 'Manage Bank Accounts',
+			'bankAccounts' => $bankAccounts
+			]);
 	}
 
     //
 	public function create()
 	{
 		
-		return view('admin.bank_accounts.edit',['title' => 'Create a Bank Account']);
+		return view('admin.bank_accounts.partials.create_modal',['title' => 'Create a Bank Account']);
 	}
 
 	public function store(Request $request)
@@ -32,7 +35,7 @@ class BankAccountController extends Controller
 
 	public function edit(BankAccount $bank)
 	{
-		return view('admin.bank_accounts.edit',[
+		return view('admin.bank_accounts.partials.create_modal',[
 				'title' => 'Edit ' . $bank->name,
 				'bank' => $bank
 			]);

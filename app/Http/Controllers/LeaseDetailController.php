@@ -14,7 +14,7 @@ class LeaseDetailController extends Controller
     public function showPetRent(Property $property, Apartment $apartment, Lease $lease)
     {
         $lease_details = $lease->details;
-        return view('leases.pet_rent',[
+        return view('leases.partials.pet_rent',[
         	'title' => 'Manage Pet Rent',
         	'property' => $property,
         	'apartment' => $apartment,
@@ -26,6 +26,7 @@ class LeaseDetailController extends Controller
 
     public function storePetRent(Property $property, Apartment $apartment, Lease $lease, Request $request)
     {
+        // return $request->all();
         $input = $request->all();
         foreach($input as $key => $value)
         {
@@ -34,7 +35,7 @@ class LeaseDetailController extends Controller
             	foreach($input['monthly_pet_rent'] as $k => $v)
             	{
                     $detail = LeaseDetail::find($k);
-	                $detail->monthly_pet_rent = $v;
+	                $detail->monthly_pet_rent = round($v*100,0);
 	                $detail->save();         		
             	}
                 //echo $key . ": " . $value . "<br>";

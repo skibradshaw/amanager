@@ -80,7 +80,7 @@ class MakePaymentsTest extends TestCase
 	    	->first();
 
 	    $this->assertNotNull($payment);
-	    $response->assertSessionHas('status','Added a $' . $payment->amount . ' Payment for ' . $tenant->full_name . '!');
+	    $response->assertSessionHas('status','Added a ' . $payment->amount_in_dollars . ' Payment for ' . $tenant->full_name . '!');
 	    $response->assertStatus(302);
 	    $response->assertRedirect('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id);
 

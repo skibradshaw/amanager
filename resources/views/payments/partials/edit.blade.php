@@ -25,7 +25,7 @@
         <div class="col-sm-6">
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                {!! Form::text('amount',null,['id' => 'amount','class' => 'form-control']) !!}
+                {!! Form::text('amount',(!isset($payment))?:str_replace('$','',$payment->amount_in_dollars),['id' => 'amount','class' => 'form-control']) !!}
             </div>
             <small class="text-danger">{{ $errors->first('amount') }}</small>
         </div>

@@ -10,6 +10,27 @@ class ManageBankAccountsTest extends TestCase
 {
 	use DatabaseMigrations;
 
+
+	/** @test */
+	function user_can_view_all_bank_accounts()
+	{
+	    $this->disableExceptionHandling();
+
+	    $admin = $this->getAdminUser();
+	    $bankAccounts = factory(BankAccount::class,5)->create();
+
+	    $response = $this->actingAs($admin)->get('/admin/bank_accounts');
+
+	    // dd($response);
+	    // dd($bankAccounts->toArray());
+	    // dd($bankAccounts->pluck('name')->toArray());
+	    // $data = json_decode($this->response->getContent(),true);
+	    // $response->assertJson($bankAccounts->pluck('name')->toArray());
+	    $response->assertStatus(200);
+	    $response->assertViewHas('bankAccounts');
+
+	}
+
 	/** @test */
 	function user_can_view_a_form_to_create_a_bank_account()
 	{

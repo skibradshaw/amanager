@@ -42,10 +42,10 @@ class LeaseController extends Controller
         if(!$apartment->checkAvailability($input['start'],$input['end'])) return redirect()->back()->with('error', 'These dates are not available!')->withInput($request->all());
 
         //Convert Dollars to Cents for DB Storage
-        $input['monthly_rent'] = round($input['monthly_rent']*100,0);
-        $input['pet_rent'] = round($input['pet_rent']*100,0);
-        $input['deposit'] = round($input['deposit']*100,0);
-        $input['pet_deposit'] = round($input['pet_deposit']*100,0);
+        $input['monthly_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['monthly_rent'])*100,0);
+        $input['pet_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_rent'])*100,0);
+        $input['deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['deposit'])*100,0);
+        $input['pet_deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_deposit'])*100,0);
         
     	$lease = Lease::create($input);
     	$apartment->leases()->save($lease);

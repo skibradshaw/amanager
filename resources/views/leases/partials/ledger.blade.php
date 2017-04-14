@@ -33,7 +33,7 @@
 				<tr>
 				    <td>Pet Rent</td>
 					@foreach($lease->details as $m)									
-					    <td align="right" class="text-right edit" id="{{$m->id}}" nowrap><a href="{{ route('leases.pet.show',[$property, $apartment, $lease]) }}" data-reveal-id="changePetRent" data-reveal-ajax="true">{{ $m->monthly_pet_rent_in_dollars }}</a></td>
+					    <td align="right" class="text-right edit" id="{{$m->id}}" nowrap><a href="{{ route('leases.pet.show',[$property, $apartment, $lease]) }}" data-toggle="modal" data-target="#largeModal">{{ $m->monthly_pet_rent_in_dollars }}</a></td>
 					@endforeach
 
 				</tr>
