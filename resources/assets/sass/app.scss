@@ -13,6 +13,7 @@
 //@import '../../../node_modules/formvalidation/dist/css/formValidation.min.css';
 //@import '../../../node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
 @import 'dataTables.bootstrap.css';
+@import 'skins/flat/green.css';
 
 
 /** Changes background color, height and margin of the border **/
@@ -40,3 +41,5 @@ table.ledger th, table.ledger td {
   font-size : 90%;
 
 }
+
+.big-checkbox {width: 30px; height: 30px;}

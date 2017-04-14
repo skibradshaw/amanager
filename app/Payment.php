@@ -12,6 +12,11 @@ class Payment extends Model
     static $types = ['Rent' => 'Rent','Fee' => 'Fee','Deposit' => 'Deposit'];
     static $methods = ['Cash' => 'Cash', 'Check' => 'Check', 'Credit Card' => 'Credit Card','PayPal' => 'PayPal'];
 
+    public function lease()
+    {
+        return $this->belongsTo(Lease::class);
+    }
+
     public function tenant()
     {
     	return $this->belongsTo(Tenant::class);

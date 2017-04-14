@@ -15,7 +15,9 @@ mix.scripts([
 	'node_modules/jquery/dist/jquery.js',
 	'node_modules/jquery-ui-dist/jquery-ui.js',
 	'node_modules/datatables.net/js/jquery.dataTables.js',
-	'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js'
+	'node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
+	'resources/assets/js/icheck.js',
+	'resources/assets/js/app.js',
 	],'public/js/all.js');
 
 

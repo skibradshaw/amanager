@@ -35,7 +35,7 @@ class LeaseDetail extends Model
 
     public function getNameAttribute()
     {
-    	return $this->end->format('n/j/y');
+    	return ucwords($this->end->format('M y'));
     }
 
     /**

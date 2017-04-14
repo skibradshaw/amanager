@@ -105,16 +105,16 @@ class LeaseController extends Controller
             // echo $end->month . " " . $end->year . " + " . $d->format('n') . " " . $d->format('Y');
             //If the startdate has the same month and year as the current month, calculate a partial
             if($start->month == $d->format('n') && $start->year == $d->format('Y')) {
-                // $multiplier = (date('t',strtotime($d->format('Y-m-d')))-($start->day-1))/date('t',strtotime($d->format('Y-m-d')));
-                $multiplier = $helper->fractionalMonths($start,Carbon::parse('last day of ' . $d->format('F') . " " . $d->year));
+                $multiplier = (date('t',strtotime($d->format('Y-m-d')))-($start->day-1))/date('t',strtotime($d->format('Y-m-d')));
+                // $multiplier = $helper->fractionalMonths($start,Carbon::parse('last day of ' . $d->format('F') . " " . $d->year));
                 $lease_detail->start = $start;
                 $lease_detail->end = Carbon::parse('last day of ' . $d->format('F') . " " . $d->year);
                 // echo "Remaining Days/Total Days in Month (" . date('t',strtotime($d->format('Y-m-d'))) . " - " . ($start->day-1) . "/" .  date('t',strtotime($d->format('Y-m-d'))) . ") Mulitiplier: ";
             }
             //Else If the enddate has the same month and year as this month, calculate for partial          
             elseif($end->month == $d->format('n') && $end->year == $d->format('Y')) {
-                // $multiplier = ($end->day)/date('t',strtotime($d->format('Y-m-d')));
-                $multiplier = $helper->fractionalMonths(Carbon::parse('first day of ' . $d->format('F') . " " . $d->year),$end);
+                $multiplier = ($end->day)/date('t',strtotime($d->format('Y-m-d')));
+                // $multiplier = $helper->fractionalMonths(Carbon::parse('first day of ' . $d->format('F') . " " . $d->year),$end);
                 $lease_detail->start = Carbon::parse('first day of ' . $d->format('F') . " " . $d->year);
                 $lease_detail->end = $end;
                 // echo "# of Days in Last Month/Total Days in Month (" . ($end->day) . "/" .  date('t',strtotime($d->format('Y-m-d'))) . ") Mulitiplier: ";

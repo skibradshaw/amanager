@@ -15,8 +15,10 @@ class CreateBankDepositsTable extends Migration
     {
         Schema::create('bank_deposits', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('bank_account_id')->unsigned();
             $table->integer('user_id')->unsigned()->index();
             $table->dateTime('deposit_date')->nullable();
+            $table->string('deposit_type')->nullable();
             $table->string('transaction_id')->nullable();
             $table->integer('amount')->nullable();            
             $table->timestamps();

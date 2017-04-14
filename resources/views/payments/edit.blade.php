@@ -3,10 +3,10 @@
 @section('content')
         <div class="row">
             <div class="col-lg-12">
-                <h1>{{$title}}</h1>
-                <p>Let's get some money!</p>
+                <h1>{{$title}} <small>Lease: {{$lease->start->format('n/j/y')}} - {{$lease->end->format('n/j/y')}}</small> </h1>
+                <p></p>
                 <div class="row">
-                  <div class="col-lg-8">
+                  <div class="col-lg-7">
                       @if(isset($payment))
                       {!! Form::model($payment,['route' => ['payments.update',$property,$apartment,$lease,$payment],'method' => 'PUT','class' => 'form-horizontal']) !!}
                       @else
@@ -28,7 +28,7 @@
                   </div>                
 
                 
-                  <div class="col-lg-4">
+                  <div class="col-lg-5">
                     @include('leases.partials.payments_panel')
                     @include('leases.partials.deposit_panel')
                   </div>  

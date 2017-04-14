@@ -30,7 +30,17 @@ class BankAccountController extends Controller
 				'name' => 'required'
 			]);
 		$bankAccount = BankAccount::create($request->all());
-		return redirect()->route('bank_accounts.index')->with('status','New Bank Account Added!');
+		return redirect()->back()->with('status','New Bank Account Added!');
+	}
+
+	public function show(BankAccount $bank)
+	{
+		$deposits = $bank->deposits;
+		return view('admin.bank_accounts.show',[
+			'title' => 'Bank Account History',
+			'bankAccount' => $bank,
+			'deposits' => $deposits
+			]);
 	}
 
 	public function edit(BankAccount $bank)
@@ -50,6 +60,7 @@ class BankAccountController extends Controller
 
 	public function destroy(BankAccount $bank,Request $request)
 	{
+		if(count($bank->deposits) > 0) return redirect()->back()->with('error','This Bank Account has historical deposits.  It cannot be deleted.');
 		$bank->delete();
 		return redirect()->route('bank_accounts.index')->with('status','Bank Account Deleted!');
 	}

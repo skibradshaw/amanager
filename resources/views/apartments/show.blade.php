@@ -30,23 +30,25 @@
                 <div class="col-md-4">
                     <h3>Current Lease Details</h3>
                         <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-calendar-o fa-fw"></i> <a href="{{route('leases.show',[$property,$apartment,$currentLease])}}"> Current Lease</a>
-                        </div>
-                        <div class="panel-body">
-                            <p>
-                                <strong>Dates:</strong> {{$currentLease->start->format('n/j/y') . "-" . $currentLease->end->format('n/j/y')}}<br>
-                                <strong>Monthly:</strong> {{$currentLease->monthly_rent_in_dollars}}<br>
-                                <strong>Pet Rent:</strong> {{$currentLease->pet_rent_in_dollars}}<br>
-                                <strong>Security Deposit:</strong> {{$currentLease->deposit_in_dollars}}<br>
-                                <strong>Pet Deposit:</strong> {{$currentLease->pet_deposit_in_dollars}}<br>
-                            </p>
+                            <div class="panel-heading">
+                                <i class="fa fa-calendar-o fa-fw"></i> <a href="{{route('leases.show',[$property,$apartment,$currentLease])}}"> Current Lease</a>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    <strong>Dates:</strong> {{$currentLease->start->format('n/j/y') . "-" . $currentLease->end->format('n/j/y')}}<br>
+                                    <strong>Monthly:</strong> {{$currentLease->monthly_rent_in_dollars}}<br>
+                                    <strong>Pet Rent:</strong> {{$currentLease->pet_rent_in_dollars}}<br>
+                                    <strong>Security Deposit:</strong> {{$currentLease->deposit_in_dollars}}<br>
+                                    <strong>Pet Deposit:</strong> {{$currentLease->pet_deposit_in_dollars}}<br>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                 </div>
                 @else
                 <p class="lead">{{$property->name . " " . $apartment->name}} does not currently have a lease in place.</p>
+                <a href="{{route('leases.create',[$property,$apartment])}}" class="btn btn-primary">Create a New Lease</a>
                 @endif
 
 

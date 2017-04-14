@@ -1,5 +1,6 @@
 <?php
 use App\BankAccount;
+use App\BankDeposit;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -49,9 +50,9 @@ class ManageBankAccountsTest extends TestCase
 		$this->disableExceptionHandling();
 
 		$admin = $this->getAdminUser();
-		$response = $this->actingAs($admin)->post('/admin/bank_accounts',[
+		$response = $this->actingAs($admin)->json('POST', '/admin/bank_accounts',[
 				'name' => 'Bank Account 1',
-			]);
+			],['HTTP_REFERER' => '/admin/bank_accounts']);
 	    
 	    // dd($response);
 	    $bankAccount = BankAccount::where('name','Bank Account 1')->first();
@@ -108,5 +109,43 @@ class ManageBankAccountsTest extends TestCase
 	    $response->assertSessionHas('status','Bank Account Deleted!');
 	    $response->assertRedirect('/admin/bank_accounts');
 	}
-    
+
+	/** @test */
+	function user_cannot_delete_a_bank_account_with_deposits()
+	{
+	    // $this->disableExceptionHandling();
+		$admin = $this->getAdminUser();
+	    $bankAccount = factory(BankAccount::class)->create();
+		$deposits = factory(BankDeposit::class,3)->create([
+				'bank_account_id' => $bankAccount->id
+			]);
+	    $response = $this->actingAs($admin)->json("DELETE", '/admin/bank_accounts/'.$bankAccount->id,[],['HTTP_REFERER' => 'admin/bank_accounts']);
+
+	    $newBankAccount = BankAccount::find($bankAccount->id);
+
+	    $this->assertNotNull($newBankAccount);
+	    $response->assertStatus(302);
+	    $response->assertSessionHas('error','This Bank Account has historical deposits.  It cannot be deleted.');
+	    $response->assertRedirect('/admin/bank_accounts');	    
+	}
+
+	/** @test */
+	function user_can_view_historical_bank_deposits_for_bank_account()
+	{
+		$this->disableExceptionHandling();
+		$admin = $this->getAdminUser();
+		$bankAccount = factory(BankAccount::class)->create();
+		$deposits = factory(BankDeposit::class,3)->create([
+				'bank_account_id' => $bankAccount->id
+			]);
+		// dd($bankAccount);
+		$response = $this->actingAs($admin)->get('/admin/bank_accounts/'.$bankAccount->id);
+
+		$response->assertStatus(200);
+		$response->assertViewHas('bankAccount');
+		$response->assertViewHas('deposits');
+	}    
+
+
+
 }

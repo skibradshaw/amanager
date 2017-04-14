@@ -112,7 +112,9 @@ $factory->define(App\BankDeposit::class, function(Faker\Generator $faker) {
 	(is_null(App\BankDeposit::min('deposit_date'))) ?: $depositDate = App\BankDeposit::min('deposit_date')->subWeeks(2);
 	return [
 		'user_id' => factory(App\User::class)->create(['is_admin' => 1]),
+		'bank_account_id' => factory(App\BankAccount::class)->create()->id,
 		'deposit_date' => $depositDate,
+		'deposit_type' => collect(App\BankDeposit::$types)->random(),
 		'transaction_id' => $faker->randomAscii,
 		'amount' => 500000
 	];

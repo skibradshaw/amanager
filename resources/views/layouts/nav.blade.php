@@ -33,7 +33,7 @@
                             <li class="divider"></li>
                             <li><a href="#">Unpaid Balances</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Undeposited Funds</a></li>
+                            <li><a href="{{route('undeposited')}}">Undeposited Funds</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Vacant Apartments</a></li>
                         </ul>
@@ -67,7 +67,7 @@
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
-                                <li><a href="#">Manage Bank Accounts</a> </li>
+                                <li><a href="{{route('bank_accounts.index')}}">Manage Bank Accounts</a> </li>
                                 <li><a href="#">Manage Users</a></li>
                             </ul>
                         </li>
