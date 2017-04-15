@@ -76,7 +76,7 @@ class BankDepositController extends Controller
     public function store(Property $property, Request $request)
     {
         // dd($request->all());
-        $input = $request->except(['payment_id']);
+        $input = $request->except(['payment_id','all']);
         $payments = $request->only(['payment_id']);
         $input['deposit_date'] = Carbon::parse($input['deposit_date']);
         // $input['deposit_type'] = $request->input('type');
