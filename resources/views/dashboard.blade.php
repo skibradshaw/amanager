@@ -104,7 +104,7 @@
                                 <div class="row">
                                 
                                     <div class="col-sm-12">
-                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id'), null, ['id' => 'apt_choice', 'class' => 'form-control']) !!}
+                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id'), null, ['class' => 'form-control apt_choice']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -124,4 +124,19 @@
             </div>
         </div>
         <!-- /.row -->
+@stop
+@section('scripts')
+<script>
+    
+    // bind change event to select
+    $('.apt_choice').on('change', function () {
+      var apartment = $(this).val(); // get selected value
+      var url = '/properties/{{$property->id}}/apartments/'+apartment+'/leases/create';
+      if (url) { // require a URL
+          window.location = url; // redirect
+      }
+      return false;
+    });
+</script>
+
 @stop
