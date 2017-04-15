@@ -9,13 +9,13 @@
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                
+                                <a href="#" data-toggle="modal" data-target="#{{$property->id}}Modal" class="btn btn-primary pull-right btn-xs">Create a New Lease</a>
                                 <h4><i class="fa fa-building fa-fw"></i> {{$property->name}}</h4>
                             </div>
                             <div class="panel-body">
                                 <h4><strong>Unpaid Balances:</strong> Rents + Security Deposits?</h4>
                                 <h4><strong>Undeposited Funds:</strong> Rents + Security Deposits?</h4>
-                                <h4><strong>Vacant Apartments:</strong> </h4>
+                                <h4><strong>Vacant Apartments:</strong> {{$property->apartments()->has('leases','=',0)->count()}} </h4>
 
                                 <div class="col-lg-12"><hr></div>
                                 <h5><strong>New Leases:</strong> </h5>
@@ -91,6 +91,31 @@
                             </div>
                         </div>                        
                     </div>
+                    <div class="modal fade" id="{{$property->id}}Modal" tabindex="-1" role="dialog" aria-labelledby="smallModal">
+                      <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                             <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                Which Apartment?
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                
+                                    <div class="col-sm-12">
+                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id'), null, ['id' => 'apt_choice', 'class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+
+
+
+                            </script>
+                        </div>
+                      </div>
+                    </div>                    
                     @endforeach
                 </div>                
 

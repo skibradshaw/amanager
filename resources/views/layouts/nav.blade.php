@@ -13,6 +13,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <!-- Nav Bar Left -->
+                @if (Auth::check())
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Apartments</a>
@@ -42,7 +43,7 @@
                         <a href="#">Contact</a>
                     </li> -->
                 </ul>
-
+                @endif
                 <!-- Navbar Right -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
