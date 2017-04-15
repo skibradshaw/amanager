@@ -16,6 +16,18 @@
 @import 'skins/flat/green.css';
 
 
+.dl-horizontal dt{
+    text-align: left;
+    //margin-bottom: 1em;
+    width: auto;
+    padding-right: 1em;
+}
+
+.dl-horizontal dd{
+    margin-left: 0;
+    margin-bottom: 1em;
+}
+
 /** Changes background color, height and margin of the border **/
 .navbar {
     background: rgb(16, 15, 54);

@@ -1,8 +1,10 @@
-                <div class="panel panel-default">
+                <div class="panel @if($lease->depositBalance()>0) panel-danger @else panel-default @endif">
                     <div class="panel-heading">
-                        @if($lease->depositBalance() <> 0)
-                        <!-- <a href="{{ route('payments.create',[$property,$apartment,$lease]) }}?type=Deposit" class="btn btn-success btn-xs pull-right">Collect a Deposit Payment</a> -->
-                        @endif                    
+                    @if($lease->depositBalance() > 0)
+                    <span class="text-danger pull-right">Depsoit Balance: {{$lease->deposit_balance_in_dollars}}</span>
+                    @else
+                    <span class="text-success pull-right">Deposit Balance: {{$lease->deposit_balance_in_dollars}}</span>
+                    @endif                
                         <i class="fa fa-money fa-fw"></i> Security Deposits
                     </div>
                     <div class="panel-body">

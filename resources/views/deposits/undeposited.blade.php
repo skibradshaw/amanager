@@ -52,7 +52,7 @@
                                     @forelse($allPayments as $p)
                                     <tr>
                                         <td>{{$p->lease->apartment->property->name}}</td>
-                                        <td><a href="route('leases.show',[$p->lease->apartment->property,$p->lease->apartment,$p->lease])">{{$p->lease->apartment->property->name . " " . $p->lease->apartment->number}}</a></td>
+                                        <td><a href="{{route('leases.show',[$p->lease->apartment->property,$p->lease->apartment,$p->lease])}}">{{$p->lease->apartment->name}}</a> {{$p->lease->start->format('n/j/y') . "-" . $p->lease->end->format('n/j/y')}} </td>
                                         <td>{{$p->tenant->fullname}}</td>
                                         <td class="text-center">{{$p->paid_date->format('n/j/Y')}}</td>
                                         <td class="text-center">{{$p->payment_type}}</td>
@@ -112,7 +112,7 @@
        searching: true,
        aaSorting: [[0, 'asc']]
     });    
-
+    $('div.dataTables_filter input').addClass('form-control');
     // bind change event to select
     $('#deposit_types').on('change', function () {
       var type = $(this).val(); // get selected value

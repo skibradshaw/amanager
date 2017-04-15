@@ -41,7 +41,9 @@
 @stop
 @section('scripts')
 <script>
-    $( "#due_date" ).datepicker();
+    $( "#due_date" ).datepicker({
+      dateFormat: "m/d/yy",
+    });
 
 $('input,textarea').focus(function(){
    $(this).data('placeholder',$(this).attr('placeholder'))

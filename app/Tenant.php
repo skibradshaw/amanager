@@ -17,7 +17,11 @@ class Tenant extends User
     // Get and Set Phone Fields as presentable and numbers only
     public function getPhoneAttribute($value) 
     {
-        return "(".substr($value, 0, 3).") ".substr($value, 3, 3)."-".substr($value,6);
+        if(!empty($value))
+        {
+            return "(".substr($value, 0, 3).") ".substr($value, 3, 3)."-".substr($value,6);
+        }
+        return null;
     }
     public function setPhoneAttribute($value) 
     {

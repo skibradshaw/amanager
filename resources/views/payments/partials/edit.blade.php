@@ -9,7 +9,7 @@
     <div class="form-group @if($errors->first('paid_date')) has-error @endif">
         {!! Form::label('paid_date','Date Paid:',['for' => 'paid_date','class' => 'col-sm-4 control-label']) !!}
         <div class="col-sm-4">
-				{!! Form::text('paid_date',null,['id' => 'paid_date','class' => 'datepicker form-control','placeholder' => 'mm/dd/yyyy','style' => 'position: relative; z-index: 100000;']) !!}
+				{!! Form::text('paid_date',(isset($payment))? $payment->paid_date->format('n/j/Y'):null,['id' => 'paid_date','class' => 'datepicker form-control','placeholder' => 'mm/dd/yyyy','style' => 'position: relative; z-index: 100000;']) !!}
             <small class="text-danger">{{ $errors->first('paid_date') }}</small>
         </div>
     </div>

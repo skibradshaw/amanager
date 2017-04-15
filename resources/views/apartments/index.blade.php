@@ -19,7 +19,8 @@
                         <tr>
                             <th align="center" style="cursor:pointer">Apartment</th>
                             <th align="center" style="cursor:pointer" class="text-center">Number</th>
-                            <th align="center" style="cursor:pointer" class="text-center">Open Balance</th>
+                            <th align="center" style="cursor:pointer" class="text-center">Rent Balance</th>
+                            <th align="center" style="cursor:pointer" class="text-center">Security Deposit Balance</th>
                             <th align="center" style="cursor:pointer" class="text-center">Lease Ends</th>
                             <th align="center" class="text-center">Lease Summary</th>
                             <th align="left" style="cursor:pointer" class="text-center">New Lease</th>
@@ -30,9 +31,14 @@
                                 @forelse($apartments as $a)
                                     <tr>
                                         @if(isset($a->currentLease()->id))
-                                            <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
+                                            <td>
+                                                <!-- <a href="{{ route('apartments.show',[$property, $a]) }}"> -->
+                                                {{ $a->property->name }} {{$a->name}}
+                                                <!-- </a> -->
+                                            </td>
                                             <td class="text-center">{{$a->number}}</td>
-                                            <td align="right" class="text-center">{{$a->currentLease()->open_balance_in_dollars }}</td>
+                                            <td align="right" class="text-center">{{$a->currentLease()->open_balance_in_dollars}}</td>
+                                            <td align="right" class="text-center">{{$a->currentLease()->deposit_balance_in_dollars}}</td>
                                             <td align="right" class="text-center" nowrap>
                                                     <a href="{{ route('leases.show',[$property,$a,$a->currentLease()]) }} ">
 
@@ -49,7 +55,7 @@
                                         @endif
 
                                         <td align="center" class="text-center">
-                                                <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-xs">Create Lease</a>       
+                                                <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-sm">Create Lease</a>       
                                         </td>
                                     </tr>       
                                 @empty
@@ -94,7 +100,7 @@
                                 <td class="text-center">{{$a->number}}</td> 
                                 <td>&nbsp</td>                           
                                 <td align="center" class="text-center">
-                                        <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-xs btn-block">Create Lease</a>
+                                        <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-sm">Create Lease</a>
                                 </td>
                             </tr>       
                         @empty
@@ -143,14 +149,31 @@
     $('#apartments').DataTable({
        paging: false,
        searching: true,
-       aaSorting: [[1, 'asc']]
+       aaSorting: [[1, 'asc']],
+       columnDefs: [
+            { 'orderData':[1], 'targets': [0] },
+            {
+                "targets": [ 1 ],
+                "visible": false,
+                "searchable": false
+            }
+        ]
     });    
     $('#vacantApartments').DataTable({
        paging: false,
        searching: true,
-       aaSorting: [[1, 'asc']]
+       aaSorting: [[1, 'asc']],
+       columnDefs: [
+            { 'orderData':[1], 'targets': [0] },
+            {
+                "targets": [ 1 ],
+                "visible": false,
+                "searchable": false
+            }
+        ]
     });
-
+    $('div.dataTables_filter input').addClass('form-control');
+    
     // bind change event to select
     $('#apt_choice').on('change', function () {
       var apartment = $(this).val(); // get selected value

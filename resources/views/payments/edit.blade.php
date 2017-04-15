@@ -53,7 +53,10 @@
 @stop
 @section('scripts')
 <script>
-    $( "#paid_date" ).datepicker();
+    $( "#paid_date" ).datepicker({
+      dateFormat: "m/d/yy",
+
+    });
 
 $('input,textarea').focus(function(){
    $(this).data('placeholder',$(this).attr('placeholder'))

@@ -90,7 +90,7 @@
 <script>
   
     $( "#start" ).datepicker({
-        dateFormat: "mm/dd/yy",
+        dateFormat: "m/d/yy",
         onSelect: function(dateText, instance) {
             date = $.datepicker.parseDate(instance.settings.dateFormat, dateText, instance.settings);
             date.setMonth(date.getMonth() + 12);
@@ -98,7 +98,9 @@
             $("#end").datepicker("setDate", date).attr('placeholder','');
         }
     });
-    $( "#end" ).datepicker();
+    $( "#end" ).datepicker({
+        dateFormat: "m/d/yy",
+    });
 
 $('input,textarea').focus(function(){
    $(this).data('placeholder',$(this).attr('placeholder'))

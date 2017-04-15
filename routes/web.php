@@ -32,7 +32,7 @@
     Route::group(['middleware' => 'auth'],function() {
 		//Homepage
 		Route::get('/', function () {
-		    return view('new_page',['title' => 'Home']);
+		    return view('dashboard',['title' => 'Dashboard']);
 		});   	
 		// //Properties
 
@@ -51,6 +51,9 @@
 
 		//Deposits
 		Route::get('deposits/undeposited/{property?}',['as' => 'undeposited','uses' => 'BankDepositController@undeposited']);
+
+		//Reports
+		Route::get('reports/unpaid_balances/{property?}',['as' => 'unpaid.balances','uses' => 'ReportController@unpaidBalances']);
 
 		//Resource Routes
 		Route::resource('users','UserController');

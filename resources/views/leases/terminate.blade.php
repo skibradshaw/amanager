@@ -31,7 +31,9 @@
 
   <script>
   $(function() {
-    $( ".datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker({
+      dateFormat: "m/d/yy",
+    });
   
   });
   </script>

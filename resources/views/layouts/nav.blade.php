@@ -27,15 +27,15 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Active Tenants</a></li>
+                            <!-- <li><a href="#">Active Tenants</a></li>
                             <li class="divider"></li>
                             <li><a href="#">Collection Report</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Unpaid Balances</a></li>
+                            <li class="divider"></li> -->
+                            <li><a href="{{route('unpaid.balances')}}">Unpaid Balances</a></li>
                             <li class="divider"></li>
                             <li><a href="{{route('undeposited')}}">Undeposited Funds</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Vacant Apartments</a></li>
+                            <!-- <li><a href="#">Vacant Apartments</a></li> -->
                         </ul>
                     </li>
                     <!-- <li>

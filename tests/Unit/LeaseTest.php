@@ -277,4 +277,27 @@ class LeaseTest extends TestCase
 
 	}
 
+	/** @test */
+	function can_get_current_active_leases()
+	{
+	    $lease1 = factory(Lease::class)->create([
+	    		'start' => Carbon::parse('-6 months'),
+	    		'end' => Carbon::parse('-1 month')
+	    	]);
+	    $lease2 = factory(Lease::class)->create([
+	    		'start' => Carbon::parse('-6 months'),
+	    		'end' => Carbon::parse('+1 month')
+	    	]);
+
+	    $lease3 = factory(Lease::class)->create([
+	    		'start' => Carbon::parse('+1 month'),
+	    		'end' => Carbon::parse('+12 months')
+	    	]);
+
+	    $activeLeases = Lease::active()->toSql();
+	    // dd($activeLeases);
+	    $this->assertEquals(1,count($activeLeases));
+
+	}
+
 }

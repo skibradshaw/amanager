@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel @if($lease->openBalance()>0) panel-danger @else panel-default @endif">
     <div class="panel-heading">
         @if($lease->openBalance() > 0)
         <span class="text-danger pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>

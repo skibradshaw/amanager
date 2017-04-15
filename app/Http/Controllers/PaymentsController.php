@@ -90,7 +90,7 @@ class PaymentsController extends Controller
        // }
        $payment_types = Payment::$types; 
        return view('payments.edit',[
-            'title' => 'Edit a Payment: ' . $lease->apartment->name . ' Lease: ' . $lease->start->format('n/j/y') . ' - ' . $lease->end->format('n/j/y')  ,
+            'title' => 'Edit Payment ' . $lease->apartment->name,
             'property' => $property,
             'apartment' => $apartment, 
             'lease' => $lease, 

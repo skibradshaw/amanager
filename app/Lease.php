@@ -123,4 +123,13 @@ class Lease extends Model
         $end = Carbon::parse('last day of ' . $start->format('F') . " " . $year);
         return $this->fees()->whereBetween('due_date',[$start,$end])->sum('amount');
     }
+
+    /**
+     * Active Leases are leases that are currently in place.  Not in the past and not in the future.
+     * @return [type] [description]
+     */
+    public function scopeActive($query)
+    {
+        return $query->whereRaw("DATE('".Carbon::now()->format('Y-m-d')."') BETWEEN start AND end");
+    }
 }
