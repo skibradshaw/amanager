@@ -78,6 +78,7 @@ class BankDepositController extends Controller
         // dd($request->all());
         $input = $request->except(['payment_id','all']);
         $payments = $request->only(['payment_id']);
+        $input['user_id'] = \Auth::user()->id;
         $input['deposit_date'] = Carbon::parse($input['deposit_date']);
         // $input['deposit_type'] = $request->input('type');
         // $input['user_id'] = \Auth::user()->id;
