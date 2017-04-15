@@ -184,8 +184,8 @@ class ManageLeaseTest extends TestCase
 		$helper = new App\Repositories\HelperRepository;
 		//Apartment
 		$apartment = factory(Apartment::class)->create(); 
-		$start = Carbon::parse('first day of last month')->format('n/j/Y');
-		$end = Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+		$start =  '4/1/2017'; //Carbon::parse('first day of last month')->format('n/j/Y');
+		$end = '3/31/2018';//Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
 
 	    $this->createLease($apartment,[
 	    		'start' => $start,
@@ -199,15 +199,17 @@ class ManageLeaseTest extends TestCase
 
 		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
 
+		$terminationEnd = '5/1/2017';
+
 		$response = $this->post('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/'.$lease->id . '/terminate',[
-				'end' => Carbon::now()->format('n/j/Y'),
+				'end' => $terminationEnd,
 			]);
-	    
+
 	    $newLease = Lease::find($lease->id);
 		//Assert the new Lease End date equals today
-		$this->assertEquals(Carbon::now()->format('n/j/Y'),$newLease->end->format('n/j/Y'));
+		$this->assertEquals($terminationEnd,$newLease->end->format('n/j/Y'));
 		//Assert the correct number of months is in the Lease Details
-		$expectedMonths = $helper->fractionalMonths($start,Carbon::now()->format('n/j/Y'));
+		$expectedMonths = $helper->fractionalMonths($start,$terminationEnd);
 		$this->assertEquals($expectedMonths,$newLease->details->sum('multiplier'));
 
 		//Assert the New Total is the expected total

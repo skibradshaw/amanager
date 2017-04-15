@@ -25,17 +25,30 @@
                            </div>
                        </div>                
                       {!! Form::close() !!}
-                  </div>                
-
-                
-                  <div class="col-lg-5">
-                    @include('leases.partials.payments_panel')
-                    @include('leases.partials.deposit_panel')
-                  </div>  
+                  </div>                  
                 </div> 
             </div>
 
         </div>
+        <div class="row">
+          <div class="col-lg-12"><hr></div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+              @include('leases.partials.ledger')           
+          </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+             <div class="col-lg-6">
+                @include('leases.partials.payments_panel')
+            </div>            
+             <div class="col-lg-6">
+                 @include('leases.partials.deposit_panel')
+            </div> 
+        </div>
+        <!-- /.row -->
+
         <!-- /.row -->
 @stop
 @section('scripts')

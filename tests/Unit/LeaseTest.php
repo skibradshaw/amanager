@@ -76,11 +76,11 @@ class LeaseTest extends TestCase
 	    // dd($apartment->leases);
 	    $newLease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
 	    //Assert Lease Total Rent equals expected Total
-	    $expectedRentTotal = ($numMonths*1000.00)*100;
+	    $expectedRentTotal = round(($numMonths*1000.00)*100);
 		$this->assertEquals($expectedRentTotal,$newLease->rent_total);	    
 
 		// Assert Lease Total Pet Rent equals expected Total
-		$expectedPetRentTotal = ($numMonths*150.00)*100;
+		$expectedPetRentTotal = round(($numMonths*150.00)*100);
 		$this->assertEquals($expectedPetRentTotal,$newLease->petrent_total);
 
 	}	
@@ -111,7 +111,8 @@ class LeaseTest extends TestCase
 	    $payments = factory(App\Payment::class,3)->create([
 	    		'lease_id' => $newLease->id,
 	    		'tenant_id' => $tenant->id,
-	    		'amount' => 25000
+	    		'amount' => 25000,
+	    		'payment_type' => 'Rent'
 	    	]);
 
 	    // dd($newLease->openBalance());

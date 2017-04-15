@@ -1,3 +1,13 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        @if($lease->openBalance() > 0)
+        <span class="text-danger pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>
+        @else
+        <span class="text-success pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>
+        @endif
+        <i class="fa fa-bar-chart-o fa-fw"></i> Ledger
+    </div>
+    <div class="panel-body">
 	  <div class="table-responsive">
 		  <table id="ledger" class="table table-condensed  table-hover responsive ledger">
 			<thead>
@@ -54,4 +64,6 @@
 			</tfoot>	
 		  </table>
 		  
-	  </div>
+	  </div>        
+    </div>
+</div>

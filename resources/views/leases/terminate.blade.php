@@ -1,22 +1,37 @@
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h4 class="modal-title" id="myModalLabel">
+    Terminate Lease <strong>{{$apartment->name}}</strong> <small>Lease: {{$lease->start->format('n/j/Y')}} - {{$lease->end->format('n/j/Y')}}</small>
+    </h4>
+  </div>
+  {!! Form::open(['route' => ['leases.terminate',$property,$apartment,$lease], 'method' => 'post','class' => 'inline']) !!}
+  <div class="modal-body">
+    <div class="row">
+    
+      <div class="col-sm-12">
+          {!! Form::label('end','Set End Date:',['for' => 'end','class' => 'col-sm-2 control-label']) !!}
+          <div class="form-group @if($errors->first('end')) has-error @endif">
+              
+              <div class="col-sm-4">
+              {!! Form::text('end',\Carbon\Carbon::now()->format('n/j/Y'),['id' => 'end','class' => 'datepicker form-control','placeholder' => 'mm/dd/yyyy','style' => 'position: relative; z-index: 100000;']) !!}
+                  <small class="text-danger">{{ $errors->first('end') }}</small>
+              </div>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
 
-<h4 class="small">Terminate Lease<br>{{ $title }}</h4>
-{!! Form::open(['route' => ['leases.terminate',$property,$apartment,$lease], 'method' => 'post']) !!}
-{!! Form::hidden('lease_id',$lease->id) !!}
-<div class="row">
-    <div class="large-3 columns">
-        {!! Form::label('enddate','End Date:',['class' => 'inline']) !!}    
-    </div>
-    <div class="large-4 columns left">
-        {!! Form::text('enddate',\Carbon\Carbon::now()->format('m/d/Y'),['id' => 'datepicker']) !!}
-    </div>
-</div>
-<button type="submit" id="terminateLease" class="radius button alert">Terminate Lease</button>
-{!! Form::close(['class' => 'close-reveal-modal']) !!}  
-<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+  <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+  <button type="submit" id="add" class="btn btn-danger">End This Lease <i class="fa fa-plus-right"></i></button>
+
+  </div>
+  {!! Form::close() !!}
 
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker();
   
   });
   </script>

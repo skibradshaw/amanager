@@ -105,16 +105,16 @@ class LeaseController extends Controller
             // echo $end->month . " " . $end->year . " + " . $d->format('n') . " " . $d->format('Y');
             //If the startdate has the same month and year as the current month, calculate a partial
             if($start->month == $d->format('n') && $start->year == $d->format('Y')) {
-                $multiplier = (date('t',strtotime($d->format('Y-m-d')))-($start->day-1))/date('t',strtotime($d->format('Y-m-d')));
-                // $multiplier = $helper->fractionalMonths($start,Carbon::parse('last day of ' . $d->format('F') . " " . $d->year));
+                // $multiplier = (date('t',strtotime($d->format('Y-m-d')))-($start->day-1))/date('t',strtotime($d->format('Y-m-d')));
+                $multiplier = $helper->fractionalStart($start);
                 $lease_detail->start = $start;
                 $lease_detail->end = Carbon::parse('last day of ' . $d->format('F') . " " . $d->year);
                 // echo "Remaining Days/Total Days in Month (" . date('t',strtotime($d->format('Y-m-d'))) . " - " . ($start->day-1) . "/" .  date('t',strtotime($d->format('Y-m-d'))) . ") Mulitiplier: ";
             }
             //Else If the enddate has the same month and year as this month, calculate for partial          
             elseif($end->month == $d->format('n') && $end->year == $d->format('Y')) {
-                $multiplier = ($end->day)/date('t',strtotime($d->format('Y-m-d')));
-                // $multiplier = $helper->fractionalMonths(Carbon::parse('first day of ' . $d->format('F') . " " . $d->year),$end);
+                // $multiplier = ($end->day)/date('t',strtotime($d->format('Y-m-d')));
+                $multiplier = $helper->fractionalEnd($end);
                 $lease_detail->start = Carbon::parse('first day of ' . $d->format('F') . " " . $d->year);
                 $lease_detail->end = $end;
                 // echo "# of Days in Last Month/Total Days in Month (" . ($end->day) . "/" .  date('t',strtotime($d->format('Y-m-d'))) . ") Mulitiplier: ";
@@ -129,8 +129,8 @@ class LeaseController extends Controller
             }
             // echo $multiplier . "<br>";
             $lease_detail->multiplier = $multiplier;
-            $lease_detail->monthly_rent = round(($lease->monthly_rent*$multiplier),0);
-            $lease_detail->monthly_pet_rent = round(($lease->pet_rent*$multiplier),0);
+            $lease_detail->monthly_rent = ($lease->monthly_rent*$multiplier);
+            $lease_detail->monthly_pet_rent = ($lease->pet_rent*$multiplier);
 
             $lease->details()->save($lease_detail);
         }
@@ -165,12 +165,12 @@ class LeaseController extends Controller
                 if($detail_last_day <= Carbon::parse('last day of ' .$lease->end->format('F') . " " . $lease->end->year))
                 {
                     //Modify Mulitiplier on Last Month
-                    $multiplier = $helper->fractionalMonths($detail->start,$lease->end);
+                    $multiplier = $helper->fractionalEnd($lease->end);
                     $detail->end = $lease->end;
                     // echo "Modify Multiplier: " . $multiplier . "<br>";
                     $detail->multiplier = $multiplier;
-                    $detail->monthly_rent = round(($lease->monthly_rent*$multiplier),2);
-                    $detail->monthly_pet_rent = round(($lease->pet_rent*$multiplier),2);
+                    $detail->monthly_rent = ($lease->monthly_rent*$multiplier);
+                    $detail->monthly_pet_rent = ($lease->pet_rent*$multiplier);
                     $detail->save();
                 } else {
                     //Delete Future Lease Details

@@ -103,7 +103,7 @@ class Lease extends Model
                 $amount_due += $m->monthdue();             
             }
         }
-        $balance = $amount_due-$this->payments->sum('amount');
+        $balance = $amount_due-$this->payments()->rentsAndFees()->sum('amount');
         return $balance;
 
     }

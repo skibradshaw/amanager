@@ -47,7 +47,7 @@
 	<div class="modal-footer">
 
 	<button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
-	<button type="submit" id="add" class="btn btn-default">Add to Lease <i class="fa fa-plus-right"></i></button>
+	<button type="submit" id="add" class="btn btn-primary">Add to Lease <i class="fa fa-plus-right"></i></button>
 
 	</div>
 	{!! Form::close() !!}

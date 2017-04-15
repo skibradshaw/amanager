@@ -62,6 +62,7 @@
                             <strong>Rent Balance:</strong> {{$lease->open_balance_in_dollars}}</br>
                             <strong>Deposit Balance:</strong> {{$lease->deposit_balance_in_dollars}}</br>
                         </p>
+                        <a href="{{route('leases.terminate',[$property,$apartment,$lease])}}" data-toggle="modal" data-target="#largeModal" class="btn btn-danger btn-block">End Lease</a>
                     </div>
                 </div>
             </div>
@@ -69,19 +70,7 @@
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        @if($lease->openBalance() > 0)
-                        <span class="text-danger pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>
-                        @else
-                        <span class="text-success pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>
-                        @endif
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Ledger
-                    </div>
-                    <div class="panel-body">
-                        @include('leases.partials.ledger')
-                    </div>
-                </div>
+                @include('leases.partials.ledger')
             </div>            
         </div>
         <!-- /.row -->

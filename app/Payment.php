@@ -33,4 +33,12 @@ class Payment extends Model
     	return $query->whereNull('bank_deposit_id');
     }
 
+    public function scopeRentsAndFees($query)
+    {
+        $query->where(function($q){
+            $q->where('payment_type','Rent')
+                ->orWhere('payment_type','Fee');
+        });
+    }
+
 }

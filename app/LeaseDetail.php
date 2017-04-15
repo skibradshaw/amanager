@@ -44,7 +44,8 @@ class LeaseDetail extends Model
      */
     public function rentPayments($tenant_id = null)
     {
-        $query = $this->lease->payments();
+        $query = $this->lease->payments()->rentsAndFees();
+
         if(!is_null($tenant_id))
         {
             $query = $query->where('tenant_id',$tenant_id);
