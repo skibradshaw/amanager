@@ -7,6 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lease extends Model
 {
+public static function boot() {
+        parent::boot();
+
+        // create a event to happen on saving
+        static::saving(function($table)  {
+            $table->created_by = \Auth::user()->id;
+        });
+}
+
+
+
+
     protected $guarded = [];
     protected $dates = ['start','end'];
 

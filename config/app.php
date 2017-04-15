@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
 
     ],
