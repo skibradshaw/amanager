@@ -42,11 +42,13 @@ class BankDepositController extends Controller
                     $q->where('payment_type','Rent')
                         ->orWhere('payment_type','Fee');
                 });
-                $type = 'Rent & Fee Payments';
+                $typeMessage = 'Rent & Fee Payments';
+                $type = 1;
                 break;
             case 2:
                 $query = $query->where('payment_type','Deposit');
-                $type = 'Security Deposit Payments';
+                $typeMessage = 'Security Deposit Payments';
+                $type = 2;
                 break;                        
             default:
                 # code...
@@ -60,10 +62,11 @@ class BankDepositController extends Controller
         if(is_null($bankAccounts)) return redirct()->back()->with('error','There are no bank accounts setup.  Please Setup a Bank Account!');
 
         return view('deposits.create',[
-            'title' => 'Make a ' . $type . ' Deposit',
+            'title' => 'Make a ' . $typeMessage . ' Deposit',
             'payments' => $payments,
             'paymentTypes' => $paymentTypes,
-            'bankAccounts' => $bankAccounts
+            'bankAccounts' => $bankAccounts,
+            'type' => $type
             ]);
     }
 
@@ -76,10 +79,12 @@ class BankDepositController extends Controller
     public function store(Property $property, Request $request)
     {
         // dd($request->all());
-        $input = $request->except(['payment_id','all']);
+        // return $request->all();
+        $input = $request->except(['payment_id','all','payment_amount','type']);
         $payments = $request->only(['payment_id']);
         $input['user_id'] = \Auth::user()->id;
         $input['deposit_date'] = Carbon::parse($input['deposit_date']);
+        $input['deposit_type'] = BankDeposit::$types[$request->input('type')];
         // $input['deposit_type'] = $request->input('type');
         // $input['user_id'] = \Auth::user()->id;
 
@@ -91,9 +96,21 @@ class BankDepositController extends Controller
         {
             Payment::where('id',$p)->update(['bank_deposit_id' => $deposit->id]);   
         }
+        $deposit->amount = $deposit->payments->sum('amount');
+        $deposit->save();
 
-        return redirect()->route('deposits.index')->with('status','Deposit Added!');
+        return redirect()->route('bank_accounts.show',[$deposit->bank_account_id])->with('status','Deposit Added!');
 
+    }
+
+    public function show(BankDeposit $deposit)
+    {
+        $payments = $deposit->payments;
+        return view('deposits.show',[
+            'title' => 'Bank Deposit: ' . $deposit->deposit_date->format('Y-m-d'), 
+            'deposit' => $deposit,
+            'payments' => $payments
+            ]);
     }
 
 }

@@ -26,5 +26,12 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        //Bugsnag Tracking Code - Run everywhere but locally
+        if(\App::environment('production') || \App::environment('development'))
+        {
+            $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
+            $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
+        }
+    
     }
 }

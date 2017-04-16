@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lease extends Model
 {
-public static function boot() {
-        parent::boot();
+    public static function boot() {
+            parent::boot();
 
-        // create a event to happen on saving
-        static::saving(function($table)  {
-            $table->created_by = \Auth::user()->id;
-        });
-}
+            // create a event to happen on saving
+            static::saving(function($table)  {
+                $table->created_by = \Auth::user()->id;
+            });
+    }
 
 
 
@@ -73,6 +73,10 @@ public static function boot() {
     }
 
     //Relationships
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'created_by');
+    }
 
     public function apartment()
     {

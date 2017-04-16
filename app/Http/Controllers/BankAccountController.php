@@ -37,7 +37,7 @@ class BankAccountController extends Controller
 	{
 		$deposits = $bank->deposits;
 		return view('admin.bank_accounts.show',[
-			'title' => 'Bank Account History',
+			'title' => 'Account History for ' . $bank->name,
 			'bankAccount' => $bank,
 			'deposits' => $deposits
 			]);

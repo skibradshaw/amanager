@@ -5,15 +5,18 @@
             <div class="col-lg-12">
                 <h1>{{$title or ''}}</h1>
                 <p>&nbsp;</p>
-                {!! Form::open(['route' => ['deposits.store'],'class' => 'form-inline']) !!}
+                {!! Form::open(['route' => ['deposits.store'],'class' => 'form-horizontal']) !!}
+                {!! Form::hidden('type', $type) !!}
                 <div class="row">
                     <div class="col-md-3">
                         {!! Form::label('deposit_date', 'Deposit Date:', ['for' => 'deposit_date', 'class' => 'control-label']) !!}
                         {!! Form::text('deposit_date', \Carbon\Carbon::now()->format('n/j/Y'), ['id' => 'deposit_date', 'class' => 'form-control']) !!}
+                        {!! Form::label('transaction_id', 'Deposit #:', ['for' => 'transaction_id', 'class' => 'control-label']) !!}
+                        {!! Form::text('transaction_id', null, ['id' => 'transaction_id', 'class' => 'form-control','placeholder' => 'Optional Bank Deposit #']) !!}
                     </div>
                     <div class="col-md-4 col-md-offset-5 text-right">
                         {!! Form::label('bank_account_id', 'Deposit To:', ['for' => 'bank_account', 'class' => 'control-label']) !!}
-                        {!! Form::select('bank_account_id',$bankAccounts->pluck('name','id'), null,['id' => 'bank_account_id','class' => 'form-control']) !!}<br>
+                        {!! Form::select('bank_account_id',$bankAccounts->pluck('name','id'), null,['id' => 'bank_account_id','class' => 'form-control']) !!}
                         <small class="pull-right text-right"><a href="{{route('bank_accounts.create')}}" data-toggle="modal" data-target="#largeModal">Add a Bank Account</a><!--  | <a href="{{route('bank_accounts.index')}}">View all Accounts</a> --></small>
                     </div>
                 </div>
@@ -46,7 +49,7 @@
                                         <td class="text-center">{{$p->paid_date->format('n/j/Y')}}</td>
                                         <td class="text-center">{{$p->payment_type}}</td>
                                         <td align="right" class="text-right">{{$p->amount_in_dollars}}</td>
-                                        <td align="right" class="text-center">{!! Form::checkbox('payment_id', $p->amount/100, 1, ['id' => $p->id,'class' => 'i-check payment']) !!}</td>
+                                        <td align="right" class="text-center">{!! Form::checkbox('payment_id[]', $p->id, 1, ['id' => $p->id,'class' => 'i-check payment']) !!}  {!! Form::hidden("payment_amount", $p->amount/100,['id' => 'payment_'.$p->id, 'class' => 'payment']) !!}</td>
                                     </tr>
                                     @empty
                                     <tr>
@@ -95,8 +98,9 @@
     //Show Selected Rent Total
     $(".payment").on('ifChanged',function(event) {
         var total = 0;
+        var id = $(this).attr('id');
         $(".payment:checked").each(function() {
-            total += parseInt($(this).val());
+            total += parseInt($('#payment_'+id).val());
         });
         // alert(total);
         if(total == 0)

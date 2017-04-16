@@ -30,7 +30,7 @@
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                {!! Form::text('monthly_rent',null,['id' => 'monthly_rent','class' => 'form-control']) !!}
+                                {!! Form::text('monthly_rent',0,['id' => 'monthly_rent','class' => 'form-control']) !!}
                             </div>
                             <small class="text-danger">{{ $errors->first('monthly_rent') }}</small>
                         </div>
@@ -40,7 +40,7 @@
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                {!! Form::text('pet_rent',null,['id' => 'pet_rent','class' => 'form-control']) !!}
+                                {!! Form::text('pet_rent',0,['id' => 'pet_rent','class' => 'form-control']) !!}
                             </div>
                             <small class="text-danger">{{ $errors->first('pet_rent') }}</small>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                {!! Form::text('deposit',null,['id' => 'deposit','class' => 'form-control']) !!}
+                                {!! Form::text('deposit',0,['id' => 'deposit','class' => 'form-control']) !!}
                             </div>
                             <small class="text-danger">{{ $errors->first('deposit') }}</small>
                         </div>
@@ -60,7 +60,7 @@
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <span class="input-group-addon">$</span>
-                                {!! Form::text('pet_deposit',null,['id' => 'pet_deposit','class' => 'form-control']) !!}
+                                {!! Form::text('pet_deposit',0,['id' => 'pet_deposit','class' => 'form-control']) !!}
                             </div>
                             <small class="text-danger">{{ $errors->first('pet_deposit') }}</small>
                         </div>

@@ -65,7 +65,7 @@ $factory->define(App\Tenant::class, function (Faker\Generator $faker){
 });
 
 $factory->define(App\Lease::class,function (Faker\Generator $faker){
-
+	App\Lease::flushEventListeners();
 	return [
 		'apartment_id' => factory(App\Apartment::class)->create()->id,
 		'start' => Carbon::parse('first day of last month')->format('n/j/Y'),
@@ -74,6 +74,7 @@ $factory->define(App\Lease::class,function (Faker\Generator $faker){
 		'pet_rent' => 10000,
 		'deposit' => 80000,
 		'pet_deposit' => 10000,
+		'created_by' => factory(App\User::class)->create()->id,
 		// 'tenants' => factory(App\Tenant::class,3)->create()->toArray()
 	];
 });
@@ -115,7 +116,7 @@ $factory->define(App\BankDeposit::class, function(Faker\Generator $faker) {
 		'bank_account_id' => factory(App\BankAccount::class)->create()->id,
 		'deposit_date' => $depositDate,
 		'deposit_type' => collect(App\BankDeposit::$types)->random(),
-		'transaction_id' => $faker->randomAscii,
+		'transaction_id' => $faker->randomNumber(4),
 		'amount' => 500000
 	];
 });

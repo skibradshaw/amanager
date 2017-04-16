@@ -10,7 +10,7 @@ class BankAccount extends Model
 
 	public function deposits()
 	{
-		return $this->hasMany(BankDeposit::class);
+		return $this->hasMany(BankDeposit::class)->orderby('deposit_date','desc');
 	}
 
 }

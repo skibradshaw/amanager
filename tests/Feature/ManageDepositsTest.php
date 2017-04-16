@@ -89,7 +89,7 @@ class ManageDepositsTest extends TestCase
 	/** @test */
 	function user_can_deposit_undeposited_rent_and_fee_payments()
 	{
-	    // $this->disableExceptionHandling();
+	    $this->disableExceptionHandling();
 
 	    $user = factory(App\User::class)->create(['is_admin' => 1]);
 	    $lease = $this->getLease();
@@ -98,36 +98,58 @@ class ManageDepositsTest extends TestCase
 			->create([
 				'lease_id' => $lease->id,
 				'amount' => 10000
-
 				]);
 		$bankAccount = factory(App\BankAccount::class)->create();	
 
-		$response = $this->post('/deposits',[
+		$response = $this->actingAs($user)->post('/deposits',[
 				'user_id' => $user->id,
 				'deposit_date' => Carbon::now()->format('n/j/Y'),
-				'deposit_type' => 1,
+				'type' => 1,
 				'amount' => $undeposited->sum('amount'),
 				'payment_id' => $undeposited->pluck('id'),
 				'bank_account_id' => $bankAccount->id
 			]);	
 
-		$deposit = BankDeposit::whereRaw("DATE(deposit_date) = DATE('".Carbon::now(). "')")
+		// dd($undeposited->sum('amount'));
+		$deposit = BankDeposit::where('deposit_date',Carbon::parse(Carbon::now()->format('n/j/Y')))
 			->where('amount',$undeposited->sum('amount'))
 			->where('user_id',$user->id)
 			->first();
-		
+		// $deposit = BankDeposit::first();
+		// dd($response);
+
 		//Assert that this Deposit was created for the correct amount and the correct type.
 		$this->assertNotNull($deposit);
-		$this->assertEquals(1,$deposit->deposit_type);
+		// $this->assertEquals(1,$deposit->deposit_type);
+		$this->assertEquals('Rent & Fee Payments',$deposit->deposit_type);
 
 		//Assert that all payments were deposited.
 		$this->assertEquals(10,$deposit->payments->count());
 		$this->assertEquals(100000,$deposit->amount);
-
-
 		$response->assertStatus(302);
-		$response->assertRedirect('/deposits');
-		$response->assertSessionHas('status','Deposit Added!');
-	    
+		$response->assertRedirect('/admin/bank_accounts/'.$bankAccount->id);
+		$response->assertSessionHas('status','Deposit Added!');	    
 	}
+
+	/** @test */
+	function use_can_vew_all_payments_in_a_deposit()
+	{
+	    $this->disableExceptionHandling();
+	    
+	    $user = factory(App\User::class)->create(['is_admin' => 1]);
+	    $lease = $this->getLease();
+		$bankAccount = factory(App\BankAccount::class)->create();
+
+	    $deposit = factory(App\BankDeposit::class)->create();
+		$payments = factory(App\Payment::class,10)
+			->create([
+					'bank_deposit_id' => $deposit->id,
+					'lease_id' => $lease->id
+				]);
+		$response = $this->get('/deposits/'.$deposit->id);
+
+		$response->assertStatus(200);
+		$response->assertViewHas('payments');
+	}
+
 }

@@ -34,9 +34,9 @@
                                                     <td>{{$l->created_at->format('n/j/Y') }}
                                                         
                                                     </td>
-                                                    <td>{{ $l->apartment->property->name . ' ' . $l->apartment->name }}</td>
+                                                    <td><a href="{{route('leases.show',[$property,$l->apartment,$l])}}"> {{ $l->apartment->property->name . ' ' . $l->apartment->name }}</a></td>
                                                     
-                                                    <td>Tim</td>
+                                                    <td>{{$l->creator->firstname}}</td>
                                                 </tr>
                                             @empty
                                             @endforelse     
@@ -71,7 +71,7 @@
                                                     </td>
                                                     <td>{{ $p->tenant->fullname }}</td>
                                                     
-                                                    <td>{{ $p->lease->apartment->property->name . ' ' . $p->lease->apartment->name }}</td>
+                                                    <td><a href="{{route('leases.show',[$p->lease->apartment->property,$p->lease->apartment,$p->lease])}}">{{ $p->lease->apartment->property->name . ' ' . $p->lease->apartment->name }}</td>
                                                     <td>{{ $p->payment_type }}</td>
                                                     <td class="text-right">{{ $p->amount_in_dollars }} </td>
                                                 </tr>

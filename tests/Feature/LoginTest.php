@@ -2,6 +2,7 @@
 
 namespace Feature;
 
+use App\Property;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -65,6 +66,7 @@ class LoginTest extends TestCase
     {
         // $this->seed('DatabaseSeeder');
         $this->disableExceptionHandling();
+        $proerty = factory(Property::class)->create();
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get('/');

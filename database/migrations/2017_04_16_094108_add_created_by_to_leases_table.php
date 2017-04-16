@@ -14,7 +14,8 @@ class AddCreatedByToLeasesTable extends Migration
     public function up()
     {
         Schema::table('leases', function (Blueprint $table) {
-            $table->integer('created_by')->unsigned();
+            //
+            $table->integer('created_by')->unsigned()->nullable()->after('active');
         });
     }
 
