@@ -13,10 +13,61 @@
                                 <h4><i class="fa fa-building fa-fw"></i> {{$property->name}}</h4>
                             </div>
                             <div class="panel-body">
-                                <h4><strong>Unpaid Balances:</strong> Rents + Security Deposits?</h4>
-                                <h4><strong>Undeposited Funds:</strong> Rents + Security Deposits?</h4>
-                                <h4><strong>Vacant Apartments:</strong> {{$property->apartments()->has('leases','=',0)->count()}} </h4>
+                                
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="widget style1">
+                                            <div class="row">
+                                                <a href="{{route('unpaid.balances')}}">
+                                                <div class="col-xs-6 text-center @if($property->unpaidRent() > 0 || $property->unpaidDeposits() > 0) text-danger @else text-success @endif">
+                                                    <span> Unpaid Balances </span>
+                                                    <h2 class="font-bold">{{money_format('%.2n',($property->unpaidRent()/100+$property->unpaidDeposits()/100))}}</h2>
+                                                </div>
+                                                </a>
+                                                <a href="{{route('undeposited')}}">
+                                                <div class="col-xs-6 text-center @if($property->undepositedFunds() > 0) text-danger @else text-success @endif">
+                                                    <span> Undeposited Funds </span>
+                                                    <h2 class="font-bold">{{$property->undeposited_funds_in_dollars}}</h2>
+                                                </div>
+                                                </a>
+                                            </div>                                            
+                                        </div>                                       
+                                    </div>
+                                </div>
 
+                                <!-- <div class="row">
+                                    <div class="col-xs-12">
+                                        <h4><strong>Undeposited Funds</strong> </h4>
+                                        <div class="widget style1">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-center">
+                                                    <span> Unpaid Balances </span>
+                                                    <h2 class="font-bold">{{$property->undeposited_rent_in_dollars}}</h2>
+                                                </div>
+                                                <div class="col-xs-6 text-center">
+                                                    <span> Deposits </span>
+                                                    <h2 class="font-bold">{{$property->undeposited_deposits_in_dollars}}</h2>
+                                                </div>
+                                            </div>                                            
+                                        </div>                                       
+                                    </div>
+                                </div> -->
+                                
+                                <!-- <h3><strong>Undeposited Funds:</strong> Rents + Security Deposits?</h3> -->
+                                @if($property->apartments()->has('leases','=',0)->count()>0)
+                                
+                                <div class="widget red-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-bell fa-4x"></i>
+                                        <h1 class="m-xs">{{$property->apartments()->has('leases','=',0)->count()}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            <a href="{{route('apartments.index',[$property])}}"> Vacant Apartments </a>
+                                        </h3>
+                                        <small>Let's get them rented!</small>
+                                    </div>
+                                </div>
+                                @endif
+                                
                                 <div class="col-lg-12"><hr></div>
                                 <h5><strong>New Leases:</strong> </h5>
                                  <div class="table-responsive">

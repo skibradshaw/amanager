@@ -26,10 +26,10 @@ class PaymentsTest extends TestCase
 	    		'start' => $start,
 	    		'end' => $end,
 	    		'apartment_id' => $apartment->id,
-                'monthly_rent' => 100000,
-                'pet_rent' => 15000,
-                'deposit' => 200000,
-                'pet_deposit' => 15000	    		
+                'monthly_rent' => 1000,
+                'pet_rent' => 150,
+                'deposit' => 2000,
+                'pet_deposit' => 150	    		
 	    	]);
 
 		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();

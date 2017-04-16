@@ -58,7 +58,7 @@ class LeaseController extends Controller
             $input['pet_deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_deposit'])*100,0);
         } else $input['pet_deposit'] = 0;
         
-    	$lease = Lease::create($input);
+    	$lease = $apartment->leases()->create($input);
     	$apartment->leases()->save($lease);
         $this->createLeaseDetails($lease);
 
