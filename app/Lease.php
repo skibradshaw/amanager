@@ -62,9 +62,9 @@ class Lease extends Model
         return $this->details->sum('monthly_pet_rent');
     }
 
-    public function getOpenBalanceInDollarsAttribute()
+    public function getRentBalanceInDollarsAttribute()
     {
-        return money_format('%.2n',$this->openBalance()/100);
+        return money_format('%.2n',$this->rentBalance()/100);
     }
 
     public function getDepositBalanceInDollarsAttribute()
@@ -107,7 +107,7 @@ class Lease extends Model
      * Description: Open Balance is calculated by going through each month up through and including the current month and adding up the amount due.
      * @return decimal for currency
      */
-    public function openBalance($tenant_id = null)
+    public function rentBalance($tenant_id = null)
     {
         $amount_due = 0;
         foreach($this->details as $m)

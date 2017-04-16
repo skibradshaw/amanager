@@ -86,7 +86,7 @@ class LeaseTest extends TestCase
 	}	
 
 	/** @test */
-	function can_get_open_balance_for_lease()
+	function can_get_rent_balance_for_lease()
 	{
 		$this->disableExceptionHandling();
 		$apartment = factory(Apartment::class)->create(); 
@@ -121,7 +121,7 @@ class LeaseTest extends TestCase
 	    //Assert open balance matches expected.  
 	    //Rent is 1050.00/mo and Pet Rent is 150.50/mo and 2 months are due: 240100 cents.  
 	    //Payments are 25000 X 3 payments.  Expected = 240100-75000 = 165100 cents.
-	    $this->assertEquals(165100,$newLease->openBalance());
+	    $this->assertEquals(165100,$newLease->rentBalance());
 	    
 	}
 	// /** @test */

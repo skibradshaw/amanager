@@ -79,6 +79,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
     <script>
+    // Tooltips
+    $('[data-toggle="tooltip"]').tooltip();
     // Closes success alerts after 5 secs.
      window.setTimeout(function() {
         $(".alert-success").fadeTo(500, 0).slideUp(500, function(){

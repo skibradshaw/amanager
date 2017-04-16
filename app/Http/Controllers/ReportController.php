@@ -23,10 +23,10 @@ class ReportController extends Controller
 		$leases = $query->get();
 
 		$unpaidRentLeases = $leases->filter(function($l){
-			if($l->openBalance()>0) return true;
+			if($l->rentBalance()>0) return true;
 		});
 		$totalUnpaidRent = $unpaidRentLeases->sum(function($l){
-			return $l->openBalance();
+			return $l->rentBalance();
 		});
 
 		// return $unpaidRentLeases;

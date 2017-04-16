@@ -43,7 +43,7 @@
                                             <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Fees {{money_format('%.2n',$l->fees->sum('amount')/100)}}"></i>
                                             @endif                                            
                                         </td>
-                                        <td align="right" class="text-right">{{$l->open_balance_in_dollars}}</td>
+                                        <td align="right" class="text-right">{{$l->rent_balance_in_dollars}}</td>
                                         <td align="right" class="text-center">{{$l->deposit_balance_in_dollars}}</td>
                                     </tr>
 

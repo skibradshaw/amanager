@@ -25,7 +25,7 @@ class Apartment extends Model
 
     public function scopeVacant($query)
     {
-        return $query->whereRaw("(SELECT COUNT(id) FROM leases WHERE apartment_id = apartments.id AND '".Carbon::now()."' BETWEEN start AND end) = 0");
+        return $query->whereRaw("(SELECT COUNT(id) FROM leases WHERE apartment_id = apartments.id AND  end >= now()) = 0");
     }
 
     public function checkAvailability($start,$end)

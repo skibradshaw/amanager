@@ -104,7 +104,7 @@
                                 <div class="row">
                                 
                                     <div class="col-sm-12">
-                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id'), null, ['class' => 'form-control apt_choice']) !!}
+                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id')->prepend('Choose Apartment...'), null, ['class' => 'form-control apt_choice']) !!}
                                     </div>
                                 </div>
                             </div>

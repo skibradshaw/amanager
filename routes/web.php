@@ -31,9 +31,7 @@
      */
     Route::group(['middleware' => 'auth'],function() {
 		//Homepage
-		Route::get('/', function () {
-		    return view('dashboard',['title' => 'Dashboard']);
-		});   	
+		Route::get('/','DasboardController@index');   	
 		// //Properties
 
 

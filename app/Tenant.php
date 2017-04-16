@@ -28,6 +28,16 @@ class Tenant extends User
         $this->attributes['phone'] = preg_replace('/[^0-9]/i', '', trim($value));
     }    
 
+    public function setFirstnameAttribute($value)
+    {
+        $this->attributes['firstname'] = ucwords($value);
+    }
+
+    public function setLastnameAttribute($value)
+    {
+        $this->attributes['lastname'] = ucwords($value);
+    }
+
     public function leases()
     {
     	return $this->belongsToMany(Lease::class,'leases_tenants');

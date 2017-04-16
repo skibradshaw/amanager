@@ -19,6 +19,7 @@
                         <tr>
                             <th align="center" style="cursor:pointer">Apartment</th>
                             <th align="center" style="cursor:pointer" class="text-center">Number</th>
+                            <th align="center" style="cursor:pointer" class="text-center">Notes</th>
                             <th align="center" style="cursor:pointer" class="text-center">Rent Balance</th>
                             <th align="center" style="cursor:pointer" class="text-center">Security Deposit Balance</th>
                             <th align="center" style="cursor:pointer" class="text-center">Lease Ends</th>
@@ -37,7 +38,15 @@
                                                 <!-- </a> -->
                                             </td>
                                             <td class="text-center">{{$a->number}}</td>
-                                            <td align="right" class="text-center">{{$a->currentLease()->open_balance_in_dollars}}</td>
+                                            <td class="text-center">
+                                                @if($a->currentLease()->pet_rent > 0)
+                                                <i class="fa fa-paw fa-fw" data-toggle="tooltip" title="Pets: {{money_format('%.2n',$a->currentLease()->pet_rent/100)}}/mo"></i>
+                                                @endif
+                                                @if($a->currentLease()->fees->sum('amount') > 0)
+                                                <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Total Fees: {{money_format('%.2n',$a->currentLease()->fees->sum('amount')/100)}}"></i>
+                                                @endif                                            
+                                            </td>
+                                            <td align="right" class="text-center">{{$a->currentLease()->rent_balance_in_dollars}}</td>
                                             <td align="right" class="text-center">{{$a->currentLease()->deposit_balance_in_dollars}}</td>
                                             <td align="right" class="text-center" nowrap>
                                                     <a href="{{ route('leases.show',[$property,$a,$a->currentLease()]) }} ">
@@ -129,7 +138,7 @@
                 <div class="row">
                 
                     <div class="col-sm-12">
-                    {!! Form::select('apartment_id', $allApartments->pluck('name','id'), null, ['id' => 'apt_choice', 'class' => 'form-control']) !!}
+                    {!! Form::select('apartment_id', $allApartments->pluck('name','id')->prepend('Choose Apartment..'), null, ['id' => 'apt_choice', 'class' => 'form-control']) !!}
                     </div>
                 </div>
             </div>

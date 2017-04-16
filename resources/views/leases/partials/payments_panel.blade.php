@@ -26,8 +26,14 @@
                                                     {{$p->paid_date->format('n/j/Y') }}
                                                 @endif
                                             </td>
-                                            <td>{{ $p->tenant->fullname }}</td>
-                                            
+                                            <td>  
+                                                @if(!empty($p->memo))
+                                                <span style="cursor:pointer; color:blue;text-decoration:underline;" data-toggle="tooltip" title="{{$p->memo}}" class="">
+                                                @else
+                                                <span>
+                                                @endif
+                                                {{ $p->tenant->fullname }}</span>
+                                            </td>
                                             <td>{{ $p->method }} {{ (!empty($p->check_no)) ? "#" . $p->check_no : "(# missing)"  }}</td>
                                             <td>{{ $p->payment_type }}</td>
                                             <td align="center" class="text-center">

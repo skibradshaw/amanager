@@ -1,9 +1,9 @@
-<div class="panel @if($lease->openBalance()>0) panel-danger @else panel-default @endif">
+<div class="panel @if($lease->rentBalance()>0) panel-danger @else panel-default @endif">
     <div class="panel-heading">
-        @if($lease->openBalance() > 0)
-        <span class="text-danger pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>
+        @if($lease->rentBalance() > 0)
+        <h4><span class="text-danger pull-right">Rent Balance: {{$lease->rent_balance_in_dollars}}</span></h4>
         @else
-        <span class="text-success pull-right">Open Balance: {{$lease->open_balance_in_dollars}}</span>
+        <h4><span class="text-success pull-right">Rent Balance: {{$lease->rent_balance_in_dollars}}</span></h4>
         @endif
         <i class="fa fa-bar-chart-o fa-fw"></i> Ledger
     </div>

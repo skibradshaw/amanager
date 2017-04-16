@@ -19,6 +19,7 @@
                                 <thead>
                                 <tr>
                                     <th align="center" style="cursor:pointer">Apartment</th>
+                                    <th align="center" style="cursor:pointer" class="text-center">Number</th>
                                     <th align="center" style="cursor:pointer">Lease</th>
                                     <th align="center" style="cursor:pointer" class="text-center">Tenants</th>
                                     <th align="center" style="cursor:pointer" class="text-center">Remarks</th>
@@ -34,6 +35,7 @@
                                     @forelse($unpaidLeases as $l)
                                     <tr data-toggle="collapse" data-target="#accordion" class="clickable">
                                         <td nowrap="nowrap">{{$l->apartment->property->name}} {{$l->apartment->name}}</td>
+                                        <td nowrap="nowrap">{{$l->apartment->number}}</td>
                                         <td><a href="{{route('leases.show',[$l->apartment->property,$l->apartment,$l])}}">{{$l->apartment->name}}</a> {{$l->start->format('n/j/y') . "-" . $l->end->format('n/j/y')}} </td>
                                         <td class="text-left">
                                             @if(count($l->tenants)>0)
@@ -54,7 +56,7 @@
                                             <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Fees {{money_format('%.2n',$l->fees->sum('amount')/100)}}"></i>
                                             @endif                                            
                                         </td>
-                                        <td align="right" class="text-right">{{$l->open_balance_in_dollars}}</td>
+                                        <td align="right" class="text-right">{{$l->rent_balance_in_dollars}}</td>
                                         <td align="right" class="text-right">{{$l->deposit_balance_in_dollars}}</td>
                                         <td><button class="btn btn-default btn-sm">Send Notice</button></td>
                                     </tr>                                  
@@ -83,8 +85,7 @@
 @stop
 @section('scripts')
 <script>
-    // Tooltips
-    $('[data-toggle="tooltip"]').tooltip();
+
 
     /** DATATABLES  */
     $('#unpaid').DataTable({
@@ -93,6 +94,12 @@
        aaSorting: [[1, 'asc']],
        columnDefs: [  
         { targets: '4', aaSorting: false},
+        { 'orderData':[1], 'targets': [0] },
+        {
+                "targets": [ 1 ],
+                "visible": false,
+                "searchable": false
+            }
         // { targets: '_all', visible: false }
         ]
     });    

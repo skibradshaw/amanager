@@ -9,7 +9,7 @@ class Payment extends Model
     protected $guarded = [];
     protected $dates = ['paid_date'];
 
-    static $types = ['Rent' => 'Rent','Fee' => 'Fee','Deposit' => 'Deposit'];
+    static $types = ['Rent' => 'Rent','Fee' => 'Fee','Security Deposit' => 'Security Deposit'];
     static $methods = ['Cash' => 'Cash', 'Check' => 'Check', 'Credit Card' => 'Credit Card','PayPal' => 'PayPal'];
 
     public function lease()

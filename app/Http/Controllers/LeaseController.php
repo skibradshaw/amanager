@@ -31,9 +31,9 @@ class LeaseController extends Controller
                 'start' => 'required | date',
                 'end' => 'required | date',
                 'monthly_rent' => 'required|numeric',
-                'pet_rent' => 'numeric',
+                'pet_rent' => 'nullable | numeric',
                 'deposit' => 'numeric',
-                'pet_deposit' => 'numeric'
+                'pet_deposit' => 'nullable | numeric'
             ]);
 
         $input = $request->except('tenants');
@@ -43,9 +43,20 @@ class LeaseController extends Controller
 
         //Convert Dollars to Cents for DB Storage
         $input['monthly_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['monthly_rent'])*100,0);
-        $input['pet_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_rent'])*100,0);
-        $input['deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['deposit'])*100,0);
-        $input['pet_deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_deposit'])*100,0);
+        if(!empty($input['pet_rent']))
+        {
+            $input['pet_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_rent'])*100,0);
+        } else $input['pet_rent'] = 0;
+        
+        if(!empty($input['deposit']))
+        {
+            $input['deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['deposit'])*100,0);
+        } else $input['deposit'] = 0;
+
+        if(!empty($input['pet_deposit']))
+        {
+            $input['pet_deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_deposit'])*100,0);
+        } else $input['pet_deposit'] = 0;
         
     	$lease = Lease::create($input);
     	$apartment->leases()->save($lease);
