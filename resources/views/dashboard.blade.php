@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <h1>Dashboard</h1>
                 <div class="row">
-                    @foreach($navProperties as $property)
+                    @foreach($properties as $property)
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -67,10 +67,10 @@
                                     </div>
                                 </div>
                                 @endif
-                                
+                                {{-- @if(count($property->new_leases) > 0) --}}
                                 <div class="col-lg-12"><hr></div>
                                 <h5><strong>New Leases:</strong> </h5>
-                                 <div class="table-responsive">
+                                <div class="table-responsive">
                                     <table class="table table-striped table-condensed ledger" id="payments" width="100%">
                                         <thead>
                                         <tr>
@@ -80,7 +80,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse($property->leases()->take(3)->orderBy('created_at','desc')->get() as $l)
+                                            @forelse($property->new_leases as $l)
                                                 <tr>
                                                     <td>{{$l->created_at->format('n/j/Y') }}
                                                         
@@ -101,6 +101,8 @@
                                         </tfoot>
                                     </table>
                                 </div>
+                                {{-- @endif --}}
+
                                 <div class="col-lg-12"><hr></div>
                                 <h5><strong>Recent Payments:</strong> </h5>
                                 <div class="table-responsive">
