@@ -56,11 +56,11 @@
                                             </td>
                                             <td align="left" class="text-center">{{$a->nextLease()->start->format('n/j/y') . " - " . $a->nextLease()->end->format('n/j/y')}} with {{($a->nextLease()->tenants->count() == 1) ? $a->nextLease()->tenants->count() . " Tenant" : $a->nextLease()->tenants->count() . " Tenants" }}</td>
                                         @else
-                                            <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
+                                            <!-- <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
                                             <td class="text-center">{{$a->number}}</td>
                                             <td align="right" class="text-right">&nbsp</td>
                                             <td align="center" class="text-center">&nbsp</td>
-                                            <td align="center" class="text-center">&nbsp</td>
+                                            <td align="center" class="text-center">&nbsp</td> -->
                                         @endif
 
                                         <td align="center" class="text-center">

@@ -61,7 +61,7 @@ class Apartment extends Model
         return $lease;
     }
     public function nextLease() {
-        $lease = $this->leases()->whereRaw("DATE('".Carbon::now()."') <= start")->first();
+        $lease = $this->leases()->where('end','>',Carbon::now())->orderBy('end','desc')->first();
         return $lease;
     }
 }
