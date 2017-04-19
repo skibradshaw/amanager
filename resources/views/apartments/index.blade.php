@@ -31,7 +31,7 @@
 
                                 @forelse($apartments as $a)
                                     <tr>
-                                        @if(isset($a->currentLease()->id))
+                                        @if(isset($a->nextLease()->id))
                                             <td>
                                                 <!-- <a href="{{ route('apartments.show',[$property, $a]) }}"> -->
                                                 {{ $a->property->name }} {{$a->name}}
@@ -39,22 +39,22 @@
                                             </td>
                                             <td class="text-center">{{$a->number}}</td>
                                             <td class="text-center">
-                                                @if($a->currentLease()->pet_rent > 0)
-                                                <i class="fa fa-paw fa-fw" data-toggle="tooltip" title="Pets: {{money_format('%.2n',$a->currentLease()->pet_rent/100)}}/mo"></i>
+                                                @if($a->nextLease()->pet_rent > 0)
+                                                <i class="fa fa-paw fa-fw" data-toggle="tooltip" title="Pets: {{money_format('%.2n',$a->nextLease()->pet_rent/100)}}/mo"></i>
                                                 @endif
-                                                @if($a->currentLease()->fees->sum('amount') > 0)
-                                                <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Total Fees: {{money_format('%.2n',$a->currentLease()->fees->sum('amount')/100)}}"></i>
+                                                @if($a->nextLease()->fees->sum('amount') > 0)
+                                                <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Total Fees: {{money_format('%.2n',$a->nextLease()->fees->sum('amount')/100)}}"></i>
                                                 @endif                                            
                                             </td>
-                                            <td align="right" class="text-center">{{$a->currentLease()->rent_balance_in_dollars}}</td>
-                                            <td align="right" class="text-center">{{$a->currentLease()->deposit_balance_in_dollars}}</td>
+                                            <td align="right" class="text-center">{{$a->nextLease()->rent_balance_in_dollars}}</td>
+                                            <td align="right" class="text-center">{{$a->nextLease()->deposit_balance_in_dollars}}</td>
                                             <td align="right" class="text-center" nowrap>
-                                                    <a href="{{ route('leases.show',[$property,$a,$a->currentLease()]) }} ">
+                                                    <a href="{{ route('leases.show',[$property,$a,$a->nextLease()]) }} ">
 
-                                                    {{  $a->currentLease()->end->format('n/j/y') }}
+                                                    {{  $a->nextLease()->end->format('n/j/y') }}
                                                     </a>
                                             </td>
-                                            <td align="left" class="text-center">{{$a->currentLease()->start->format('n/j/y') . " - " . $a->currentLease()->end->format('n/j/y')}} with {{($a->currentLease()->tenants->count() == 1) ? $a->currentLease()->tenants->count() . " Tenant" : $a->currentLease()->tenants->count() . " Tenants" }}</td>
+                                            <td align="left" class="text-center">{{$a->nextLease()->start->format('n/j/y') . " - " . $a->nextLease()->end->format('n/j/y')}} with {{($a->nextLease()->tenants->count() == 1) ? $a->nextLease()->tenants->count() . " Tenant" : $a->nextLease()->tenants->count() . " Tenants" }}</td>
                                         @else
                                             <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
                                             <td class="text-center">{{$a->number}}</td>
