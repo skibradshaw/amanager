@@ -17,9 +17,7 @@ class ApartmentController extends Controller
 	 */
 	public function index(Property $property)
 	{
-        $apartments = Apartment::with('property')->whereHas('leases',function($q){
-        	$q->whereRaw("DATE('".Carbon::now()."') BETWEEN start AND end");
-        })->where('property_id',$property->id)
+        $apartments = Apartment::with('property')->notVacant()->where('property_id',$property->id)
         ->orderBy('number')
         ->get();
         $vacantApartments = Apartment::with('property')->vacant()

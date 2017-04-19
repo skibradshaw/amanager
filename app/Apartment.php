@@ -28,6 +28,11 @@ class Apartment extends Model
         return $query->whereRaw("(SELECT COUNT(id) FROM leases WHERE apartment_id = apartments.id AND  end >= now()) = 0");
     }
 
+    public function scopeNotVacant($query)
+    {
+        return $query->whereRaw("(SELECT COUNT(id) FROM leases WHERE apartment_id = apartments.id AND  end >= now()) > 0");
+    }
+
     public function checkAvailability($start,$end)
     {
         // \DB::connection()->enableQueryLog();
