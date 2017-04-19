@@ -35,6 +35,7 @@ class LoginTest extends TestCase
     {
         // $this->seed('DatabaseSeeder');
         $user = factory(User::class)->create();
+        // $user = User::find(3);
         // $user = User::find(1);
         $response = $this->post('/login',[
                 'email' => $user->email,

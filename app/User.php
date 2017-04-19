@@ -20,9 +20,9 @@ class User extends Authenticatable
     ];
     protected $guarded = [];
 
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = \Hash::make($value);
-    }
+    // public function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = \Hash::make($value);
+    // }
 
 }
