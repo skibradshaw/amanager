@@ -67,14 +67,14 @@
                                     </div>
                                 </div>
                                 @endif
-                                {{-- @if(count($property->new_leases) > 0) --}}
+                                 @if(count($property->new_leases) > 0)
                                 <div class="col-lg-12"><hr></div>
-                                <h5><strong>New Leases:</strong> </h5>
+                                <h5><strong>Recently Created Leases:</strong> </h5>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-condensed ledger" id="payments" width="100%">
                                         <thead>
                                         <tr>
-                                            <th align="center">Date Created</th>
+                                            <th align="center">Lease Dates</th>
                                             <th align="center">Apartment</th>
                                             <th align="center">Created By</th>
                                         </tr>
@@ -82,12 +82,12 @@
                                         <tbody>
                                             @forelse($property->new_leases as $l)
                                                 <tr>
-                                                    <td>{{$l->created_at->format('n/j/Y') }}
-                                                        
+                                                    <td>
+                                                        {{$l->start->format('n/j/y')}} - {{$l->end->format('n/j/y')}}
                                                     </td>
                                                     <td><a href="{{route('leases.show',[$property,$l->apartment,$l])}}"> {{ $l->apartment->property->name . ' ' . $l->apartment->name }}</a></td>
                                                     
-                                                    <td>{{$l->creator->firstname}}</td>
+                                                    <td>{{$l->creator->firstname}}: {{$l->created_at->diffForHumans() }}</td>
                                                 </tr>
                                             @empty
                                             @endforelse     
@@ -101,8 +101,8 @@
                                         </tfoot>
                                     </table>
                                 </div>
-                                {{-- @endif --}}
-
+                                @endif
+                                @if(count($property->recent_payments) > 0)
                                 <div class="col-lg-12"><hr></div>
                                 <h5><strong>Recent Payments:</strong> </h5>
                                 <div class="table-responsive">
@@ -117,7 +117,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse(App\Payment::whereHas('lease',function($q) use ($property) { $q->whereHas('apartment',function($y) use ($property){ $y->where('property_id',$property->id); }); })->where('payment_type','<>','Deposit')->orderBy('paid_date','desc')->take(3)->get() as $p)
+                                            @forelse($property->recent_payments as $p)
                                                 <tr>
                                                     <td>{{$p->paid_date->format('n/j/Y') }}
                                                         
@@ -140,7 +140,7 @@
                                         </tfoot>
                                     </table>
                                 </div>
-
+                                @endif
                             </div>
                         </div>                        
                     </div>
