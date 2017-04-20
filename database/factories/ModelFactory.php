@@ -68,8 +68,8 @@ $factory->define(App\Lease::class,function (Faker\Generator $faker){
 	App\Lease::flushEventListeners();
 	return [
 		'apartment_id' => factory(App\Apartment::class)->create()->id,
-		'start' => Carbon::parse('first day of last month')->format('n/j/Y'),
-		'end' => Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y'),
+		'start' =>  '3/1/2017', //Carbon::parse('first day of last month')->format('n/j/Y'),
+		'end' => '4/30/2018', //Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y'),
 		'monthly_rent' => 80000,
 		'pet_rent' => 10000,
 		'deposit' => 80000,

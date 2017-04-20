@@ -25,6 +25,9 @@
                           <li><a href="#">Add a New Property</a></li>                            
                         </ul>
                     </li>
+                    <li>
+                        <a href="{{route('tenants.index')}}">Tenants</a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports</a>
                         <ul class="dropdown-menu" role="menu">

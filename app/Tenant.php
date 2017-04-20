@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use Carbon\Carbon;
 
 class Tenant extends User
 {
@@ -40,6 +41,29 @@ class Tenant extends User
 
     public function leases()
     {
-    	return $this->belongsToMany(Lease::class,'leases_tenants');
+    	return $this->belongsToMany(Lease::class,'lease_tenants');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereHas('leases',function($q){
+            $q->where('end','>=',Carbon::now());
+        });
+    }
+
+    public function scopeActiveProperty($query,$property_id)
+    {
+        return $query->whereHas('leases',function($q) use ($property_id){
+                $q->where('end','>=',Carbon::now());
+            })->whereHas('leases.apartment',function($q) use ($property_id){
+                $q->where('property_id',$property_id);
+            });
+    }
+
+    public function getActiveLease()
+    {
+        return $this->leases()->where('end','>=',Carbon::now())->orderby('end','desc')->first();
+    }
+
+
 }

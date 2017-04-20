@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-5 col-md-offset-2">
-                                <button type="submit" id="add" class="btn btn-default pull-right">Create <i class="fa fa-plus"></i></button>
+                                <button type="submit" id="add" class="btn btn-success btn-lg pull-right control-label">Create <i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>

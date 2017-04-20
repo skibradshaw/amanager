@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTenant;
 use App\Lease;
+use App\Property;
 use App\Tenant;
 use Illuminate\Http\Request;
 
 class TenantController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		$tenants = Tenant::all();
-		return view('tenants.index',['tenants' => $tenants]);
+		$property = null;
+		$query = Tenant::select();
+		if($request->has('property_id'))
+		{
+			$query = $query->activeProperty($request->input('property_id'));
+			$property = Property::find($request->input('property_id'));
+		} else $query = $query->active();
+
+		$tenants = $query->get();
+		return view('tenants.index',[
+			'title' => 'Active Tenants',
+			'property' => $property,
+			'tenants' => $tenants
+			]);
 	}
 
 	public function create()
@@ -48,7 +61,7 @@ class TenantController extends Controller
 
 	public function edit(Tenant $tenant)
 	{
-		return view('tenants.edit',['tenant' => $tenant]);
+		return view('tenants.edit',['title' => 'Edit '.$tenant->fullname, 'tenant' => $tenant]);
 	}
 
 	public function update(Tenant $tenant, Request $request)

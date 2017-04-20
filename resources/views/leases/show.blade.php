@@ -29,9 +29,16 @@
                                 <tr>
                                     <td>{{$t->fullname}}</td>
                                     <td class="text-center">{{$t->phone}}</td>
-                                    <td class="text-center">{{$t->email}}</td>
+                                    <td class="text-center">
+                                        @if(empty($t->email))
+                                        <!-- <span class="label label-danger">Add Email</span> -->
+                                        <a href="{{route('tenants.edit',[$t])}}" class="btn btn-danger btn-xs btn-block">Add Email</a> 
+                                        @else 
+                                        {{$t->email}}
+                                        @endif
+                                    </td>
                                     <td class="text-center"></td>
-                                    <td class="text-center"><a href="{{route('payments.create',[$property,$apartment,$lease,'tenant_id' => $t->id])}}" class="btn btn-success btn-xs">Add Payment</a href=" "></td>
+                                    <td class="text-center"><a href="{{route('payments.create',[$property,$apartment,$lease,'tenant_id' => $t->id])}}" class="btn btn-success btn-xs btn-block">Add Payment</a href=" "></td>
                                 </tr>
                             @endforeach                            
                             </tbody>

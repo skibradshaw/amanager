@@ -1,5 +1,7 @@
 <?php
+use App\Lease;
 use App\Tenant;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -8,6 +10,7 @@ use Tests\TestCase;
 
 class TenantTest extends TestCase
 {
+	use DatabaseMigrations;
 
 	/** @test */
 	function can_get_tenant_full_name()
@@ -44,6 +47,45 @@ class TenantTest extends TestCase
     	$formatted_phone = $tenant['attributes']['phone'];
 		
 		$this->assertEquals('3076904269',$formatted_phone);
+	}
+
+	/** @test */
+	function can_get_active_tenants()
+	{
+		$this->disableExceptionHandling();
+
+	    $lease = factory(Lease::class)->create([
+    		'start' => Carbon::parse('-6 months'),
+    		'end' => Carbon::parse('+1 month')
+    	]);
+		$tenantsWithLease = factory(Tenant::class,4)->create();
+		$tenantsWithoutLease = factory(Tenant::class,20)->create();
+
+		$lease->tenants()->attach($tenantsWithLease->pluck('id'));
+
+		$tenantCount = Tenant::active()->get()->count();
+
+		$this->assertEquals(4,$tenantCount);
+	}	
+
+	/** @test */
+	function can_get_active_lease()
+	{
+		$this->disableExceptionHandling();
+
+	    $lease = factory(Lease::class)->create([
+    		'start' => Carbon::parse('-6 months'),
+    		'end' => Carbon::parse('+1 month')
+    	]);
+	    $tenant = factory(Tenant::class)->create();
+
+	    $lease->tenants()->attach($tenant->id);
+
+	    $activeLease = $tenant->getActiveLease();
+
+	    $this->assertEquals($lease->id, $activeLease->id);
+
+
 	}
     
 }

@@ -41,7 +41,7 @@
                                             @if(count($l->tenants)>0)
                                             <dl class="dl-horizontal text-left">
                                                 @foreach($l->tenants as $t)
-                                                    <dt>{{$t->fullname}}</dt><dd>{{$t->phone or ''}} {{$t->email}}</dd>
+                                                    <dt>{{$t->fullname}}</dt><br><dd>{{$t->phone or ''}}<br>{{$t->email or ''}}</dd>
                                                 @endforeach
                                             </dl>
                                             @else
@@ -58,7 +58,7 @@
                                         </td>
                                         <td align="right" class="text-right">{{$l->rent_balance_in_dollars}}</td>
                                         <td align="right" class="text-right">{{$l->deposit_balance_in_dollars}}</td>
-                                        <td><button class="btn btn-default btn-sm">Send Notice</button></td>
+                                        <td align="center" class="text-center"><button class="btn btn-default btn-sm">Send Notice</button></td>
                                     </tr>                                  
                                     @empty
 
@@ -66,7 +66,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <td colspan="4"><h4><strong>Totals:</strong></h4></td>
+                                        <td colspan="5"><h4><strong>Totals:</strong></h4></td>
                                         <td class="text-right"><h4><strong><span id="total">{{money_format('%.2n',$totalUnpaidRent/100)}}</span></strong></h4></td>
                                         <td class="text-right"><h4><strong><span id="total">{{money_format('%.2n',$totalUnpaidDeposits/100)}}</span></strong></h4></td>
                                         <td colspan="1" ></td>

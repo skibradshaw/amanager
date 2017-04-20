@@ -38,13 +38,13 @@ class ManagePetRentTest extends TestCase
 	/** @test */
 	function user_can_view_pet_rent()
 	{
-		$this->disableExceptionHandling();
+		// $this->disableExceptionHandling();
 
 		$lease = $this->getLease();
 
 		$response = $this->get('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/pet_rent');
 
-
+		// dd('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/pet_rent');
 		$response->assertStatus(200);
 		$response->assertViewHas('lease_details');
 
