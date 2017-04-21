@@ -17,7 +17,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($lease->payments()->where('payment_type','<>','Security Deposit')->get() as $p)
+                                    @forelse($lease->payments as $p)
                                         <tr>
                                             <td>
                                                 @if(empty($p->bank_deposits_id))
