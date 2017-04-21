@@ -25,12 +25,7 @@ class PaymentsController extends Controller
         ($request->input('tenant_id')) ? $tenant = Tenant::find($request->input('tenant_id')) : $tenant = new Tenant;
         (!empty($request->input('type'))) ? $type = $request->input('type') : $type = '';
         $paymentMethods = Payment::$methods;
-        // if($lease->depositBalance() <> 0)
-        // {
-        //    $payment_types = ['Rent' => 'Rent','Fee' => 'Fee','Deposit' => 'Deposit'];        
-        // } else {
-        //    $payment_types = ['Rent' => 'Rent','Fee' => 'Fee'];
-        // } 
+
         $payment_types = Payment::$types;       
         //return $tenant;
         return view('payments.edit',[

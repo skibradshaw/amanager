@@ -25,7 +25,7 @@ class DashboardController extends Controller
 				$q->whereHas('apartment',function($y) use ($p){ 
 					$y->where('property_id',$p->id); 
 				}); 
-			})->where('payment_type','<>','Deposit')
+			})->where('payment_type','<>','Security Deposit')
 			->orderBy('paid_date','desc')
 			->take(3)->get();
 			// dd(count($p->new_leases));

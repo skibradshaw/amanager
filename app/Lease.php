@@ -127,7 +127,7 @@ class Lease extends Model
     public function depositBalance()
     {
         // $deposit_amount = $this->leaseDeposits()->sum('amount');
-        $deposit_payments = $this->payments()->where('payment_type','Deposit')->sum('amount');
+        $deposit_payments = $this->payments()->where('payment_type','Security Deposit')->sum('amount');
         $deposit_amount = $this->deposit+$this->pet_deposit;
         $deposit_balance = $deposit_amount - $deposit_payments;
         return $deposit_balance;
