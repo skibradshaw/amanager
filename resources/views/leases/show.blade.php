@@ -67,7 +67,7 @@
                             <strong>Security Deposit:</strong> {{$lease->deposit_in_dollars}}<br>
                             <strong>Pet Deposit:</strong> {{$lease->pet_deposit_in_dollars}}<br>
                             <strong>Rent Balance:</strong> <span class="@if($lease->rentBalance()>0) label label-danger @endif">{{$lease->rent_balance_in_dollars}}</span><br>
-                            <strong>Deposit Balance:</strong> <span class="@if($lease->depositBalance()>0) label label-danger @endif">{{$lease->deposit_balance_in_dollars}}<br>
+                            <strong>Deposit Balance:</strong> <span class="@if($lease->depositBalance()>0) label label-danger @endif">{{$lease->deposit_balance_in_dollars}}</span><br>
                         </p>
                         <!-- <a href="{{route('leases.terminate',[$property,$apartment,$lease])}}" data-toggle="modal" data-target="#largeModal" class="btn btn-default btn-block">End Lease</a> -->
                     </div>
