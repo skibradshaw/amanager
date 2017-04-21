@@ -29,11 +29,11 @@
 
                                 @forelse($tenants as $t)
                                     <tr>
-                                            <td nowrap="nowrap">{{ $t->getActiveLease()->apartment->number}}</td>
-                                            <td>
-                                                {{$t->fullname}}
+                                            <td>{{ $t->getActiveLease()->apartment->number}}</td>
+                                            <td nowrap="nowrap">
+                                                {{$t->lastname}}. {{$t->firstname}}
                                             </td>
-                                            <td>
+                                            <td  nowrap="nowrap">
                                                 {{$t->phone}}
                                             </td>
                                             <td>

@@ -13,7 +13,7 @@ class TenantController extends Controller
 	public function index(Request $request)
 	{
 		$property = null;
-		$query = Tenant::select();
+		$query = Tenant::orderBy('lastname')->select();
 		if($request->has('property_id'))
 		{
 			$query = $query->activeProperty($request->input('property_id'));
