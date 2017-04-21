@@ -28,7 +28,7 @@
                                             </td>
                                             <td>  
                                                 @if(!empty($p->memo))
-                                                <span style="cursor:pointer; color:blue;text-decoration:underline;" data-toggle="tooltip" title="{{$p->memo}}" class="">
+                                                <span style="cursor:pointer; color:blue;text-decoration:underline;" data-toggle="tooltip" title="Notes: {{$p->memo}}" class="">
                                                 @else
                                                 <span>
                                                 @endif
