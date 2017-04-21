@@ -37,6 +37,11 @@ class Lease extends Model
         return money_format('%.2n',$this->deposit/100);
     }
 
+    public function getDepositDueInDollarsAttribute()
+    {
+        return money_format('%.2n',($this->deposit+$this->pet_deposit)/100);
+    }
+
     public function getPetDepositInDollarsAttribute()
     {
         return money_format('%.2n',$this->pet_deposit/100);
@@ -130,6 +135,7 @@ class Lease extends Model
         $deposit_payments = $this->payments()->where('payment_type','Security Deposit')->sum('amount');
         $deposit_amount = $this->deposit+$this->pet_deposit;
         $deposit_balance = $deposit_amount - $deposit_payments;
+        // dd($deposit_balance);
         return $deposit_balance;
     }    
 

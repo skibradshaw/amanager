@@ -27,6 +27,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
+                                    <td><strong>Total Due:</strong></td>
+                                    <td align="right" class="text-right"><strong>{{ $lease->deposit_due_in_dollars }}</strong></td>
+                                </tr>
+                                <tr>
                                     <td><strong>Total Paid:</strong></td>
                                     <td align="right" class="text-right"><strong>{{ money_format('%.2n',$lease->payments()->where('payment_type','Security Deposit')->sum('amount')/100) }}</strong></td>
                                 </tr>

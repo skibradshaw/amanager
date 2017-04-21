@@ -71,6 +71,7 @@ class LeaseController extends Controller
     public function show(Property $property, Apartment $apartment, Lease $lease)
     {
         $tenants = Tenant::all();
+
         return view('leases.show',[
                 'title' => $property->name . " " . $apartment->name . " Lease",
                 'property' => $property,
