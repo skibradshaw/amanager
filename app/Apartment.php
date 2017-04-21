@@ -64,4 +64,10 @@ class Apartment extends Model
         $lease = $this->leases()->where('end','>',Carbon::now())->orderBy('end','desc')->first();
         return $lease;
     }
+
+    public function pastLeases()
+    {
+        $lease = $this->leases()->where('end','<',Carbon::now())->orderBy('end','desc')->get();
+        return $lease;
+    }
 }

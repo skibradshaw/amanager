@@ -17,7 +17,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($lease->payments()->where('payment_type','<>','Deposit')->get() as $p)
+                                    @forelse($lease->payments()->where('payment_type','<>','Security Deposit')->get() as $p)
                                         <tr>
                                             <td>
                                                 @if(empty($p->bank_deposits_id))
@@ -52,7 +52,7 @@
                             <tfoot>
                                 <tr>
                                     <td colspan="2"><strong>Total Paid:</strong></td>
-                                    <td align="right" class="text-right" colspan="4"><strong>{{ money_format('%.2n',$lease->payments()->where('payment_type','!=','Deposit')->sum('amount')/100) }}</strong></td>
+                                    <td align="right" class="text-right" colspan="4"><strong>{{ money_format('%.2n',$lease->payments()->where('payment_type','!=','Security Deposit')->sum('amount')/100) }}</strong></td>
                                 </tr>
                                                        
                             </tfoot>

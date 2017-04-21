@@ -20,7 +20,7 @@
                                 @foreach($lease->tenants as $t)
                                 <tr>
                                     <td>{{ $t->fullname }}</td>
-                                    <td align="right" class="text-right">{{ money_format('%.2n',$lease->payments()->where('tenant_id',$t->id)->where('payment_type','Deposit')->sum('amount')/100) }}</td>
+                                    <td align="right" class="text-right">{{ money_format('%.2n',$lease->payments()->where('tenant_id',$t->id)->where('payment_type','Security Deposit')->sum('amount')/100) }}</td>
                                 </tr>
                                 @endforeach
 
@@ -28,7 +28,7 @@
                             <tfoot>
                                 <tr>
                                     <td><strong>Total Paid:</strong></td>
-                                    <td align="right" class="text-right"><strong>{{ money_format('%.2n',$lease->payments()->where('payment_type','Deposit')->sum('amount')/100) }}</strong></td>
+                                    <td align="right" class="text-right"><strong>{{ money_format('%.2n',$lease->payments()->where('payment_type','Security Deposit')->sum('amount')/100) }}</strong></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Balance Due:</strong></td>

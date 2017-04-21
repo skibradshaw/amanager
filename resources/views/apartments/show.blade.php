@@ -57,4 +57,27 @@
             </div>
         </div>
         <!-- /.row -->
+        <div class="row"><div class="col-lg-12"><hr></div></div>
+        <!-- /.row -->
+        <div class="row">
+            <h3>Past Leases</h3>
+            <div class="col-md-8">
+                
+                    <div class="list-group">
+                        @foreach($apartment->pastLeases() as $l)
+                        <span class="list-group-item">
+                            <h4 class="list-group-item-heading">{{$l->start->format('n/j/y')}} - {{$l->end->format('n/j/y')}}</h4>
+                            <p class="list-group-item-text">
+                            Tenants: {{$l->tenants->count()}}<br>
+                            Monthly Rent: {{$l->monthly_rent_in_dollars}}<br>
+                            Pet Rent: {{$l->pet_rent_in_dollars}}<br>
+                            Security Deposit: {{$l->deposit_in_dollars}}<br>
+                            Pet Deposit: {{$l->pet_deposit_in_dollars}}
+                            </p>
+                        </span>
+                        @endforeach
+                    </div>                
+            </div>
+        </div>
+        <!-- /.row -->
 @stop

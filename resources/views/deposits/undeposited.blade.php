@@ -23,7 +23,7 @@
                                 <h4><strong>Total Payments:</strong> {{$propertyPayments->count()}}</h4>
                                 <h4><strong>Amount to Deposit:</strong> {{money_format('%.2n',$propertyPayments->sum('amount')/100)}}</h4>
                                 <h4><strong>Rent Payments:</strong> {{money_format('%.2n',$propertyPayments->filter(function($p){ if($p->payment_type == 'Rent' || $p->payment_type == 'Fee') return true; })->sum('amount')/100)}}</h4>
-                                <h4><strong>Security Deposit Payments:</strong> {{money_format('%.2n',$propertyPayments->filter(function($p){ if($p->payment_type == 'Deposit') return true; })->sum('amount')/100)}}</h4>
+                                <h4><strong>Security Deposit Payments:</strong> {{money_format('%.2n',$propertyPayments->filter(function($p){ if($p->payment_type == 'Security Deposit') return true; })->sum('amount')/100)}}</h4>
 
                                
                                 </p>

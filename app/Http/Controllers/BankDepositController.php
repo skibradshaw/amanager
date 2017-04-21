@@ -46,7 +46,7 @@ class BankDepositController extends Controller
                 $type = 1;
                 break;
             case 2:
-                $query = $query->where('payment_type','Deposit');
+                $query = $query->where('payment_type','Security Deposit');
                 $typeMessage = 'Security Deposit Payments';
                 $type = 2;
                 break;                        
