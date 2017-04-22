@@ -4,9 +4,12 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Lease extends Model
 {
+    use LogsActivity;
+
     public static function boot() {
             parent::boot();
 
@@ -21,6 +24,7 @@ class Lease extends Model
 
     protected $guarded = [];
     protected $dates = ['start','end'];
+    protected $logOnlyDirty = true;
 
     public function getMonthlyRentInDollarsAttribute()
     {

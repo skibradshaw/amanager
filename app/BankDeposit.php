@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class BankDeposit extends Model
 {
+    use LogsActivity;
     //
 	protected $guarded = [];
 	protected $dates = ['deposit_date'];
 	static $types = [1 => 'Rent & Fee Payments',2 => 'Security Deposit Payments'];
+	protected $logOnlyDirty = true;
 
 	public function getAmountInDollarsAttribute()
 	{

@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class LeaseDetail extends Model
 {
+    use LogsActivity;
+
     protected $dates = ['start','end'];
+    protected $logOnlyDirty = true;
 
     public function lease()
     {

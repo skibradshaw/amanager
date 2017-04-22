@@ -4,11 +4,15 @@ namespace App;
 
 use App\User;
 use Carbon\Carbon;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Tenant extends User
 {
+    use LogsActivity;
+
     protected $table = 'users';
     protected $guarded = [];
+    protected $logOnlyDirty = true;
 
     public function getFullNameAttribute()
     {
