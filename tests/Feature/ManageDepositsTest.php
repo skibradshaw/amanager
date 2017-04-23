@@ -132,6 +132,33 @@ class ManageDepositsTest extends TestCase
 	}
 
 	/** @test */
+	function user_cannot_make_a_deposit_with_no_items()
+	{
+	    $this->disableExceptionHandling();
+
+	    $user = factory(App\User::class)->create(['is_admin' => 1]);
+	    $lease = $this->getLease();
+		$undeposited = factory(App\Payment::class,10)
+			->states('undeposited')
+			->create([
+				'lease_id' => $lease->id,
+				'amount' => 10000
+				]);
+		$bankAccount = factory(App\BankAccount::class)->create();	
+
+		$response = $this->actingAs($user)->post('/deposits',[
+				'user_id' => $user->id,
+				'deposit_date' => Carbon::now()->format('n/j/Y'),
+				'type' => 1,
+				'amount' => 0,
+				'payment_id' => $undeposited->pluck('id'),
+				'bank_account_id' => $bankAccount->id
+			]);		    
+
+		$response->assertSessionHas('error','The total payments must be more than 0 (zero).  Please try again!');
+	}
+
+	/** @test */
 	function use_can_vew_all_payments_in_a_deposit()
 	{
 	    $this->disableExceptionHandling();

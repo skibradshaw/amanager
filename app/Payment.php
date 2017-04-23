@@ -37,6 +37,11 @@ class Payment extends Model
     	return $query->whereNull('bank_deposit_id');
     }
 
+    public function scopeDeposited($query)
+    {
+        return $query->whereNotNull('bank_deposit_id');
+    }
+
     public function scopeRentsAndFees($query)
     {
         $query->where(function($q){

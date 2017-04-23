@@ -81,20 +81,24 @@ class BankDepositController extends Controller
         // dd($request->all());
         // return $request->all();
         $input = $request->except(['payment_id','all','payment_amount','type']);
-        $payments = $request->only(['payment_id']);
+        $payments = Payment::whereIn('id',$request->input('payment_id'))->get();
         $input['user_id'] = \Auth::user()->id;
         $input['deposit_date'] = Carbon::parse($input['deposit_date']);
         $input['deposit_type'] = BankDeposit::$types[$request->input('type')];
         // $input['deposit_type'] = $request->input('type');
         // $input['user_id'] = \Auth::user()->id;
 
+        //Amount submitted must equal payments total
+        if($request->input('amount') != $payments->sum('amount')) return redirect()->back()->with('error','The total payments must be more than 0 (zero).  Please try again!');
+
+        if(count($payments) == 0) return redirect()->back()->with('error','There are no payments in this deposit.  Please try again!');
         //Bank Transaction ID is currently a placeholder for a future need/feature
         // $deposit = Deposit::create($input);
         $deposit = BankDeposit::create($input);
 
-        foreach($payments['payment_id'] as $p)
+        foreach($payments as $p)
         {
-            Payment::where('id',$p)->update(['bank_deposit_id' => $deposit->id]);   
+            $p->update(['bank_deposit_id' => $deposit->id]);   
         }
         $deposit->amount = $deposit->payments->sum('amount');
         $deposit->save();
