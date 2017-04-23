@@ -3,10 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+
 
 class BankAccount extends Model
 {
+	use LogsActivity;
+
 	protected $guarded = [];
+	protected $logOnlyDirty = true;
 
 	public function setNameAttribute($value)
 	{

@@ -3,11 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+
 
 class Property extends Model
 {
+    use LogsActivity;
     //
     protected $guarded = [];
+    protected $logOnlyDirty = true;
 
     public function getUnpaidRentInDollarsAttribute()
     {
