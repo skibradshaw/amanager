@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Spatie\Activitylog\Models\Activity;
 use Tests\TestCase;
 
 class ManageLeaseTest extends TestCase
@@ -50,6 +51,8 @@ class ManageLeaseTest extends TestCase
 	    $response->assertStatus(302);
 	    $response->assertRedirect('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/'.$lease->id);
 
+	    // dd(Activity::all()->last());
+	    // dd($admin->activity);
 	    
 	}
 
