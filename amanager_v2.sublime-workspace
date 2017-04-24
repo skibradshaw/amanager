@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"month_pet",
+				"monthly_pet_rent_in_dollars),['class"
+			],
+			[
+				"month",
+				"monthly_rent"
+			],
+			[
 				"depo",
 				"deposit_balance"
 			],
@@ -169,10 +177,6 @@
 			],
 			[
 				"monthl",
-				"monthly_pet_rent"
-			],
-			[
-				"month",
 				"monthly_pet_rent"
 			],
 			[
@@ -510,10 +514,6 @@
 			[
 				"propos",
 				"proposals_dropdown"
-			],
-			[
-				"curr",
-				"currentForecast"
 			]
 		]
 	},
@@ -529,10 +529,37 @@
 			}
 		},
 		{
-			"file": "tests/Unit/ApartmentTest.php",
+			"file": "app/Http/Controllers/LeaseDetailController.php",
 			"settings":
 			{
-				"buffer_size": 1403,
+				"buffer_size": 1986,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/Feature/ManagePetRentTest.php",
+			"settings":
+			{
+				"buffer_size": 3704,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/leases/partials/pet_rent.blade.php",
+			"settings":
+			{
+				"buffer_size": 3527,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/LeaseController.php",
+			"settings":
+			{
+				"buffer_size": 8217,
 				"line_ending": "Unix"
 			}
 		}
@@ -641,6 +668,7 @@
 		"/Users/tbradshaw/Sites/amanager_v2",
 		"/Users/tbradshaw/Sites/amanager_v2/app",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers",
 		"/Users/tbradshaw/Sites/amanager_v2/database",
 		"/Users/tbradshaw/Sites/amanager_v2/database/factories",
 		"/Users/tbradshaw/Sites/amanager_v2/database/seeds",
@@ -679,12 +707,20 @@
 	],
 	"file_history":
 	[
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/pet_rent.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/FeeController.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/ledger.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/index.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/LeaseDetail.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/index.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PaymentsTest.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Payment.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/payments_panel.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/BankDepositController.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Lease.php",
+		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageDepositsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/deposit_panel.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/payments_panel.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/index.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Lease.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/BankDepositController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/.gitignore",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Apartment.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DashboardController.php",
@@ -709,7 +745,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2014_10_12_000000_create_users_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Requests/StoreTenant.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PropertyTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PaymentsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/ReportController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/index.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/ApartmentController.php",
@@ -724,21 +759,17 @@
 		"/Users/tbradshaw/Sites/amanager_v2/node_modules/websocket-driver/lib/websocket/streams.js",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Providers/ViewComposerServiceProvider.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/ledger.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports/collection_report.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Payment.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/layout.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/BankAccount.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/create.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_16_094108_add_created_by_to_leases_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/vendor/fzaninotto/faker/src/Faker/Generator.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/BankDeposit.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageDepositsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/deposits/show.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/deposits/create.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/show.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/BankAccountController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/index.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageBankAccountsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/payments/partials/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Providers/AppServiceProvider.php",
@@ -749,7 +780,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/terminate.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/partials/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/edit.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/LeaseDetail.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Repositories/HelperRepository.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageLeaseTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_tenant.blade.php",
@@ -759,11 +789,9 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_09_042002_create_bank_deposits_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/b31b95c0699362e94591bf84ead18e008804dd06.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/partials/create_modal.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/FeeController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/MakePaymentTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseDetailController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageFeesTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/pet_rent.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/payments_panel.php",
 		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/7db0388b0eae5cedfc48f9ec1ad51387d6fc6b38.php",
@@ -817,6 +845,8 @@
 		"height": 158.0,
 		"where_history":
 		[
+			"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers",
+			"/Users/tbradshaw/Sites/amanager_v2/resources/views",
 			"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers",
 			"/Users/tbradshaw/Sites/amanager_v2/resources/views",
 			"/Users/tbradshaw/Sites/amanager_v2/tests",
@@ -942,8 +972,6 @@
 			"/Users/tbradshaw/Dropbox/Development/at_apps/resources/views",
 			"/Users/tbradshaw/Dropbox/Development/at_apps/app",
 			"/Users/tbradshaw/Dropbox/Development/at_apps/app/Http/Controllers",
-			"/Users/tbradshaw/Dropbox/Development/at_apps/app",
-			"/Users/tbradshaw/Dropbox/Development/at_apps/resources/views",
 			"/Users/tbradshaw/Dropbox/Development/at_apps/app"
 		]
 	},
@@ -952,6 +980,11 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"month_pet_rent",
+			"preg_",
+			"month_pet_rent",
+			"td",
+			"delete",
 			"'Deposit'",
 			"$a->nextLease()",
 			"factory(Lease::class)->create",
@@ -1074,12 +1107,7 @@
 			"->enddate",
 			"->startdate",
 			"->startdatea",
-			"Bare",
-			"tenant",
-			"HTTP_",
-			"bank_deposits_id",
-			"session",
-			"$lease"
+			"Bare"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1115,7 +1143,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1143,24 +1171,54 @@
 						"translation.y": 1000.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "tests/Unit/ApartmentTest.php",
-					"semi_transient": true,
+					"file": "app/Http/Controllers/LeaseDetailController.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1403,
+						"buffer_size": 1986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								671,
-								671
+								1013,
+								1013
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 376.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "tests/Feature/ManagePetRentTest.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3704,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3233,
+								3233
 							]
 						],
 						"settings":
@@ -1169,10 +1227,84 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 88.0,
+						"translation.y": 1912.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/views/leases/partials/pet_rent.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1353,
+								1353
+							],
+							[
+								1421,
+								1421
+							],
+							[
+								1466,
+								1466
+							],
+							[
+								1694,
+								1694
+							],
+							[
+								1726,
+								1726
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 494.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/Http/Controllers/LeaseController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8217,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								223,
+								238
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1231,8 +1363,40 @@
 		"selected_items":
 		[
 			[
+				"leased",
+				"app/Http/Controllers/LeaseDetailController.php"
+			],
+			[
 				"leasec",
 				"app/Http/Controllers/LeaseController.php"
+			],
+			[
+				"led",
+				"resources/views/leases/partials/ledger.blade.php"
+			],
+			[
+				"tenantsind",
+				"resources/views/tenants/index.blade.php"
+			],
+			[
+				"payment_pan",
+				"resources/views/leases/partials/payments_panel.blade.php"
+			],
+			[
+				"payment",
+				"app/Payment.php"
+			],
+			[
+				"paym",
+				"app/Payment.php"
+			],
+			[
+				"lease",
+				"app/Lease.php"
+			],
+			[
+				"bankde",
+				"app/Http/Controllers/BankDepositController.php"
 			],
 			[
 				"depo",
@@ -1275,10 +1439,6 @@
 				"database/factories/ModelFactory.php"
 			],
 			[
-				"tenantsind",
-				"resources/views/tenants/index.blade.php"
-			],
-			[
 				"tentco",
 				"app/Http/Controllers/TenantController.php"
 			],
@@ -1297,10 +1457,6 @@
 			[
 				"pay",
 				"app/Http/Controllers/PaymentsController.php"
-			],
-			[
-				"bankde",
-				"app/Http/Controllers/BankDepositController.php"
 			],
 			[
 				"app.",
@@ -1329,10 +1485,6 @@
 			[
 				"leasete",
 				"tests/Unit/LeaseTest.php"
-			],
-			[
-				"paym",
-				"app/Payment.php"
 			],
 			[
 				"bank",
@@ -1399,10 +1551,6 @@
 				"tests/Unit/LeaseTest.php"
 			],
 			[
-				"lease",
-				"app/LeaseDetail.php"
-			],
-			[
 				"repo",
 				"app/Http/Controllers/ReportController.php"
 			],
@@ -1425,10 +1573,6 @@
 			[
 				"managelea",
 				"tests/Feature/ManageLeaseTest.php"
-			],
-			[
-				"leased",
-				"app/LeaseDetail.php"
 			],
 			[
 				"payment.",
@@ -1729,18 +1873,6 @@
 			[
 				"commiss",
 				"app/Http/Controllers/Sales/CommissionController.php"
-			],
-			[
-				"credit",
-				"app/Http/Controllers/Sales/CreditNoteController.php"
-			],
-			[
-				"contractre",
-				"app/Repositories/ContractRepository.php"
-			],
-			[
-				"billin",
-				"app/Http/Controllers/Sales/BillingEventController.php"
 			]
 		],
 		"width": 0.0

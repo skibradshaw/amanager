@@ -28,6 +28,11 @@ class LeaseDetailController extends Controller
     {
         // return $request->all();
         $input = $request->all();
+        //Update the Lease with new totals
+        $lease->update([
+                'pet_deposit' => round(preg_replace('/[^0-9\.\-]/i','', $input['pet_deposit'])*100),
+                'pet_rent' => round(preg_replace('/[^0-9\.\-]/i','', $input['pet_rent'])*100)
+            ]);
         foreach($input as $key => $value)
         {
             if($key == 'monthly_pet_rent')
@@ -35,7 +40,7 @@ class LeaseDetailController extends Controller
             	foreach($input['monthly_pet_rent'] as $k => $v)
             	{
                     $detail = LeaseDetail::find($k);
-	                $detail->monthly_pet_rent = round($v*100,0);
+	                $detail->monthly_pet_rent = round(preg_replace('/[^0-9\.\-]/i','', $v)*100);
 	                $detail->save();         		
             	}
                 //echo $key . ": " . $value . "<br>";

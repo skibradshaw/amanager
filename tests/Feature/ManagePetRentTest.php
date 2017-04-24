@@ -69,7 +69,9 @@ class ManagePetRentTest extends TestCase
 		//Update all Lease Details with new pet rent;
 		$response = $this->json('POST', '/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/pet_rent',[
 				'details' => $lease->details->pluck('id'),
-				'monthly_pet_rent' => $monthly_pet_rent
+				'monthly_pet_rent' => $monthly_pet_rent,
+				'pet_rent' => 100,
+				'pet_deposit' => 500
 			],['HTTP_REFERER' => '/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id]);
 		// dd($response);
 		
@@ -79,6 +81,7 @@ class ManagePetRentTest extends TestCase
 		$newPetRentTotal = 10000*$details->sum('multiplier');
 
 		$this->assertEquals($newPetRentTotal,$newLease->petrent_total);
+		$this->assertEquals(50000,$newLease->pet_deposit);
 		$response->assertStatus(302);
 		$response->assertRedirect('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id);
 
@@ -94,7 +97,9 @@ class ManagePetRentTest extends TestCase
 
 		$response = $this->json('POST', '/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/single_pet_rent',[
 				'detail_id' => $detail->id,
-				'monthly_pet_rent' => 50000
+				'month_pet_rent' => 50000,
+				'monthly_pet_rent' => 50000,
+				'pet_deposit' => 25000,
 			],['HTTP_REFERER' => '/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id]);
 
 		$newDetail = LeaseDetail::find($detail->id);
