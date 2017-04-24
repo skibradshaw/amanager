@@ -40,12 +40,12 @@
 				</tr>		
 				<tr>
 						<td> &nbsp; </td>
-						<td colspan="{{$lease->details->count()}}" class="text-right"><small>**Payments made outside of lease dates are placed in first month.</small> </td>
+						<td colspan="{{$lease->details->count()}}" class="text-right"></td>
 
 				</tr>
 				<tr>
 					<th>Payments</th>
-					<th colspan="{{$lease->details->count()}}">&nbsp;</th>
+					<th colspan="{{$lease->details->count()}}" class="text-right"><small>**Payments made outside of lease dates are placed in first month.</small> </th>
 				</tr>
 				@foreach($lease->tenants as $t)
 					<tr>
