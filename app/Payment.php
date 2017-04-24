@@ -16,6 +16,11 @@ class Payment extends Model
     static $types = ['Rent' => 'Rent','Fee' => 'Fee','Security Deposit' => 'Security Deposit'];
     static $methods = ['Cash' => 'Cash', 'Check' => 'Check', 'Credit Card' => 'Credit Card','PayPal' => 'PayPal'];
 
+    public function getDepositedAttribute()
+    {
+        return !is_null($this->bank_deposit_id);
+    }
+
     public function lease()
     {
         return $this->belongsTo(Lease::class);

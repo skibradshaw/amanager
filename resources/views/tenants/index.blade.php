@@ -43,7 +43,7 @@
                                                 {{$t->email}}
                                                 @endif
                                             </td>
-                                            <td class="text-center">{{ $t->getActiveLease()->apartment->property->name }} {{$t->getActiveLease()->apartment->name}}</td>
+                                            <td class="text-center"><a href="{{route('leases.show',[$t->getActiveLease()->apartment->property,$t->getActiveLease()->apartment,$t->getActiveLease()])}}">{{ $t->getActiveLease()->apartment->property->name }} {{$t->getActiveLease()->apartment->name}}</a></td>
                                             <td>
                                                 {{$t->getActiveLease()->start->format('n/j/Y')}} - {{$t->getActiveLease()->end->format('n/j/Y')}}
                                             </td>

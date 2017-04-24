@@ -1,5 +1,6 @@
 <?php
 use App\Apartment;
+use App\Payment;
 use App\Tenant;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -54,5 +55,41 @@ class PaymentsTest extends TestCase
 		$this->response->assertStatus(422);	
 	    
 	}
+
+	/** @test */
+	function can_get_payment_deposited_status()
+	{
+		// $this->disableExceptionHandling();
+
+		$apartment = factory(Apartment::class)->create(); 
+		$start = Carbon::parse('first day of next month')->format('n/j/Y');
+		$end = Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+
+		$tenant = factory(Tenant::class)->create();
+
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 1000,
+                'pet_rent' => 150,
+                'deposit' => 2000,
+                'pet_deposit' => 150	    		
+	    	]);
+
+		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+
+		$undeposited = factory(Payment::class)->states('undeposited')->create([
+				'lease_id' => $lease->id
+			]);
+
+		$deposited = factory(Payment::class)->states('deposited')->create([
+				'lease_id' => $lease->id
+			]);
+
+		$this->assertTrue($deposited->deposited);
+		$this->assertFalse($undeposited->deposited);
+	    
+	}	
     
 }

@@ -27,6 +27,16 @@ class LeaseDetail extends Model
         return money_format('%.2n',$this->monthly_pet_rent/100);
     }
 
+    public function getMonthlyDueInDollarsAttribute()
+    {
+        return money_format('%.2n',$this->monthDue()/100);
+    }
+
+    public function getMonthlyPaymentsInDollarsAttribute()
+    {
+        return money_format('%.2n',$this->rentPayments()/100);
+    }
+
     public function getMonthDueInDollarsAttribute()
     {
         return money_format('%.2n',$this->monthDue()/100);
