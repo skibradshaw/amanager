@@ -40,11 +40,10 @@ class ManageDepositsTest extends TestCase
 	function user_can_view_undeposited_payments()
 	{
 	    $this->disableExceptionHandling();
-
 	    $lease = $this->getLease();
 		$undeposited = factory(App\Payment::class,20)->states('undeposited')->create(['lease_id' => $lease->id]);
 
-		$response = $this->get('/deposits/undeposited');
+		$response = $this->get('/reports/undeposited');
 
 		$response->assertStatus(200);
 		$response->assertViewHas('payments');
@@ -59,14 +58,19 @@ class ManageDepositsTest extends TestCase
 		$this->disableExceptionHandling();
 
 		$user = factory(App\User::class)->create(['is_admin' => 1]);
-		$bankAccount = factory(App\BankAccount::class)->create();	
+		$lease = $this->getLease();
+		$undeposited = factory(App\Payment::class,20)->states('undeposited')->create([
+			'lease_id' => $lease->id,
+			'payment_type' => 'Rent'
 
-		$response = $this->actingAs($user)->get('/deposits/create?type=1');
+			]);
+		$bankAccount = factory(App\BankAccount::class)->create(['property_id' => $lease->apartment->property_id]);	
 
+		$response = $this->actingAs($user)->get('/reports/undeposited/'.$bankAccount->property_id.'/confirm?type=1');
+		// dd($lease->apartment);
 		$response->assertStatus(200);
 
 		$response->assertViewHas('payments');	    
-		$response->assertViewHas('paymentTypes');
 		$response->assertViewHas('bankAccounts');		
 	}
 
@@ -76,14 +80,20 @@ class ManageDepositsTest extends TestCase
 		$this->disableExceptionHandling();
 
 		$user = factory(App\User::class)->create(['is_admin' => 1]);
-		$bankAccount = factory(App\BankAccount::class)->create();	
+		$lease = $this->getLease();
+		$undeposited = factory(App\Payment::class,20)->states('undeposited')->create([
+			'lease_id' => $lease->id,
+			'payment_type' => 'Security Deposit'
 
-		$response = $this->actingAs($user)->get('/deposits/create?type=2');
+			]);
+		$bankAccount = factory(App\BankAccount::class)->create(['property_id' => $lease->apartment->property_id]);	
+
+		$response = $this->actingAs($user)->get('/reports/undeposited/'.$bankAccount->property_id.'/confirm?type=2');
 
 		$response->assertStatus(200);
 
 		$response->assertViewHas('payments');	    
-		$response->assertViewHas('paymentTypes');
+
 		$response->assertViewHas('bankAccounts');		
 	}
 	/** @test */
@@ -99,13 +109,13 @@ class ManageDepositsTest extends TestCase
 				'lease_id' => $lease->id,
 				'amount' => 10000
 				]);
-		$bankAccount = factory(App\BankAccount::class)->create();	
+		$bankAccount = factory(App\BankAccount::class)->create(['property_id' => $lease->apartment->property_id]);	
 
-		$response = $this->actingAs($user)->post('/deposits',[
+		$response = $this->actingAs($user)->post('/reports/undeposited/'.$bankAccount->property_id.'/confirm',[
 				'user_id' => $user->id,
 				'deposit_date' => Carbon::now()->format('n/j/Y'),
 				'type' => 1,
-				'amount' => $undeposited->sum('amount'),
+				'amount' => $undeposited->sum('amount')/100,
 				'payment_id' => $undeposited->pluck('id'),
 				'bank_account_id' => $bankAccount->id
 			]);	
@@ -117,6 +127,9 @@ class ManageDepositsTest extends TestCase
 			->first();
 		// $deposit = BankDeposit::first();
 		// dd($response);
+		// $data = json_decode($response->getContent(),true);
+
+		// dd($data);		
 
 		//Assert that this Deposit was created for the correct amount and the correct type.
 		$this->assertNotNull($deposit);
@@ -146,7 +159,7 @@ class ManageDepositsTest extends TestCase
 				]);
 		$bankAccount = factory(App\BankAccount::class)->create();	
 
-		$response = $this->actingAs($user)->post('/deposits',[
+		$response = $this->actingAs($user)->post('/reports/undeposited/'.$bankAccount->property_id.'/confirm',[
 				'user_id' => $user->id,
 				'deposit_date' => Carbon::now()->format('n/j/Y'),
 				'type' => 1,
@@ -155,7 +168,7 @@ class ManageDepositsTest extends TestCase
 				'bank_account_id' => $bankAccount->id
 			]);		    
 
-		$response->assertSessionHas('error','The total payments must be more than 0 (zero).  Please try again!');
+		$response->assertSessionHas('error','The total payments must match the Deposit Total.  Please try again!');
 	}
 
 	/** @test */
@@ -173,7 +186,7 @@ class ManageDepositsTest extends TestCase
 					'bank_deposit_id' => $deposit->id,
 					'lease_id' => $lease->id
 				]);
-		$response = $this->get('/deposits/'.$deposit->id);
+		$response = $this->get('/admin/bank_accounts/'.$bankAccount->id.'/deposits/'.$deposit->id);
 
 		$response->assertStatus(200);
 		$response->assertViewHas('payments');

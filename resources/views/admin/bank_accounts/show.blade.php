@@ -10,7 +10,7 @@
                     <div class="list-group">
                         @forelse($deposits as $d)
                         <span class="list-group-item">
-                            <a href="{{route('deposits.show',[$d])}}" class="btn btn-default btn-xs pull-right">View Details</a>                   
+                            <a href="{{route('deposits.show',[$bank,$d])}}" class="btn btn-default btn-xs pull-right">View Details</a>                   
                             <h4 class="list-group-item-heading">
                                 <strong>Deposit:</strong> {{$d->deposit_date->toDateString()}} by {{$d->creator->firstname or ''}}
                             </h4>

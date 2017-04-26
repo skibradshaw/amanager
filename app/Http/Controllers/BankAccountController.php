@@ -38,7 +38,7 @@ class BankAccountController extends Controller
 		$deposits = $bank->deposits;
 		return view('admin.bank_accounts.show',[
 			'title' => 'Account History for ' . $bank->name,
-			'bankAccount' => $bank,
+			'bank' => $bank,
 			'deposits' => $deposits
 			]);
 	}
@@ -53,6 +53,7 @@ class BankAccountController extends Controller
 
 	public function update(BankAccount $bank,Request $request)
 	{
+		// return $request->all();
 		$bank->update($request->all());
 		// return $bank;
 		return redirect()->route('bank_accounts.index')->with('status','Bank Account Updated!');

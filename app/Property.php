@@ -32,16 +32,20 @@ class Property extends Model
     	return $this->hasMany(Apartment::class);
     }
 
-    public function scopeActive($query)
-    {
-    	return $query->where('active',1);
-    }
-
     public function leases()
     {
         return $this->hasManyThrough(Lease::class,Apartment::class,'property_id','apartment_id');
     }
 
+    public function bank_accounts()
+    {
+        return $this->hasMany(BankAccount::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active',1);
+    }
 
     public function unpaidRent()
     {
@@ -81,6 +85,12 @@ class Property extends Model
             $totalUndeposited += $l->payments()->undeposited()->sum('amount');
         }
         return $totalUndeposited;
+    }
+
+    public function getUndepositedPayments()
+    {
+        $leases = Lease::whereIn('apartment_id',$this->apartments->pluck('id')->toArray())->get();
+        return Payment::whereIn('lease_id',$leases->pluck('id'))->undeposited()->get();
     }
 
 }

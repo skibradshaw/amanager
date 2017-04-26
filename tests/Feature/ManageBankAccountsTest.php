@@ -1,6 +1,7 @@
 <?php
 use App\BankAccount;
 use App\BankDeposit;
+use App\Property;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -48,14 +49,16 @@ class ManageBankAccountsTest extends TestCase
 	{
 
 		$this->disableExceptionHandling();
-
 		$admin = $this->getAdminUser();
+		$property = factory(Property::class)->create();
+
 		$response = $this->actingAs($admin)->json('POST', '/admin/bank_accounts',[
 				'name' => 'Bank Account 1',
+				'property_id' => $property->id,
 			],['HTTP_REFERER' => '/admin/bank_accounts']);
 	    
 	    // dd($response);
-	    $bankAccount = BankAccount::where('name','Bank Account 1')->first();
+	    $bankAccount = BankAccount::where('name','Bank Account 1')->where('property_id',$property->id)->first();
 	    $this->assertNotNull($bankAccount);
 	    $response->assertStatus(302);
 	    $response->assertRedirect('/admin/bank_accounts');
@@ -142,7 +145,7 @@ class ManageBankAccountsTest extends TestCase
 		$response = $this->actingAs($admin)->get('/admin/bank_accounts/'.$bankAccount->id);
 
 		$response->assertStatus(200);
-		$response->assertViewHas('bankAccount');
+		$response->assertViewHas('bank');
 		$response->assertViewHas('deposits');
 	}    
 

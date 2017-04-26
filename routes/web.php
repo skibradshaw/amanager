@@ -48,10 +48,13 @@
 
 
 		//Deposits
-		Route::get('deposits/undeposited/{property?}',['as' => 'undeposited','uses' => 'BankDepositController@undeposited']);
+		Route::get('reports/undeposited/{property}/confirm',['as' => 'properties.deposits','uses' => 'BankDepositController@confirm']);
+		Route::post('reports/undeposited/{property}/confirm',['as' => 'properties.deposits.confirm','uses' => 'BankDepositController@storeConfirm']);
 
 		//Reports
 		Route::get('reports/unpaid_balances/{property?}',['as' => 'unpaid.balances','uses' => 'ReportController@unpaidBalances']);
+		Route::get('reports/undeposited/{property?}',['as' => 'undeposited','uses' => 'BankDepositController@undeposited']);
+		
 
 		//Resource Routes
 		Route::resource('users','UserController');
@@ -61,8 +64,8 @@
 		Route::resource('properties/{property}/apartments/{apartment}/leases/{lease}/payments','PaymentsController');
 		Route::resource('properties/{property}/apartments/{apartment}/leases/{lease}/fees','FeeController');
 		Route::resource('tenants','TenantController');
-		Route::resource('deposits','BankDepositController');
 		Route::resource('admin/bank_accounts','BankAccountController'); 
+		Route::resource('admin/bank_accounts/{bank_account}/deposits','BankDepositController');
 
     });
 

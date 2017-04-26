@@ -123,6 +123,7 @@ $factory->define(App\BankDeposit::class, function(Faker\Generator $faker) {
 
 $factory->define(App\BankAccount::class,function(Faker\Generator $faker){
 	return [
-		'name' => $faker->bankAccountNumber
+		'name' => $faker->bankAccountNumber,
+		'property_id' => factory(App\Property::class)->create()->id
 	];
 });

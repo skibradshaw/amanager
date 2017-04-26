@@ -5,7 +5,7 @@
             <div class="col-lg-12">
                 <h1>{{$title or ''}}</h1>
                 <p>&nbsp;</p>
-                {!! Form::open(['route' => ['deposits.store',$bank],'class' => 'form-horizontal']) !!}
+                {!! Form::open(['route' => ['properties.deposits.confirm',$property],'class' => 'form-horizontal']) !!}
                 {!! Form::hidden('type', $type) !!}
                 <div class="row">
                     <div class="col-md-3">
@@ -49,7 +49,7 @@
                                         <td class="text-center">{{$p->paid_date->format('n/j/Y')}}</td>
                                         <td class="text-center">{{$p->payment_type}}</td>
                                         <td align="right" class="text-right">{{$p->amount_in_dollars}}</td>
-                                        <td align="right" class="text-center">{!! Form::checkbox('payment_id[]', $p->id, 1, ['id' => $p->id,'class' => 'i-check payment']) !!}  {!! Form::hidden("payment_amount", $p->amount/100,['id' => 'payment_'.$p->id, 'class' => 'payment']) !!}</td>
+                                        <td align="right" class="text-center">{!! Form::checkbox('payment_id[]', $p->id, 1, ['id' => $p->id,'class' => 'i-check payment']) !!}  {!! Form::hidden("payment_amount[]", $p->amount/100,['id' => 'payment_'.$p->id, 'class' => 'payment']) !!}</td>
                                     </tr>
                                     @empty
                                     <tr>
@@ -60,8 +60,11 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="3"><h4><strong>Total Deposit</strong></h4></td>
-                                        <td colspan="3" class="text-right"><h4><strong>$<span id="total">{{number_format($payments->sum('amount')/100,2)}}</span></strong></h4></td>
-                                        <td colspan="1" class="text-center"><button class="btn btn-success" id="depositSubmit">Make Deposit</button></td>
+                                        <td colspan="3" class="text-right">
+                                            <h4><strong>$<span id="total">{{number_format($payments->sum('amount')/100,2)}}</span></strong></h4>
+                                            {!! Form::hidden('amount', $payments->sum('amount')/100, ['id' => 'total_amount']) !!}
+                                        </td>
+                                        <td colspan="1" class="text-center"><button class="btn btn-success" id="depositSubmit" @if($payments->sum('amount') == 0) disabled='disabled' @endif>Make Deposit</button></td>
                                     </tr>
                                 </tfoot>    
                             </table>                        
@@ -98,16 +101,23 @@
     //Show Selected Rent Total
     $(".payment").on('ifChanged',function(event) {
         var total = 0;
-        var id = $(this).attr('id');
+        
         $(".payment:checked").each(function() {
+            var id = $(this).attr('id');
+            // alert($('#payment_'+id).val());
             total += parseInt($('#payment_'+id).val());
         });
+        // $(".payment:not(:checked)").each(function() {
+        //     var id = $(this).attr('id');
+        //     // alert($('#payment_'+id).val());
+        //     $('#payment_'+id).val(0);
+        // });
         // alert(total);
         if(total == 0)
             $('#depositSubmit').attr('disabled',true);
         else
             $('#depositSubmit').attr('disabled',false);
-        $('#total').val(total);
+        $('#total_amount').val(total);
         total = numberWithCommas(total.toFixed(2))
         $('#total').text(total);
     });

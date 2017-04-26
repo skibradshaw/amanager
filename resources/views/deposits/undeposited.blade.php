@@ -4,26 +4,27 @@
         <div class="row">
             <div class="col-lg-12">
                 
-                @if(count($bankAccounts) == 0)
-                <a href="{{route('bank_accounts.create')}}" class="btn btn-danger pull-right"  data-toggle="modal" data-target="#largeModal">Setup a Bank</a>
-                @else
-                <a href="#" data-toggle="modal" data-target="#depositModal" class="btn btn-success pull-right">Make a Deposit</a>
-                @endif
+                
                 <h1>{{$title or ''}} <small>{{money_format('%.2n',$allPayments->sum('amount')/100)}} to Deposit</small> </h1>
 
                 <div class="row">
-                    @foreach($payments as $k => $propertyPayments)
+                    @foreach($navProperties as $property)
                     <div class="col-lg-6">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                
-                                <h4><i class="fa fa-bank fa-fw"></i> {{$k}} Undeposited Funds</h4>
+
+                            @if(count($property->bank_accounts) === 0)
+                            <a href="{{route('bank_accounts.create')}}" class="btn btn-danger pull-right"  data-toggle="modal" data-target="#largeModal">Setup a Bank</a>
+                            @else
+                            <a href="#" data-toggle="modal" data-target="#depositModal" data-property="{{$property->id}}" class="btn btn-success pull-right open-DepositTypeDialog">Make a Deposit</a>
+                            @endif                
+                                <h4><i class="fa fa-bank fa-fw"></i> {{$property->name}} Undeposited Funds</h4>
                             </div>
                             <div class="panel-body">
-                                <h4><strong>Total Payments:</strong> {{$propertyPayments->count()}}</h4>
-                                <h4><strong>Amount to Deposit:</strong> {{money_format('%.2n',$propertyPayments->sum('amount')/100)}}</h4>
-                                <h4><strong>Rent Payments:</strong> {{money_format('%.2n',$propertyPayments->filter(function($p){ if($p->payment_type == 'Rent' || $p->payment_type == 'Fee') return true; })->sum('amount')/100)}}</h4>
-                                <h4><strong>Security Deposit Payments:</strong> {{money_format('%.2n',$propertyPayments->filter(function($p){ if($p->payment_type == 'Security Deposit') return true; })->sum('amount')/100)}}</h4>
+                                <h4><strong>Total Payments:</strong> {{count($property->getUndepositedPayments())}}</h4>
+                                <h4><strong>Amount to Deposit:</strong> {{money_format('%.2n',$property->getUndepositedPayments()->sum('amount')/100)}}</h4>
+                                <h4><strong>Rent Payments:</strong> {{money_format('%.2n',$property->getUndepositedPayments()->filter(function($p){ if($p->payment_type == 'Rent' || $p->payment_type == 'Fee') return true; })->sum('amount')/100)}}</h4>
+                                <h4><strong>Security Deposit Payments:</strong> {{money_format('%.2n',$property->getUndepositedPayments()->filter(function($p){ if($p->payment_type == 'Security Deposit') return true; })->sum('amount')/100)}}</h4>
 
                                
                                 </p>
@@ -80,7 +81,7 @@
         <!-- /.row -->
 
     <div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="mediumModal">
-      <div class="modal-dialog modal-sm">
+      <div class="modal-dialog modal-md">
         <div class="modal-content">
              <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -93,6 +94,7 @@
                 
                     <div class="col-sm-12">
                     {!! Form::select('deposit_type', $depositTypes->prepend('Please Choose...'), null, ['id' => 'deposit_types', 'class' => 'form-control']) !!}
+                    {!! Form::hidden('property_id', '', ['id' => 'modalPropertyId']) !!}
                     </div>
                 </div>
             </div>
@@ -113,11 +115,18 @@
        aaSorting: [[0, 'asc']]
     });    
     $('div.dataTables_filter input').addClass('form-control');
+
+    // Set the property ID on the Modal Select
+    $(".open-DepositTypeDialog").click(function () {
+        $('#modalPropertyId').val($(this).data('property'));
+    });
+
     // bind change event to select
     $('#deposit_types').on('change', function () {
       var type = $(this).val(); // get selected value
-      var url = '/deposits/create?type='+type;
-      if (url) { // require a URL
+      var property = $('#modalPropertyId').val();
+      var url = '/reports/undeposited/'+property+'/confirm?type='+type;
+      if (url && type > 0) { // require a URL
           window.location = url; // redirect
       }
       return false;

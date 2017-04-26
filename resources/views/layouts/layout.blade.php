@@ -31,7 +31,11 @@
 </head>
 
 <body>
-
+@if (!App::environment('production'))
+    <div class="alert alert-danger text-center">
+        <h3>Sandbox: Test Data Only!</h3>
+    </div>
+@endif
     <!-- Navigation -->
     @include('layouts.nav')
 
@@ -87,6 +91,10 @@
             $(this).remove(); 
         });
     }, 4000);
+     // Clears Bootstrap Modals when closed
+       $(".modal").on("hidden.bs.modal", function() {
+            $(this).removeData('modal');
+          });
     </script>
 </body>
 

@@ -18,6 +18,11 @@ class BankAccount extends Model
 		$this->attributes['name'] = ucwords($value);
 	}
 
+	public function property()
+	{
+		return $this->belongsTo(Property::class);
+	}
+
 	public function deposits()
 	{
 		return $this->hasMany(BankDeposit::class)->orderby('deposit_date','desc');
