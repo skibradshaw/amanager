@@ -40,7 +40,7 @@
                                                 @if($p->deposited)
                                                     Deposited
                                               @else
-                                                    <a href="#" onclick="confirm('Are you sure?');
+                                                    <a href="#" onclick="return confirm('Are you sure?');
                                                                          document.getElementById('delete-payment-{{$p->id}}').submit();"><i class="fa fa-trash fa-fw text-danger"></i></a>
                                                     <form id="delete-payment-{{$p->id}}" action="{{ route('payments.destroy',[$property,$apartment,$lease,$p]) }}" method="POST" style="display: none;">
                                                         <input type="hidden" name="_method" value="DELETE">
