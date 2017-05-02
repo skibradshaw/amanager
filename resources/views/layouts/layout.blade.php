@@ -92,9 +92,13 @@
         });
     }, 4000);
      // Clears Bootstrap Modals when closed
-       $(".modal").on("hidden.bs.modal", function() {
-            $(this).removeData('modal');
-          });
+    // $(".modal").on("hidden.bs.modal", function() {
+    //     $(this).removeData('modal');
+    // });
+    $('body').on('hidden.bs.modal', '.modal', function () {
+      $(this).removeData('bs.modal');
+    });
+    
     </script>
 </body>
 

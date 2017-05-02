@@ -107,6 +107,10 @@
        aaSorting: [[0, 'desc']]
     });
 
+  //  $(".modal").on("hidden.bs.modal", function() {
+  //   $(this).removeData('modal');
+  // });
+
     //Jquery autocomplete search
     $(function()
     {
