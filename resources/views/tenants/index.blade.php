@@ -31,7 +31,7 @@
                                     <tr>
                                             <td>{{ $t->getActiveLease()->apartment->number}}</td>
                                             <td nowrap="nowrap">
-                                                {{$t->lastname}}. {{$t->firstname}}
+                                                <a href="{{route('tenants.edit',[$t])}}" class="btn btn-danger btn-xs btn-block">{{$t->lastname}}. {{$t->firstname}}</a>
                                             </td>
                                             <td  nowrap="nowrap">
                                                 {{$t->phone}}
