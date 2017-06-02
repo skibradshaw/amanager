@@ -2,6 +2,7 @@
 use App\Apartment;
 use App\Lease;
 use App\LeaseDetail;
+use App\Payment;
 use App\Tenant;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -248,13 +249,19 @@ class ManageLeaseTest extends TestCase
 	    	]);
 
 		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+		$undeposited = factory(Payment::class)->states('undeposited')->create([
+				'lease_id' => $lease->id
+			]);
+
 		
 		$response = $this->delete('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/'.$lease->id);
 
 		$newLease = Lease::find($lease->id);
 		$details = LeaseDetail::where('lease_id',$lease->id)->get();
+		$payments = $lease->payments;
 
 		$this->assertNull($newLease);
+		$this->assertEmpty($payments->toArray());
 		$this->assertEmpty($details->toArray());
 
 		$response->assertStatus(302);

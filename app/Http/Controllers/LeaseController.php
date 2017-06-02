@@ -201,6 +201,9 @@ class LeaseController extends Controller
         // Detach Tenants
         $lease->tenants()->detach();
 
+        // Delete Payments
+        $lease->payments()->undeposited()->delete();
+
         // Delete Details
         $lease->details()->delete();
 
