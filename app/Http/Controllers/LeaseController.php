@@ -195,4 +195,19 @@ class LeaseController extends Controller
         
         return redirect()->route('leases.show',[$property,$apartment,$lease]);        
     }
+
+    public function destroy(Property $property, Apartment $apartment, Lease $lease, Request $request)
+    {
+        // Detach Tenants
+        $lease->tenants()->detach();
+
+        // Delete Details
+        $lease->details()->delete();
+
+        // Delete Lease
+        $lease->delete();
+
+        return redirect()->route('home')->with('status','Lease Deleted!');
+    }
+
 }

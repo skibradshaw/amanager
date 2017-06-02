@@ -1,6 +1,7 @@
 <?php
 use App\Apartment;
 use App\Lease;
+use App\LeaseDetail;
 use App\Tenant;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -224,6 +225,43 @@ class ManageLeaseTest extends TestCase
 		$response->assertRedirect('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/'.$lease->id);
 
 	}
-	
+
+	/** @test */
+	function user_can_delete_a_lease()
+	{
+
+		$this->disableExceptionHandling();
+		$helper = new App\Repositories\HelperRepository;
+		//Apartment
+		$apartment = factory(Apartment::class)->create(); 
+		$start =  '4/1/2017'; //Carbon::parse('first day of last month')->format('n/j/Y');
+		$end = '3/31/2018';//Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 1050.50,
+                'pet_rent' => 150.00,
+                'deposit' => 2000.00,
+                'pet_deposit' => 150.00	    		
+	    	]);
+
+		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+		
+		$response = $this->delete('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/'.$lease->id);
+
+		$newLease = Lease::find($lease->id);
+		$details = LeaseDetail::where('lease_id',$lease->id)->get();
+
+		$this->assertNull($newLease);
+		$this->assertEmpty($details->toArray());
+
+		$response->assertStatus(302);
+		$response->assertRedirect('/');
+		$response->assertSessionHas('status','Lease Deleted!');
+
+	    
+	}	
     
 }

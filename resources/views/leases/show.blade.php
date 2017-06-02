@@ -57,6 +57,15 @@
             <div class="col-lg-4">
                 <div class="panel">
                     <div class="panel-heading">
+                    @if(count($lease->payments()->deposited()->get()) === 0)
+                    <a href="#" onclick="if(confirm('Are you sure? This cannot be undone.')){
+                            document.getElementById('delete-lease').submit();
+                        };">
+                        <i class="fa fa-trash fa-1x text-danger pull-right"></i></a>
+                            {!! Form::open(['route' => ['leases.destroy',$property,$apartment,$lease],'method' => 'DELETE','style'=> 'display: none;','id' => 'delete-lease']) !!}
+                            <!-- <button type="submit" class="btn btn-default btn-outline btn-xs pull-right" style="display: inline;"><i class="fa fa-trash text-danger fa-1x"></i></button>  -->
+                             {!! Form::close() !!}   
+                    @endif                 
                         <i class="fa fa-calendar-o fa-fw"></i> Lease Details
                     </div>
                     <div class="panel-body">
