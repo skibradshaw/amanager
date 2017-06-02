@@ -17,7 +17,7 @@
                         <table class="table table-striped table-condensed  table-hover responsive" id="tenants" width="100%">
                             <thead>
                                 <tr>
-                                    <th align="center" style="cursor:pointer">Name</th>
+                                    <th align="center" style="cursor:pointer"><a href="{{route('tenants.edit',[$t])}}">Name</a></th>
                                     <th align="center" style="cursor:pointer" class="text-center">Phone</th>
                                     <th align="center" style="cursor:pointer" class="text-center">Email</th>
                                     <th align="center" style="cursor:pointer" class="text-center">SubLease</th>
