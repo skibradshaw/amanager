@@ -27,7 +27,13 @@
                             <tbody> 
                             @foreach($lease->tenants as $t)
                                 <tr>
-                                    <td><a href="{{route('tenants.edit',[$t])}}">{{$t->fullname}}</td>
+                                    <td>
+                                        <a href="{{route('tenants.edit',[$t])}}">{{$t->fullname}}</a> 
+                                        @if($lease->payments()->where('tenant_id',$t->id)->count() == 0)
+                                        <a href="{{route('leases.remove_tenant',[$property,$apartment,$lease,$t])}}"><i class="fa fa-times text-danger" aria-hidden="true"></i></a> 
+                                        @endif
+
+                                    </td>
                                     <td class="text-center">{{$t->phone}}</td>
                                     <td class="text-center">
                                         @if(empty($t->email))

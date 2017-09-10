@@ -81,7 +81,7 @@ class TenantTest extends TestCase
 
 	    $lease->tenants()->attach($tenant->id);
 
-	    $activeLease = $tenant->getActiveLease();
+	    $activeLease = $tenant->active_lease;
 
 	    $this->assertEquals($lease->id, $activeLease->id);
 

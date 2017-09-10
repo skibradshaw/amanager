@@ -39,6 +39,7 @@
 
 		//Leases
 		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/add_tenant',['as' => 'leases.add_tenant','uses' => 'LeaseController@addTenant']);
+		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/remove_tenant/{tenant}',['as' => 'leases.remove_tenant','uses' => 'LeaseController@removeTenant']);
 		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/add_tenant',['as' => 'leases.add_tenant.show','uses' => 'LeaseController@showAddTenant']);
 		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/terminate',['as' => 'leases.terminate.show','uses' => 'LeaseController@showTerminate']);
 		Route::post('properties/{property}/apartments/{apartment}/leases/{lease}/terminate',['as' => 'leases.terminate','uses' => 'LeaseController@terminate']);

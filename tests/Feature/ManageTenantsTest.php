@@ -87,7 +87,6 @@ class ManageTenantsTest extends TestCase
 		// dd($this->app['session.store']);
 		$this->assertEquals('(307) 733-5681',$newTenant->phone);
 		$response->assertStatus(302);
-		$response->assertRedirect('/tenants');
 
 	}
 

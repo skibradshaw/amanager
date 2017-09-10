@@ -124,6 +124,43 @@ class ManageLeaseTest extends TestCase
 	}
 
 	/** @test */
+	function user_can_remove_tenant_from_lease()
+	{
+		$this->disableExceptionHandling();
+		$apartment = factory(Apartment::class)->create(); 
+		$tenant = factory(Tenant::class)->create();
+		
+		
+		$start = Carbon::parse('first day of next month')->format('n/j/Y');
+		$end = Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 100000,
+                'pet_rent' => 15000,
+                'deposit' => 200000,
+                'pet_deposit' => 15000	    		
+	    	]);
+
+		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+		$lease->tenants()->attach($tenant->id);
+
+		$this->assertEquals(1,$lease->tenants->count());
+		
+		$response = $this->get('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/'.$lease->id . '/remove_tenant/'. $tenant->id);
+		// $data = json_decode($this->response->getContent(),true);
+		// dd($data);
+		$response->assertStatus(302);
+		$response->assertSessionHas('status',$tenant->fullname . ' was successfully removed from this Lease.');
+		$lease = $lease->fresh();
+		$this->assertEquals(0,$lease->tenants->count());
+	    
+	}
+
+
+	/** @test */
 	function user_can_view_lease()
 	{
 		$this->disableExceptionHandling();		

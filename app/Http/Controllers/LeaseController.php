@@ -97,6 +97,13 @@ class LeaseController extends Controller
         return $tenant;
     }
 
+    public function removeTenant(Property $property, Apartment $apartment, Lease $lease, Tenant $tenant)
+    {
+        // $tenant = Tenant::find($request->input('tenant_id'));
+        $lease->tenants()->detach($tenant->id);
+        return redirect()->back()->with('status',$tenant->fullname . ' was successfully removed from this Lease.');
+    }
+
     public function createLeaseDetails(Lease $lease)
     {
         //Create Lease Details
