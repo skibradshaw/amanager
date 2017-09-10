@@ -64,9 +64,10 @@ class Tenant extends User
             });
     }
 
-    public function getActiveLease()
+    public function getActiveLeaseAttribute()
     {
-        return $this->leases()->where('end','>=',Carbon::now())->orderby('end','desc')->first();
+        // return $this->leases()->where('end','>=',Carbon::now())->orderby('end','desc')->first();
+        return $this->leases->last();
     }
 
 

@@ -13,7 +13,7 @@ class TenantController extends Controller
 	public function index(Request $request)
 	{
 		$property = null;
-		$query = Tenant::orderBy('lastname')->select();
+		$query = Tenant::with('leases')->orderBy('lastname')->select();
 		if($request->has('property_id'))
 		{
 			$query = $query->activeProperty($request->input('property_id'));
@@ -55,7 +55,7 @@ class TenantController extends Controller
 			return redirect()->route('leases.show',[$lease->apartment->property,$lease->apartment,$lease])->with('status',$tenant->fullname . " was added to this lease.");
 		}
 
-		return redirect()->route('tenants.show',$tenant)->with('status',$tenant->fullname . " successfully added..nice work!"); 
+		return redirect()->route('tenants.edit',$tenant)->with('status',$tenant->fullname . " successfully added..nice work!"); 
 
 	}
 

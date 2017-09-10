@@ -29,7 +29,7 @@
 
                                 @forelse($tenants as $t)
                                     <tr>
-                                            <td>{{ $t->getActiveLease()->apartment->number}}</td>
+                                            <td>{{ $t->active_lease->apartment->number}}</td>
                                             <td nowrap="nowrap">
                                                 <a href="{{route('tenants.edit',[$t])}}">{{$t->lastname}}. {{$t->firstname}}</a>
                                             </td>
@@ -43,20 +43,20 @@
                                                 {{$t->email}}
                                                 @endif
                                             </td>
-                                            <td class="text-center"><a href="{{route('leases.show',[$t->getActiveLease()->apartment->property,$t->getActiveLease()->apartment,$t->getActiveLease()])}}">{{ $t->getActiveLease()->apartment->property->name }} {{$t->getActiveLease()->apartment->name}}</a></td>
+                                            <td class="text-center"><a href="{{route('leases.show',[$t->active_lease->apartment->property,$t->active_lease->apartment,$t->active_lease])}}">{{ $t->active_lease->apartment->property->name }} {{$t->active_lease->apartment->name}}</a></td>
                                             <td>
-                                                {{$t->getActiveLease()->start->format('n/j/Y')}} - {{$t->getActiveLease()->end->format('n/j/Y')}}
+                                                {{$t->active_lease->start->format('n/j/Y')}} - {{$t->active_lease->end->format('n/j/Y')}}
                                             </td>
                                             <td class="text-center">
-                                                @if($t->getActiveLease()->pet_rent > 0)
-                                                <i class="fa fa-paw fa-fw" data-toggle="tooltip" title="Pets: {{money_format('%.2n',$t->getActiveLease()->pet_rent/100)}}/mo"></i>
+                                                @if($t->active_lease->pet_rent > 0)
+                                                <i class="fa fa-paw fa-fw" data-toggle="tooltip" title="Pets: {{money_format('%.2n',$t->active_lease->pet_rent/100)}}/mo"></i>
                                                 @endif
-                                                @if($t->getActiveLease()->fees->sum('amount') > 0)
-                                                <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Total Fees: {{money_format('%.2n',$t->getActiveLease()->fees->sum('amount')/100)}}"></i>
+                                                @if($t->active_lease->fees->sum('amount') > 0)
+                                                <i class="fa fa-usd fa-fw" data-toggle="tooltip" title="Total Fees: {{money_format('%.2n',$t->active_lease->fees->sum('amount')/100)}}"></i>
                                                 @endif                                            
                                             </td>
-                                            <td align="right" class="text-center">{{$t->getActiveLease()->rent_balance_in_dollars}}</td>
-                                            <td align="right" class="text-center">{{$t->getActiveLease()->deposit_balance_in_dollars}}</td>
+                                            <td align="right" class="text-center">{{$t->active_lease->rent_balance_in_dollars}}</td>
+                                            <td align="right" class="text-center">{{$t->active_lease->deposit_balance_in_dollars}}</td>
                                     </tr>       
                                 @empty
                                 @endforelse

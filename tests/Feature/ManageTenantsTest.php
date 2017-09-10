@@ -54,7 +54,7 @@ class ManageTenantsTest extends TestCase
 
 		$this->assertNotNull($tenant);
 		$response->assertStatus(302);
-		$response->assertRedirect('/tenants/'.$tenant->id);
+		$response->assertRedirect('/tenants/'.$tenant->id .'/edit');
 	}    
 
 	/** @test */
