@@ -157,7 +157,7 @@
                                 <div class="row">
                                 
                                     <div class="col-sm-12">
-                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id')->prepend('Choose Apartment...'), null, ['class' => 'form-control apt_choice']) !!}
+                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id')->prepend('Choose Apartment...'), null, ['class' => 'form-control apt_choice','onclick' => "var apartment = $(this).val(); window.location = '/properties/'+".$property->id ."+'/apartments/'+apartment+'/leases/create'"]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -182,14 +182,14 @@
 <script>
     
     // bind change event to select
-    $('.apt_choice').on('change', function () {
-      var apartment = $(this).val(); // get selected value
-      var url = '/properties/{{$property->id}}/apartments/'+apartment+'/leases/create';
-      if (url) { // require a URL
-          window.location = url; // redirect
-      }
-      return false;
-    });
+    // $('.apt_choice').on('change', function () {
+    //   var apartment = $(this).val(); // get selected value
+    //   var url = '/properties/{{$property->id}}/apartments/'+apartment+'/leases/create';
+    //   if (url) { // require a URL
+    //       window.location = url; // redirect
+    //   }
+    //   return false;
+    // });
 </script>
 
 @stop
