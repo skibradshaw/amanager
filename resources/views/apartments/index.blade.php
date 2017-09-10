@@ -6,11 +6,40 @@
                 <p><a href="#" data-toggle="modal" data-target="#apartmentModal" class="btn btn-primary pull-right">Create a New Lease</a></p>
                 <h1>{{$title}}</h1>
                 
-<!--                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Primum Theophrasti, Strato, physicum se voluit; Hoc est vim afferre, Torquate, sensibus, extorquere ex animis cognitiones verborum, quibus inbuti sumus. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Cum autem negant ea quicquam ad beatam vitam pertinere, rursus naturam relinquunt. Ut necesse sit omnium rerum, quae natura vigeant, similem esse finem, non eundem. Et quidem, inquit, vehementer errat;</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.7</li>
-                    <li>jQuery v1.11.1</li>
-                </ul> -->
+                @if(count($vacantApartments))
+                <h3>Vacant Apartments</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped table-condensed  table-hover responsive" id="vacantApartments" width="100%">
+                    <thead>
+                    <tr>
+                        <th align="center" style="cursor:pointer">Apartment</th>
+                        <th align="center" style="cursor:pointer" class="text-center">Number</th>
+                        <th align="center" style="cursor:pointer" class="text-center">Last Lease</th>
+                        <th align="left" style="cursor:pointer" class="text-center">New Lease</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                            @forelse($vacantApartments as $a)
+                                <tr>
+                                    <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
+                                    <td class="text-center">{{$a->number}}</td> 
+                                    <td>{{$a->leases->last()}} </td>                           
+                                    <td align="center" class="text-center">
+                                            <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-sm">Create Lease</a>
+                                    </td>
+                                </tr>       
+                            @empty
+                                <tr>
+                                    <td colspan="6">None Added</td>
+                                </tr>
+                            @endforelse
+
+                    </tbody>
+                    </table>
+                </div>
+                @endif                
+
                 @if(count($apartments))
                 <h3>Leased Apartments</h3>
                     <div class="table-responsive">
@@ -33,9 +62,9 @@
                                     <tr>
                                         @if(isset($a->nextLease()->id))
                                             <td>
-                                                <!-- <a href="{{ route('apartments.show',[$property, $a]) }}"> -->
+                                                <a href="{{ route('apartments.show',[$property, $a]) }}">
                                                 {{ $a->property->name }} {{$a->name}}
-                                                <!-- </a> -->
+                                                </a>
                                             </td>
                                             <td class="text-center">{{$a->number}}</td>
                                             <td class="text-center">
@@ -86,44 +115,6 @@
                 @endif
             </div>
         </div>        
-        <div class="row">
-            <div class="col-lg-12">
-
-            @if(count($vacantApartments))
-            <h3>Vacant Apartments</h3>
-            <div class="table-responsive">
-                <table class="table table-striped table-condensed  table-hover responsive" id="vacantApartments" width="100%">
-                <thead>
-                <tr>
-                    <th align="center" style="cursor:pointer">Apartment</th>
-                    <th align="center" style="cursor:pointer" class="text-center">Number</th>
-                    <th align="center" style="cursor:pointer" class="text-center">Last Lease</th>
-                    <th align="left" style="cursor:pointer" class="text-center">New Lease</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                        @forelse($vacantApartments as $a)
-                            <tr>
-                                <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
-                                <td class="text-center">{{$a->number}}</td> 
-                                <td>&nbsp</td>                           
-                                <td align="center" class="text-center">
-                                        <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-sm">Create Lease</a>
-                                </td>
-                            </tr>       
-                        @empty
-                            <tr>
-                                <td colspan="6">None Added</td>
-                            </tr>
-                        @endforelse
-
-                </tbody>
-                </table>
-            </div>
-            @endif                
-            </div>
-        </div>
         <!-- /.row -->
     <div class="modal fade" id="apartmentModal" tabindex="-1" role="dialog" aria-labelledby="smallModal">
       <div class="modal-dialog modal-sm">

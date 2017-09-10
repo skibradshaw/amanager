@@ -69,6 +69,6 @@ class TenantController extends Controller
 		// return $request->all();
 		
 		$tenant->update($request->all());
-		return redirect()->route('tenants.index')->with('status',$tenant->full_name . " updated successfully.  Nice work!");
+		return redirect()->back()->with('status',$tenant->full_name . " updated successfully.  Nice work!");
 	}
 }

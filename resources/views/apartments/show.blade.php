@@ -14,7 +14,7 @@
                 </p>
                 
                 <div class="col-md-8">
-                <h3>Current Tenants</h3>
+                    <h3>Current Tenants</h3>
                     <div class="list-group">
                         @foreach($currentLease->tenants as $t)
                         <span class="list-group-item">
@@ -55,18 +55,13 @@
 
                 
             </div>
-        </div>
-        <!-- /.row -->
-        <div class="row"><div class="col-lg-12"><hr></div></div>
-        <!-- /.row -->
-        <div class="row">
-            <h3>Past Leases</h3>
-            <div class="col-md-8">
-                
+            <div class="row"><div class="col-lg-12"><hr></div></div>
+            <div class="col-lg-12">
+                    <h3>Past Leases</h3>
                     <div class="list-group">
                         @foreach($apartment->pastLeases() as $l)
                         <span class="list-group-item">
-                            <h4 class="list-group-item-heading">{{$l->start->format('n/j/y')}} - {{$l->end->format('n/j/y')}}</h4>
+                            <h4 class="list-group-item-heading"><a href="{{ route('leases.show',[$property,$apartment,$l]) }}"> {{$l->start->format('n/j/y')}} - {{$l->end->format('n/j/y')}}</a></h4>
                             <p class="list-group-item-text">
                             Tenants: {{$l->tenants->count()}}<br>
                             Monthly Rent: {{$l->monthly_rent_in_dollars}}<br>
@@ -80,4 +75,5 @@
             </div>
         </div>
         <!-- /.row -->
+        
 @stop
