@@ -74,15 +74,17 @@ class ManageFeesTest extends TestCase
 		$this->disableExceptionHandling();
 
 		$lease = $this->getLease();
+		$fee_date = Carbon::parse('first day of this month');
 
 		$response = $this->post('/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id . '/fees',[
 				'item_name' => collect(Fee::$types)->random(),
 				'note' => 'Fake Fee is assessed',
 				'amount' => 50.00,
-				'due_date' => '5/1/17'
+				'due_date' => $fee_date->format('n/j/Y')
 			]);
 
-		$fee = $lease->fees()->where('amount',5000)->where('due_date',Carbon::parse('5/1/17'))->first();
+		// dd($lease->fees);
+		$fee = $lease->fees()->where('amount',5000)->first();
 
 		$this->assertNotNull($fee);
 	    $response->assertSessionHas('status','New fee has been assessed for $'.$fee->amount_in_dollars . ' due on ' .$fee->due_date->format('n/j/Y') . '!');
