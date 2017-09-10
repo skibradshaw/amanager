@@ -54,6 +54,17 @@ table.ledger th, table.ledger td {
 
 }
 
+/*
+Bootstrap tooltip wrap
+ */
+.tooltip-inner  {
+
+    white-space:pre-wrap; /* you can also try white-space: normal; */
+    //max-width:300;
+
+}
+
+
 .big-checkbox {width: 30px; height: 30px;}
 
 /* WIDGETS */

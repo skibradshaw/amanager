@@ -58,6 +58,33 @@ class LeaseDetail extends Model
      */
     public function rentPayments($tenant_id = null)
     {
+        // $query = $this->lease->payments()->rentsAndFees();
+
+        // if(!is_null($tenant_id))
+        // {
+        //     $query = $query->where('tenant_id',$tenant_id);
+        // }
+        // //BUSINESS RULE: Any rent payments recieved outside of the Lease dates should be applied to the first month.
+        // if($this->start->eq($this->lease->start))
+        // {
+        //     $query = $query->where(function($q){
+        //         $q->whereBetween('paid_date',[$this->start,$this->end])
+        //             ->orwhere('paid_date','<',$this->lease->start)
+        //             ->orWhere('paid_date','>',$this->lease->end);
+        //     });
+        //     // $query = $query->where('paid_date',Carbon::now());
+        // } else $query = $query->whereBetween('paid_date',[$this->start,$this->end]);
+
+        return $this->getRentPayments($tenant_id)->sum('amount');
+    }
+
+    /**
+     * Retrieves a collection of payments during time period of the lease detail.  
+     * @param  [type] $tenant_id [description]
+     * @return [type]            [description]
+     */
+    public function getRentPayments($tenant_id = null)
+    {
         $query = $this->lease->payments()->rentsAndFees();
 
         if(!is_null($tenant_id))
@@ -75,8 +102,9 @@ class LeaseDetail extends Model
             // $query = $query->where('paid_date',Carbon::now());
         } else $query = $query->whereBetween('paid_date',[$this->start,$this->end]);
 
-        return $query->sum('amount');
+        return $query->get();
     }
+
 
     public function monthBalance()
     {

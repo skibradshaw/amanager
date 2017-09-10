@@ -532,7 +532,60 @@
 			"file": "resources/views/dashboard.blade.php",
 			"settings":
 			{
-				"buffer_size": 11821,
+				"buffer_size": 11985,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/apartments/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 9624,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/apartments/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 3901,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/TenantController.php",
+			"settings":
+			{
+				"buffer_size": 2013,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/leases/partials/ledger.blade.php",
+			"settings":
+			{
+				"buffer_size": 3741,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/assets/sass/app.scss",
+			"settings":
+			{
+				"buffer_size": 2864,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/LeaseDetail.php",
+			"settings":
+			{
+				"buffer_size": 4365,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -667,16 +720,14 @@
 	[
 		"/Users/tbradshaw/Sites/amanager_v2",
 		"/Users/tbradshaw/Sites/amanager_v2/app",
-		"/Users/tbradshaw/Sites/amanager_v2/config",
-		"/Users/tbradshaw/Sites/amanager_v2/database",
 		"/Users/tbradshaw/Sites/amanager_v2/database/factories",
-		"/Users/tbradshaw/Sites/amanager_v2/public",
 		"/Users/tbradshaw/Sites/amanager_v2/public/css",
 		"/Users/tbradshaw/Sites/amanager_v2/resources",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/deposits",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/partials",
@@ -1136,7 +1187,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -1164,16 +1215,164 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
 					"file": "resources/views/dashboard.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11985,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11968,
+								11600
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3653.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/apartments/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9624,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5216,
+								5285
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1250.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/views/apartments/show.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3901,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3256,
+								3256
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/Http/Controllers/TenantController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2013,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1932,
+								1932
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 755.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "resources/views/leases/partials/ledger.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3741,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2512,
+								2512
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 784.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "resources/assets/sass/app.scss",
 					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 11821,
+						"buffer_size": 2864,
 						"regions":
 						{
 						},
@@ -1186,19 +1385,49 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3534.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 7,
+					"file": "app/LeaseDetail.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4365,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2461,
+								2461
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1474.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
 					"file": "app/Lease.php",
 					"semi_transient": false,
 					"settings":
@@ -1224,11 +1453,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 9,
 					"file": "tests/Feature/ManageTenantsTest.php",
 					"semi_transient": false,
 					"settings":
@@ -1253,11 +1482,11 @@
 						"translation.y": 758.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 10,
 					"file": "resources/views/tenants/edit.blade.php",
 					"semi_transient": false,
 					"settings":
@@ -1283,7 +1512,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1343,7 +1572,11 @@
 		[
 			[
 				"lease",
-				"app/Lease.php"
+				"app/LeaseDetail.php"
+			],
+			[
+				"tenant",
+				"app/Http/Controllers/TenantController.php"
 			],
 			[
 				"ten",
@@ -1464,10 +1697,6 @@
 			[
 				"depo",
 				"app/Http/Controllers/BankDepositController.php"
-			],
-			[
-				"tenant",
-				"app/Http/Controllers/TenantController.php"
 			],
 			[
 				"lea",
@@ -1859,19 +2088,19 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "se",
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"~/Sites/seismic/seismic.sublime-project"
+			],
 			[
 				"se",
 				"~/Sites/seismic/seismic.sublime-project"
 			],
 			[
 				"at",
-				"~/Sites/at_apps/at_apps.sublime-project"
-			],
-			[
-				"",
 				"~/Sites/at_apps/at_apps.sublime-project"
 			],
 			[

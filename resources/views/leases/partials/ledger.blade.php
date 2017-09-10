@@ -52,7 +52,16 @@
 						<td> {{ $t->lastname }} </td>
 
 						@foreach($lease->details as $m)
-							<td align="right" class="text-right" nowrap>{{money_format('%.2n',$m->rentPayments($t->id)/100)}}</td>
+							<td align="right" class="text-right" nowrap>
+								@if(count($m->getRentPayments($t->id)) > 1)
+								<span data-toggle="tooltip" data-html="true" data-placement="top" data-content="Test" 
+								title="@foreach($m->getRentPayments($t->id) as $p) {{$p->paid_date->format('n/j/y')}}: {{money_format('%.2n',$p->amount/100)}}<br>@endforeach">
+								@else
+								<span>
+								@endif
+								{{money_format('%.2n',$m->rentPayments($t->id)/100)}}
+								</span>
+							</td>
 						@endforeach
 					</tr>
 				@endforeach
