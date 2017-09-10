@@ -527,6 +527,42 @@
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "resources/views/leases/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 7587,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/tenants/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 5951,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 183,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/deposits/undeposited.blade.php",
+			"settings":
+			{
+				"buffer_size": 7168,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -641,9 +677,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/partials",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/auth/passwords",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/deposits",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/partials",
@@ -799,7 +832,7 @@
 	],
 	"find":
 	{
-		"height": 31.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
@@ -1104,7 +1137,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -1132,6 +1165,124 @@
 						"translation.y": 703.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/views/leases/show.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1664,
+								1664
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 264.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/tenants/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2213,
+								2213
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": ".gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 183,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								183,
+								183
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "resources/views/deposits/undeposited.blade.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 7168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 812.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 0,
 					"type": "text"
 				}
@@ -1140,7 +1291,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 30.0
 	},
 	"input":
 	{
@@ -1181,7 +1332,7 @@
 	"project": "amanager_v2.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 56.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1708,16 +1859,20 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "se",
+		"last_filter": "at",
 		"selected_items":
 		[
 			[
-				"se",
-				"~/Sites/seismic/seismic.sublime-project"
+				"at",
+				"~/Sites/at_apps/at_apps.sublime-project"
 			],
 			[
 				"",
 				"~/Sites/at_apps/at_apps.sublime-project"
+			],
+			[
+				"se",
+				"~/Sites/seismic/seismic.sublime-project"
 			],
 			[
 				"s",
@@ -1734,10 +1889,6 @@
 			[
 				"gu",
 				"~/Sites/at_guestbook/at_guestbook.sublime-project"
-			],
-			[
-				"at",
-				"~/Sites/at_apps/at_apps.sublime-project"
 			],
 			[
 				"g",
