@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"amount",
+				"amount_in_dollars\t(add_fee.blade.php)"
+			],
+			[
+				"du",
+				"due_date\t(Lease.php)"
+			],
+			[
 				"apart",
 				"apartment\t(TenantController.php)"
 			],
@@ -188,10 +196,6 @@
 				"amount_due\t(LeaseDetail.php)"
 			],
 			[
-				"amount",
-				"amount_due"
-			],
-			[
 				"cur",
 				"currentLease"
 			],
@@ -202,10 +206,6 @@
 			[
 				"lease",
 				"lease_details"
-			],
-			[
-				"du",
-				"due_date"
 			],
 			[
 				"pr",
@@ -529,91 +529,27 @@
 			}
 		},
 		{
-			"file": "app/Http/Controllers/LeaseController.php",
+			"file": "webpack.mix.js",
 			"settings":
 			{
-				"buffer_size": 9015,
+				"buffer_size": 864,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "tests/Feature/ManageLeaseTest.php",
+			"file": "composer.json",
 			"settings":
 			{
-				"buffer_size": 10888,
-				"encoding": "UTF-8",
+				"buffer_size": 1470,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "tests/Feature/ManageTenantsTest.php",
+			"file": "package.json",
 			"settings":
 			{
-				"buffer_size": 2275,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 21 files for \"data\" (case sensitive)\n\n/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageBankAccountsTest.php:\n   27  \t    // dd($bankAccounts->toArray());\n   28  \t    // dd($bankAccounts->pluck('name')->toArray());\n   29: \t    // $data = json_decode($this->response->getContent(),true);\n   30  \t    // $response->assertJson($bankAccounts->pluck('name')->toArray());\n   31  \t    $response->assertStatus(200);\n\n/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageDepositsTest.php:\n  128  \t\t// $deposit = BankDeposit::first();\n  129  \t\t// dd($response);\n  130: \t\t// $data = json_decode($response->getContent(),true);\n  131  \n  132: \t\t// dd($data);\t\t\n  133  \n  134  \t\t//Assert that this Deposit was created for the correct amount and the correct type.\n\n/Users/tbradshaw/Sites/amanager_v2/tests/Unit/FeeTest.php:\n   51  \t\t\n   52  \t\t// dd($this->response);\n   53: \t\t$data = json_decode($this->response->getContent(),true);\n   54: \t\t// dd($data);\n   55  \n   56  \t\t$fee = $lease->fees()->where('amount',5000)->where('due_date',Carbon::parse('5/1/17'))->first();\n   57  \t\t\n   58: \t\t$this->assertArrayHasKey('amount',$data);\n   59  \t\t$this->assertNull($fee);\t\t\n   60  \t\t$this->response->assertStatus(422);\n   ..\n   78  \t\t\n   79  \t\t// dd($this->response);\n   80: \t\t$data = json_decode($this->response->getContent(),true);\n   81: \t\t// dd($data);\n   82  \n   83  \t\t$fee = $lease->fees()->where('amount',5000)->where('due_date',Carbon::parse('5/1/17'))->first();\n   84  \t\t\n   85: \t\t$this->assertArrayHasKey('due_date',$data);\n   86  \t\t$this->assertNull($fee);\t\t\n   87  \t\t$this->response->assertStatus(422);\n\n/Users/tbradshaw/Sites/amanager_v2/tests/Unit/LeaseTest.php:\n  138  \t//     \t]);\n  139  \t//     // dd($response);\n  140: \t// \t$data = json_decode($this->response->getContent(),true);\n  141  \n  142  \t//     $lease = Lease::where('apartment_id',$apartment->id)->where('start',Carbon::parse('first day of next month'))->where('end',Carbon::parse('first day of next month')->addYear()->subDay())->first();\n  143  \t//     $this->assertNull($lease);\n  144: \t// \t// dd($data);\n  145  \t// \t// dd($this->response->getContent());\n  146  \t// \t// dd($this->app['session.store']);\n  ...\n  148  \n  149  \t// \t//http://stackoverflow.com/questions/35025347/phpunit-test-returns-302-for-bad-validation-why-not-422\n  150: \t// \t$this->assertArrayHasKey('tenants',$data);\t    \n  151  \t// \t$this->response->assertStatus(422);\n  152  \n  ...\n  167  \t    \t]);\n  168  \t    // dd($response);\n  169: \t\t$data = json_decode($this->response->getContent(),true);\n  170  \n  171  \t    $lease = Lease::where('apartment_id',$apartment->id)->where('start',Carbon::parse('first day of next month'))->where('end',Carbon::parse('first day of next month')->addYear()->subDay())->first();\n  172  \t    $this->assertNull($lease);\n  173: \t\t// dd($data);\n  174  \t\t// dd($this->response->getContent());\n  175  \t\t// dd($this->app['session.store']);\n  ...\n  177  \n  178  \t\t//http://stackoverflow.com/questions/35025347/phpunit-test-returns-302-for-bad-validation-why-not-422\n  179: \t\t$this->assertArrayHasKey('start',$data);\t    \n  180  \t\t$this->response->assertStatus(422);\t    \n  181  \t}\n  ...\n  197  \t    \t]);\n  198  \t    // dd($response);\n  199: \t\t$data = json_decode($this->response->getContent(),true);\n  200  \n  201  \t    $lease = Lease::where('apartment_id',$apartment->id)->where('start',Carbon::parse('first day of next month'))->where('end',Carbon::parse('first day of next month')->addYear()->subDay())->first();\n  202  \t    $this->assertNull($lease);\n  203: \t\t// dd($data);\n  204  \t\t// dd($this->response->getContent());\n  205  \t\t// dd($this->app['session.store']);\n  ...\n  207  \n  208  \t\t//http://stackoverflow.com/questions/35025347/phpunit-test-returns-302-for-bad-validation-why-not-422\n  209: \t\t$this->assertArrayHasKey('start',$data);\t    \n  210  \t\t$this->response->assertStatus(422);\t    \n  211  \t}\n\n/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PaymentsTest.php:\n   44  \t    \t\t'paid_date' => Carbon::now()->format('n/j/Y'),\t    \t\t\n   45  \t    \t]);\n   46: \t\t$data = json_decode($this->response->getContent(),true);\n   47  \t    $payment = $lease->payments()->where('paid_date',Carbon::parse(Carbon::now()->format('n/j/Y')))\n   48  \t    \t->where('tenant_id',$tenant->id)\n   ..\n   52  \n   53  \t    $this->assertNull($payment);\n   54: \t    $this->assertArrayHasKey('amount',$data);\t    \n   55  \t\t$this->response->assertStatus(422);\t\n   56  \t    \n\n20 matches across 5 files\n",
-			"settings":
-			{
-				"buffer_size": 4451,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "tests/Unit/FeeTest.php",
-			"settings":
-			{
-				"buffer_size": 2519,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/TenantController.php",
-			"settings":
-			{
-				"buffer_size": 2013,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/views/leases/partials/ledger.blade.php",
-			"settings":
-			{
-				"buffer_size": 3797,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Tenant.php",
-			"settings":
-			{
-				"buffer_size": 1853,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tests/Unit/TenantTest.php",
-			"settings":
-			{
-				"buffer_size": 2020,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/LeaseDetail.php",
-			"settings":
-			{
-				"buffer_size": 4368,
-				"encoding": "UTF-8",
+				"buffer_size": 1355,
 				"line_ending": "Unix"
 			}
 		}
@@ -721,6 +657,11 @@
 	[
 		"/Users/tbradshaw/Sites/amanager_v2",
 		"/Users/tbradshaw/Sites/amanager_v2/app",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules/css",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery-ui",
+		"/Users/tbradshaw/Sites/amanager_v2/public",
 		"/Users/tbradshaw/Sites/amanager_v2/resources",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js",
@@ -733,8 +674,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/payments",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/payments/partials",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/users",
@@ -750,25 +689,31 @@
 	],
 	"file_history":
 	[
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/show.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
-		"/Users/tbradshaw/Sites/amanager_v2/app/LeaseDetail.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/edit.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/composer.json",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Lease.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/show.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/ledger.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Fee.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/partials/edit.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/LeaseDetail.php",
+		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/TenantTest.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Tenant.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/TenantController.php",
+		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/FeeTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageTenantsTest.php",
+		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageLeaseTest.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/dashboard.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/index.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/show.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Tenant.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/index.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/TenantController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/config/app.php",
-		"/Users/tbradshaw/Sites/amanager_v2/composer.json",
 		"/Users/tbradshaw/Sites/amanager_v2/.gitignore",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/FeeController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageFeesTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageLeaseTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Payment.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/factories/ModelFactory.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/TestCase.php",
@@ -799,14 +744,12 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_24_191920_add_property_id_to_bank_accounts.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManagePetRentTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseDetailController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/ledger.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PaymentsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/deposit_panel.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Apartment.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DashboardController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/PaymentsController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/nav.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/TenantTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/create.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports/unpaid_balances.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2014_10_12_000000_create_users_table.php",
@@ -832,7 +775,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_15_125100_add_created_by_to_leases_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/payments/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/terminate.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/partials/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Repositories/HelperRepository.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_tenant.blade.php",
@@ -842,7 +784,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_09_042002_create_bank_deposits_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/b31b95c0699362e94591bf84ead18e008804dd06.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/MakePaymentTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/payments_panel.php",
 		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/7db0388b0eae5cedfc48f9ec1ad51387d6fc6b38.php",
 		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/bdae4a2b266aed8f5ec6f9dba8240fa6f8cda228.php",
@@ -871,8 +812,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_08_235849_create_payments_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DepositController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/FeeTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Fee.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/index.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_09_012954_create_fees_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_08_184857_create_lease_details_table.php",
@@ -1023,6 +962,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"ul",
 			"data",
 			"getActiveLease()",
 			"sure",
@@ -1149,8 +1089,7 @@
 			"deposit",
 			"pet_rent",
 			"monthly_rent",
-			"end",
-			"startdate"
+			"end"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1186,7 +1125,7 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1211,316 +1150,47 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 778.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/Http/Controllers/LeaseController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9015,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3693,
-								3757
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1846.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "tests/Feature/ManageLeaseTest.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10888,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5573,
-								5573
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2738.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "tests/Feature/ManageTenantsTest.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2275,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2268,
-								2268
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1146.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4451,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										246,
-										250
-									],
-									[
-										582,
-										586
-									],
-									[
-										656,
-										660
-									],
-									[
-										879,
-										883
-									],
-									[
-										951,
-										955
-									],
-									[
-										1126,
-										1130
-									],
-									[
-										1273,
-										1277
-									],
-									[
-										1345,
-										1349
-									],
-									[
-										1522,
-										1526
-									],
-									[
-										1738,
-										1742
-									],
-									[
-										2074,
-										2078
-									],
-									[
-										2355,
-										2359
-									],
-									[
-										2486,
-										2490
-									],
-									[
-										2813,
-										2817
-									],
-									[
-										3080,
-										3084
-									],
-									[
-										3215,
-										3219
-									],
-									[
-										3542,
-										3546
-									],
-									[
-										3809,
-										3813
-									],
-									[
-										4041,
-										4045
-									],
-									[
-										4353,
-										4357
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								892,
-								892
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "tests/Unit/FeeTest.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2519,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1518,
-								1444
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 711.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/Http/Controllers/TenantController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2013,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1932,
-								1932
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 755.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "resources/views/leases/partials/ledger.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3797,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2566,
-								2566
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1002.0,
+						"translation.y": 809.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "app/Tenant.php",
+					"buffer": 1,
+					"file": "webpack.mix.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1853,
+						"buffer_size": 864,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								529,
+								529
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "composer.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1470,
 						"regions":
 						{
 						},
@@ -1533,74 +1203,45 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 732.0,
+						"translation.y": 280.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "tests/Unit/TenantTest.php",
+					"buffer": 3,
+					"file": "package.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2020,
+						"buffer_size": 1355,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1950,
-								1950
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1100.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "app/LeaseDetail.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4368,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								406,
-								450
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1659,12 +1300,32 @@
 		"selected_items":
 		[
 			[
-				"lease",
-				"app/LeaseDetail.php"
+				"com",
+				"composer.json"
+			],
+			[
+				"add_f",
+				"resources/views/leases/partials/add_fee.blade.php"
+			],
+			[
+				"fee",
+				"app/Fee.php"
+			],
+			[
+				"lea",
+				"app/Lease.php"
+			],
+			[
+				"leas",
+				"app/Lease.php"
 			],
 			[
 				"leasec",
 				"app/Http/Controllers/LeaseController.php"
+			],
+			[
+				"lease",
+				"app/LeaseDetail.php"
 			],
 			[
 				"ten",
@@ -1677,14 +1338,6 @@
 			[
 				"tenan",
 				"app/Http/Controllers/TenantController.php"
-			],
-			[
-				"com",
-				"composer.json"
-			],
-			[
-				"fee",
-				"app/Http/Controllers/FeeController.php"
 			],
 			[
 				"tenantsin",
@@ -1729,10 +1382,6 @@
 			[
 				"payme",
 				"app/Payment.php"
-			],
-			[
-				"leas",
-				"app/Lease.php"
 			],
 			[
 				"prop",
@@ -1785,10 +1434,6 @@
 			[
 				"depo",
 				"app/Http/Controllers/BankDepositController.php"
-			],
-			[
-				"lea",
-				"app/Lease.php"
 			],
 			[
 				"apar",
@@ -2165,10 +1810,6 @@
 			[
 				"ppc",
 				"app/Http/Controllers/Sales/PpcContractController.php"
-			],
-			[
-				"sale",
-				"app/Http/Controllers/Sales/SalesReportController.php"
 			]
 		],
 		"width": 0.0
@@ -2176,19 +1817,19 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "s",
+		"last_filter": "se",
 		"selected_items":
 		[
+			[
+				"se",
+				"~/Sites/seismic/seismic.sublime-project"
+			],
 			[
 				"s",
 				"~/Sites/seismic/seismic.sublime-project"
 			],
 			[
 				"",
-				"~/Sites/seismic/seismic.sublime-project"
-			],
-			[
-				"se",
 				"~/Sites/seismic/seismic.sublime-project"
 			],
 			[
