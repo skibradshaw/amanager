@@ -104,7 +104,7 @@ class Lease extends Model
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(Payment::class)->orderBy('paid_date','desc');
     }
 
     public function fees()
