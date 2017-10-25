@@ -8,7 +8,7 @@
     <div class="form-group @if($errors->first('due_date')) has-error @endif">
         {!! Form::label('due_date','Due Date:',['for' => 'due_date','class' => 'col-sm-4 control-label']) !!}
         <div class="col-sm-4">
-				{!! Form::text('due_date',\Carbon\Carbon::now()->format('n/j/Y'),['id' => 'due_date','class' => 'datepicker form-control','placeholder' => 'mm/dd/yyyy','style' => 'position: relative; z-index: 100000;']) !!}
+				{!! Form::text('due_date',(!empty($fee)) ? $fee->due_date->format('n/j/Y') : \Carbon\Carbon::now()->format('n/j/Y'),['id' => 'due_date','class' => 'datepicker form-control','placeholder' => 'mm/dd/yyyy','style' => 'position: relative; z-index: 100000;']) !!}
             <small class="text-danger">{{ $errors->first('due_date') }}</small>
         </div>
     </div>
@@ -17,7 +17,7 @@
         <div class="col-sm-6">
             <div class="input-group">
                 <span class="input-group-addon">$</span>
-                {!! Form::text('amount',null,['id' => 'amount','class' => 'form-control']) !!}
+                {!! Form::text('amount',(!empty($fee)) ? number_format($fee->amount/100,2) : null,['id' => 'amount','class' => 'form-control']) !!}
             </div>
             <small class="text-danger">{{ $errors->first('amount') }}</small>
         </div>
@@ -28,4 +28,10 @@
                 {!! Form::textarea('note',null,['id' => 'note','class' => 'form-control','rows' => 2]) !!}
             <small class="text-danger">{{ $errors->first('note') }}</small>
         </div>
-    </div>    
+    </div> 
+    <script>
+    $( "#due_date" ).datepicker({
+      dateFormat: "m/d/yy",
+
+    });
+    </script>   

@@ -35,7 +35,7 @@
 				<tr>
 					<td>Fees</td>
 					@foreach($lease->details as $m)									
-						<td align="right" class="text-right" nowrap><a href="{{ route('fees.create',[$property, $apartment, $lease])}} "  data-toggle="modal" data-target="#largeModal"> {{ money_format('%.2n',$lease->monthFees($m->month,$m->year)/100) }}</a></td>
+						<td align="right" class="text-right" nowrap><a href="{{ route('fees.create',[$property, $apartment, $lease,'month='.$m->month, 'year='.$m->year])}} "  data-toggle="modal" data-target="#largeModal"> {{ money_format('%.2n',$lease->monthFees($m->month,$m->year)/100) }}</a></td>
 					@endforeach
 				</tr>		
 				<tr>

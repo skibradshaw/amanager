@@ -9,6 +9,19 @@
     <div class="row">
         @include('fees.partials.edit')
     </div>
+    @if($lease->monthFees(Request::input('month'),Request::input('year')) > 0)
+    <div class="row">
+        <div class="col-md-12">
+          <h4>{{date("F", mktime(0, 0, 0, Request::input('month'), 15))}} Fee Details</h4>
+          <div class="list-group">
+            @foreach($lease->monthFeesDetails(Request::input('month'),Request::input('year')) as $f)
+            <a href="{{route('fees.edit',[$property,$apartment,$lease,$f])}}" class="list-group-item">{{$f->due_date->format('n/j/Y')}} - {{$f->item_name}}: {{$f->amount_in_dollars}}</a>
+            @endforeach
+          </div>
+
+        </div>
+    </div>
+    @endif
   </div>              
     
   <div class="modal-footer">

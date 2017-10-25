@@ -14,5 +14,9 @@ class Fee extends Model
 	protected $logOnlyDirty = true;
 	static $types = ['Miscellaneous' => 'Miscellaneous', 'Late Fee' => 'Late Fee', 'Damage Fee' => 'Damage Fee'];
 
+    public function getAmountInDollarsAttribute()
+    {
+        return money_format('%.2n',$this->amount/100);
+    }
 
 }
