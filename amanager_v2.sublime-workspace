@@ -4,6 +4,7 @@
 		"selected_items":
 		[
 			[
+<<<<<<< HEAD
 				"unpaidRen",
 				"unpaidRentLeases"
 			],
@@ -12,6 +13,8 @@
 				"totalUnpaidRent"
 			],
 			[
+=======
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"amount",
 				"amount_in_dollars\t(add_fee.blade.php)"
 			],
@@ -529,23 +532,39 @@
 			}
 		},
 		{
+<<<<<<< HEAD
 			"file": "app/Http/Controllers/DashboardController.php",
 			"settings":
 			{
 				"buffer_size": 1012,
+=======
+			"file": "webpack.mix.js",
+			"settings":
+			{
+				"buffer_size": 864,
+				"encoding": "UTF-8",
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"line_ending": "Unix"
 			}
 		},
 		{
+<<<<<<< HEAD
 			"file": "resources/views/dashboard.blade.php",
 			"settings":
 			{
 				"buffer_size": 11985,
 				"encoding": "UTF-8",
+=======
+			"file": "composer.json",
+			"settings":
+			{
+				"buffer_size": 1470,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"line_ending": "Unix"
 			}
 		},
 		{
+<<<<<<< HEAD
 			"file": "app/Property.php",
 			"settings":
 			{
@@ -568,6 +587,12 @@
 			{
 				"buffer_size": 1366,
 				"encoding": "UTF-8",
+=======
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 1355,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"line_ending": "Unix"
 			}
 		}
@@ -674,6 +699,7 @@
 	"expanded_folders":
 	[
 		"/Users/tbradshaw/Sites/amanager_v2",
+<<<<<<< HEAD
 		"/Users/tbradshaw/Sites/amanager_v2/node_modules",
 		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net",
 		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net/js",
@@ -686,6 +712,14 @@
 		"/Users/tbradshaw/Sites/amanager_v2/public",
 		"/Users/tbradshaw/Sites/amanager_v2/public/css",
 		"/Users/tbradshaw/Sites/amanager_v2/public/js",
+=======
+		"/Users/tbradshaw/Sites/amanager_v2/app",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules/css",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery",
+		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery-ui",
+		"/Users/tbradshaw/Sites/amanager_v2/public",
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		"/Users/tbradshaw/Sites/amanager_v2/resources",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js",
@@ -712,6 +746,7 @@
 	],
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/layout.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/webpack.mix.js",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports/unpaid_balances.blade.php",
@@ -725,6 +760,10 @@
 		"/Users/tbradshaw/Sites/amanager_v2/public/js/all_not_used.js",
 		"/Users/tbradshaw/Sites/amanager_v2/package.json",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
+=======
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/composer.json",
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Lease.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/show.blade.php",
@@ -738,6 +777,10 @@
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/FeeTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageTenantsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageLeaseTest.php",
+<<<<<<< HEAD
+=======
+		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/edit.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/dashboard.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/index.blade.php",
@@ -985,8 +1028,11 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+<<<<<<< HEAD
 			"datata",
 			"datatab",
+=======
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 			"ul",
 			"data",
 			"getActiveLease()",
@@ -1112,7 +1158,13 @@
 			"deposit",
 			"Deposit",
 			"deposit",
+<<<<<<< HEAD
 			"pet_rent"
+=======
+			"pet_rent",
+			"monthly_rent",
+			"end"
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1148,7 +1200,11 @@
 	"groups":
 	[
 		{
+<<<<<<< HEAD
 			"selected": 5,
+=======
+			"selected": 2,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 			"sheets":
 			[
 				{
@@ -1173,31 +1229,52 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 359.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
+=======
+						"translation.y": 809.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+<<<<<<< HEAD
 					"file": "app/Http/Controllers/DashboardController.php",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1012,
+=======
+					"file": "webpack.mix.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 864,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								0,
 								0
+=======
+								529,
+								529
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
@@ -1206,10 +1283,20 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
+=======
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+<<<<<<< HEAD
 					"file": "resources/views/dashboard.blade.php",
 					"semi_transient": false,
 					"settings":
@@ -1275,6 +1362,13 @@
 					"settings":
 					{
 						"buffer_size": 6434,
+=======
+					"file": "composer.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1470,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 						"regions":
 						{
 						},
@@ -1287,11 +1381,12 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 1326.0,
 						"zoom_level": 1.0
 					},
@@ -1305,26 +1400,52 @@
 					"settings":
 					{
 						"buffer_size": 1366,
+=======
+						"translation.y": 280.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1355,
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								742,
 								742
+=======
+								0,
+								0
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
+=======
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 						},
 						"translation.x": 0.0,
 						"translation.y": 258.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1383,6 +1504,7 @@
 		"selected_items":
 		[
 			[
+<<<<<<< HEAD
 				"dashboar",
 				"app/Http/Controllers/DashboardController.php"
 			],
@@ -1399,10 +1521,13 @@
 				"resources/views/reports/unpaid_balances.blade.php"
 			],
 			[
+=======
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"com",
 				"composer.json"
 			],
 			[
+<<<<<<< HEAD
 				"web",
 				"webpack.mix.js"
 			],
@@ -1415,6 +1540,8 @@
 				"resources/views/dashboard.blade.php"
 			],
 			[
+=======
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"add_f",
 				"resources/views/leases/partials/add_fee.blade.php"
 			],
@@ -1495,6 +1622,13 @@
 				"app/Payment.php"
 			],
 			[
+<<<<<<< HEAD
+=======
+				"prop",
+				"app/Property.php"
+			],
+			[
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"ban",
 				"app/BankDeposit.php"
 			],
@@ -1893,6 +2027,29 @@
 			[
 				"contra",
 				"app/ContractDetail.php"
+<<<<<<< HEAD
+=======
+			],
+			[
+				"adcon",
+				"app/Http/Controllers/Sales/AdContentController.php"
+			],
+			[
+				"adim",
+				"app/Http/Controllers/Sales/AdImageController.php"
+			],
+			[
+				"comp",
+				"composer.json"
+			],
+			[
+				"xer",
+				"app/Repositories/XeroRepository.php"
+			],
+			[
+				"ppc",
+				"app/Http/Controllers/Sales/PpcContractController.php"
+>>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 			]
 		],
 		"width": 0.0

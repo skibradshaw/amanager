@@ -9,7 +9,7 @@
     <div class="row">
         @include('fees.partials.edit')
     </div>
-    @if($lease->monthFees(Request::input('month'),Request::input('year')) > 0)
+    @if(Request::has('month') && $lease->monthFees(Request::input('month'),Request::input('year')) > 0)
     <div class="row">
         <div class="col-md-12">
           <h4>{{date("F", mktime(0, 0, 0, Request::input('month'), 15))}} Fee Details</h4>
