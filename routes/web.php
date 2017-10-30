@@ -55,6 +55,7 @@
 		//Reports
 		Route::get('reports/unpaid_balances/{property?}',['as' => 'unpaid.balances','uses' => 'ReportController@unpaidBalances']);
 		Route::get('reports/undeposited/{property?}',['as' => 'undeposited','uses' => 'BankDepositController@undeposited']);
+		Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/statement',['as' => 'properties.apartments.leases.statement','uses' => 'ReportController@statement']);
 		
 
 		//Resource Routes

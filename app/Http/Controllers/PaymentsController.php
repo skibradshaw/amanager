@@ -31,7 +31,8 @@ class PaymentsController extends Controller
         return view('payments.edit',[
             'title' => 'Record a Payment: ' . $lease->apartment->name,
             'property' => $property,
-            'apartment' => $apartment, 'lease' => $lease, 
+            'apartment' => $apartment, 
+            'lease' => $lease, 
             'tenants' => $tenants, 
             'tenant' => $tenant,
             'payment_types' => $payment_types,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Apartment;
 use App\Lease;
 use App\Property;
 use Illuminate\Http\Request;
@@ -50,5 +51,15 @@ class ReportController extends Controller
 				'totalUnpaidDeposits' => $totalUnpaidDeposits,
 				'property' => $property
 			]);
+	}
+
+	public function statement(Property $property, Apartment $apartment, Lease $lease)
+	{
+		return view('reports.statement',[
+			'title' => 'Statement of Activity',
+            'property' => $property,
+            'apartment' => $apartment, 
+            'lease' => $lease, 
+		]);
 	}
 }

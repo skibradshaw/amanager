@@ -15,6 +15,18 @@
 @import 'dataTables.bootstrap.css';
 @import 'skins/flat/green.css';
 
+/*
+***********
+* START - PDF Reports.
+***********
+*/
+
+#page-wrapper-pdf {
+    background-color: #FFF;
+    position: inherit;
+    padding: 0 30px 40px;
+}
+
 
 .dl-horizontal dt{
     text-align: left;
