@@ -25,7 +25,7 @@
                                     <th align="center" style="cursor:pointer" class="text-center">Remarks</th>
                                     <th align="center" style="cursor:pointer" class="text-center">Rent Balance</th>
                                     <th align="right" style="cursor:pointer" class="text-center">Deposit Balance</th>
-                                    <th align="center" style="cursor:pointer" class="text-center">Send</th>
+                                    <th align="center" style="cursor:pointer" class="text-center">Print</th>
 
 
 
@@ -58,7 +58,7 @@
                                         </td>
                                         <td align="right" class="text-right">{{$l->rent_balance_in_dollars}}</td>
                                         <td align="right" class="text-right">{{$l->deposit_balance_in_dollars}}</td>
-                                        <td align="center" class="text-center"><button class="btn btn-default btn-sm">Send Notice</button></td>
+                                        <td align="center" class="text-center"><a href="{{route('properties.apartments.leases.statement',[$l->apartment->property,$l->apartment,$l])}}" target="_blank" class="btn btn-default btn-block">Print Statement</a></td>
                                     </tr>                                  
                                     @empty
 
