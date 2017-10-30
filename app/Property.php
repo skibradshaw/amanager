@@ -49,14 +49,13 @@ class Property extends Model
 
     public function unpaidRent()
     {
-        $leases = Lease::whereIn('apartment_id',$this->apartments->pluck('id')->toArray())->get();
+        $leases = Lease::whereIn('apartment_id',$this->apartments->pluck('id'))->get();
         // dd($this->apartments->pluck('id'));
         // dd($leases);
-        $totalUnpaidRent = 0;
-        foreach($leases as $l)
-        {
-            $totalUnpaidRent += $l->rentBalance();
-        }
+        $totalUnpaidRent = $leases->reduce(function($total,$l){
+            return $total + $l->rentBalance();
+        },0);
+        
         return $totalUnpaidRent;
 
     }

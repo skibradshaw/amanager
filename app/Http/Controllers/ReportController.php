@@ -23,15 +23,18 @@ class ReportController extends Controller
 		$leases = $query->get();
 
 		$unpaidRentLeases = $leases->filter(function($l){
-			if($l->rentBalance()>0) return true;
+			if($l->rentBalance()!=0) return true;
 		});
-		$totalUnpaidRent = $unpaidRentLeases->sum(function($l){
-			return $l->rentBalance();
-		});
-
+		// $totalUnpaidRent = $unpaidRentLeases->sum(function($l){
+		// 	return $l->rentBalance();
+		// });
+		$totalUnpaidRent = $unpaidRentLeases->reduce(function($total,$l){
+			return $total + $l->rentBalance();
+		},0);
+		// return $totalUnpaidRent;
 		// return $unpaidRentLeases;
 		$unpaidDepositLeases = $leases->filter(function($l){
-			if($l->depositBalance()>0) return true;
+			if($l->depositBalance()!=0) return true;
 		});;
 		$totalUnpaidDeposits = $unpaidDepositLeases->sum(function($l){
 			return $l->depositBalance();

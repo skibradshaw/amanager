@@ -18,7 +18,7 @@
                                     <div class="col-xs-12">
                                         <div class="widget style1">
                                             <div class="row">
-                                                <a href="{{route('unpaid.balances')}}">
+                                                <a href="{{route('unpaid.balances')}}/{{$property->id}}">
                                                 <div class="col-xs-6 text-center @if($property->unpaidRent() > 0 || $property->unpaidDeposits() > 0) text-danger @else text-success @endif">
                                                     <span> Unpaid Balances </span>
                                                     <h2 class="font-bold">{{money_format('%.2n',($property->unpaidRent()/100+$property->unpaidDeposits()/100))}}</h2>
