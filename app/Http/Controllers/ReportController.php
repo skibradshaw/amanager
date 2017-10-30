@@ -56,7 +56,7 @@ class ReportController extends Controller
 	public function statement(Property $property, Apartment $apartment, Lease $lease)
 	{
 		return view('reports.statement',[
-			'title' => 'Statement of Activity',
+			'title' => 'Statement of Activity: ' . $property->name . " " . $apartment->name . " " . $lease->start->format('n/j/Y') . "-" . $lease->end->format('n/j/Y'),
             'property' => $property,
             'apartment' => $apartment, 
             'lease' => $lease, 
