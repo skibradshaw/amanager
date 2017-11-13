@@ -7,7 +7,7 @@
 
 	<head>
 		<meta charset="utf-8"/>
-		<title>ABE | AllTrips</title>
+		<title>Amanager</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta content="width=device-width, initial-scale=1" name="viewport"/>
 		<meta content="" name="description"/>

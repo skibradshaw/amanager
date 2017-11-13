@@ -4,7 +4,10 @@
 		"selected_items":
 		[
 			[
-<<<<<<< HEAD
+				"text",
+				"text-center\t(statement.blade.php)"
+			],
+			[
 				"unpaidRen",
 				"unpaidRentLeases"
 			],
@@ -13,8 +16,6 @@
 				"totalUnpaidRent"
 			],
 			[
-=======
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"amount",
 				"amount_in_dollars\t(add_fee.blade.php)"
 			],
@@ -25,10 +26,6 @@
 			[
 				"apart",
 				"apartment\t(TenantController.php)"
-			],
-			[
-				"text",
-				"text-danger"
 			],
 			[
 				"assertSe",
@@ -526,73 +523,40 @@
 			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 4064,
+				"buffer_size": 4241,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-<<<<<<< HEAD
-			"file": "app/Http/Controllers/DashboardController.php",
+			"file": "resources/views/leases/partials/payments_panel.blade.php",
 			"settings":
 			{
-				"buffer_size": 1012,
-=======
-			"file": "webpack.mix.js",
-			"settings":
-			{
-				"buffer_size": 864,
-				"encoding": "UTF-8",
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+				"buffer_size": 4713,
 				"line_ending": "Unix"
 			}
 		},
 		{
-<<<<<<< HEAD
-			"file": "resources/views/dashboard.blade.php",
+			"file": "app/Payment.php",
 			"settings":
 			{
-				"buffer_size": 11985,
-				"encoding": "UTF-8",
-=======
-			"file": "composer.json",
-			"settings":
-			{
-				"buffer_size": 1470,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+				"buffer_size": 1300,
 				"line_ending": "Unix"
 			}
 		},
 		{
-<<<<<<< HEAD
-			"file": "app/Property.php",
+			"file": "resources/views/payments/partials/edit.blade.php",
 			"settings":
 			{
-				"buffer_size": 2433,
-				"encoding": "UTF-8",
+				"buffer_size": 3447,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "resources/views/reports/unpaid_balances.blade.php",
+			"file": "resources/views/payments/edit.blade.php",
 			"settings":
 			{
-				"buffer_size": 6434,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/ReportController.php",
-			"settings":
-			{
-				"buffer_size": 1366,
-				"encoding": "UTF-8",
-=======
-			"file": "package.json",
-			"settings":
-			{
-				"buffer_size": 1355,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+				"buffer_size": 2466,
 				"line_ending": "Unix"
 			}
 		}
@@ -699,31 +663,11 @@
 	"expanded_folders":
 	[
 		"/Users/tbradshaw/Sites/amanager_v2",
-<<<<<<< HEAD
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net/js",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net-bs",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net-bs/css",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net-bs/js",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery/dist",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery-ui-dist",
 		"/Users/tbradshaw/Sites/amanager_v2/public",
 		"/Users/tbradshaw/Sites/amanager_v2/public/css",
 		"/Users/tbradshaw/Sites/amanager_v2/public/js",
-=======
-		"/Users/tbradshaw/Sites/amanager_v2/app",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/css",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery",
-		"/Users/tbradshaw/Sites/amanager_v2/node_modules/jquery-ui",
-		"/Users/tbradshaw/Sites/amanager_v2/public",
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		"/Users/tbradshaw/Sites/amanager_v2/resources",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js/components",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments",
@@ -731,6 +675,8 @@
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/payments",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/payments/partials",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/users",
@@ -746,27 +692,33 @@
 	],
 	"file_history":
 	[
-<<<<<<< HEAD
+		"/Users/tbradshaw/Sites/amanager_v2/app/Payment.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/pdf.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/index.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/ApartmentController.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Apartment.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/ReportController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/layout.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/webpack.mix.js",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports/unpaid_balances.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/show.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/PaymentsController.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/reports/statement.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Property.php",
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DashboardController.php",
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/dashboard.blade.php",
+		"/Users/tbradshaw/Sites/amanager_v2/public/js/all.js",
+		"/Users/tbradshaw/Sites/amanager_v2/webpack.mix.js",
 		"/Users/tbradshaw/Sites/amanager_v2/node_modules/datatables.net/js/jquery.dataTables.js",
 		"/Users/tbradshaw/Sites/amanager_v2/composer.json",
 		"/Users/tbradshaw/Sites/amanager_v2/public/js/app.js",
-		"/Users/tbradshaw/Sites/amanager_v2/public/js/all.js",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/js/app.js",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/app.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/public/js/all_not_used.js",
 		"/Users/tbradshaw/Sites/amanager_v2/package.json",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
-=======
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/add_fee.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/composer.json",
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Lease.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/show.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/ledger.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Fee.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/partials/edit.blade.php",
@@ -777,20 +729,13 @@
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/FeeTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageTenantsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageLeaseTest.php",
-<<<<<<< HEAD
-=======
-		"/Users/tbradshaw/Sites/amanager_v2/resources/assets/sass/app.scss",
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/edit.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/dashboard.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/index.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/apartments/show.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/index.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/config/app.php",
 		"/Users/tbradshaw/Sites/amanager_v2/.gitignore",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/FeeController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageFeesTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Payment.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/factories/ModelFactory.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/TestCase.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/index.blade.php",
@@ -809,7 +754,6 @@
 		"/Users/tbradshaw/Sites/amanager_v2/app/BankAccount.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/partials/create_modal.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/deposits/create.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Property.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/BankDeposit.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_24_192551_add_property_id_to_bank_accounts.php",
 		"/Users/tbradshaw/Sites/_Archive/amanager_v1/amanager_v1.sublime-project",
@@ -820,16 +764,11 @@
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/LeaseDetailController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PaymentsTest.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/deposit_panel.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Apartment.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DashboardController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/PaymentsController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/layouts/nav.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/tenants/create.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2014_10_12_000000_create_users_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Requests/StoreTenant.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/PropertyTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/ReportController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/ApartmentController.php",
 		"/Users/tbradshaw/Sites/amanager_v2/vendor/laravel/framework/src/Illuminate/Contracts/Auth/CanResetPassword.php",
 		"/Users/tbradshaw/Sites/amanager_v2/app/User.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/seeds/UsersTableSeeder.php",
@@ -880,13 +819,11 @@
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/new_page.blade.php",
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_08_235849_create_payments_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/resources/views/admin/bank_accounts/edit.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DepositController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/fees/index.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_09_012954_create_fees_table.php"
+		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/DepositController.php"
 	],
 	"find":
 	{
-		"height": 70.0
+		"height": 30.0
 	},
 	"find_in_files":
 	{
@@ -1028,11 +965,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-<<<<<<< HEAD
+			"HEAD",
 			"datata",
 			"datatab",
-=======
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 			"ul",
 			"data",
 			"getActiveLease()",
@@ -1157,14 +1092,7 @@
 			"'id' => 'datepicker'",
 			"deposit",
 			"Deposit",
-			"deposit",
-<<<<<<< HEAD
-			"pet_rent"
-=======
-			"pet_rent",
-			"monthly_rent",
-			"end"
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+			"deposit"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1200,11 +1128,7 @@
 	"groups":
 	[
 		{
-<<<<<<< HEAD
-			"selected": 5,
-=======
-			"selected": 2,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1213,15 +1137,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4064,
+						"buffer_size": 4241,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1726,
-								1726
+								3433,
+								3471
 							]
 						],
 						"settings":
@@ -1229,79 +1153,49 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-<<<<<<< HEAD
-						"translation.y": 359.0,
+						"translation.y": 879.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
-=======
-						"translation.y": 809.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-<<<<<<< HEAD
-					"file": "app/Http/Controllers/DashboardController.php",
+					"file": "resources/views/leases/partials/payments_panel.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1012,
-=======
-					"file": "webpack.mix.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 864,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+						"buffer_size": 4713,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
 								0,
 								0
-=======
-								529,
-								529
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 							]
 						],
 						"settings":
 						{
-<<<<<<< HEAD
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
-=======
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-<<<<<<< HEAD
-					"file": "resources/views/dashboard.blade.php",
+					"file": "app/Payment.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11985,
+						"buffer_size": 1300,
 						"regions":
 						{
 						},
@@ -1319,133 +1213,70 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 56.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/Property.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2433,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1396,
-								1396
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 844.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "resources/views/reports/unpaid_balances.blade.php",
+					"buffer": 3,
+					"file": "resources/views/payments/partials/edit.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6434,
-=======
-					"file": "composer.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1470,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+						"buffer_size": 3447,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3445,
+								3034
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-<<<<<<< HEAD
-						"translation.y": 1326.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/Http/Controllers/ReportController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1366,
-=======
-						"translation.y": 280.0,
+						"translation.y": 257.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "package.json",
+					"buffer": 4,
+					"file": "resources/views/payments/edit.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1355,
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+						"buffer_size": 2466,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								742,
-								742
-=======
-								0,
-								0
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
+								674,
+								702
 							]
 						],
 						"settings":
 						{
-<<<<<<< HEAD
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-=======
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 						},
 						"translation.x": 0.0,
-						"translation.y": 258.0,
+						"translation.y": 579.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1504,7 +1335,30 @@
 		"selected_items":
 		[
 			[
-<<<<<<< HEAD
+				"pay",
+				"app/Payment.php"
+			],
+			[
+				"partials/pay",
+				"resources/views/leases/partials/payments_panel.blade.php"
+			],
+			[
+				"apart",
+				"app/Apartment.php"
+			],
+			[
+				"apartments/in",
+				"resources/views/apartments/index.blade.php"
+			],
+			[
+				"unpaid",
+				"resources/views/reports/unpaid_balances.blade.php"
+			],
+			[
+				"paymentsc",
+				"app/Http/Controllers/PaymentsController.php"
+			],
+			[
 				"dashboar",
 				"app/Http/Controllers/DashboardController.php"
 			],
@@ -1517,17 +1371,10 @@
 				"resources/views/reports/unpaid_balances.blade.php"
 			],
 			[
-				"unpaid",
-				"resources/views/reports/unpaid_balances.blade.php"
-			],
-			[
-=======
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"com",
 				"composer.json"
 			],
 			[
-<<<<<<< HEAD
 				"web",
 				"webpack.mix.js"
 			],
@@ -1540,8 +1387,6 @@
 				"resources/views/dashboard.blade.php"
 			],
 			[
-=======
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"add_f",
 				"resources/views/leases/partials/add_fee.blade.php"
 			],
@@ -1594,10 +1439,6 @@
 				"resources/views/leases/show.blade.php"
 			],
 			[
-				"pay",
-				"app/Payment.php"
-			],
-			[
 				"mod",
 				"database/factories/ModelFactory.php"
 			],
@@ -1622,13 +1463,6 @@
 				"app/Payment.php"
 			],
 			[
-<<<<<<< HEAD
-=======
-				"prop",
-				"app/Property.php"
-			],
-			[
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 				"ban",
 				"app/BankDeposit.php"
 			],
@@ -1719,10 +1553,6 @@
 			[
 				"rep",
 				"app/Http/Controllers/ReportController.php"
-			],
-			[
-				"apart",
-				"app/Apartment.php"
 			],
 			[
 				"leasete",
@@ -2015,41 +1845,6 @@
 			[
 				"ed",
 				"app/EditDetail.php"
-			],
-			[
-				"adc",
-				"app/AdContent.php"
-			],
-			[
-				"contractd",
-				"app/Http/Controllers/Sales/ContractDetailController.php"
-			],
-			[
-				"contra",
-				"app/ContractDetail.php"
-<<<<<<< HEAD
-=======
-			],
-			[
-				"adcon",
-				"app/Http/Controllers/Sales/AdContentController.php"
-			],
-			[
-				"adim",
-				"app/Http/Controllers/Sales/AdImageController.php"
-			],
-			[
-				"comp",
-				"composer.json"
-			],
-			[
-				"xer",
-				"app/Repositories/XeroRepository.php"
-			],
-			[
-				"ppc",
-				"app/Http/Controllers/Sales/PpcContractController.php"
->>>>>>> 33f9e6bebecc5c6f6e4b632924665ee5a8b4820c
 			]
 		],
 		"width": 0.0

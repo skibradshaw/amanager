@@ -87,8 +87,8 @@
     /** DATATABLES  */
     $('#payments').DataTable({
        paging: false,
-       searching: false,
-       aaSorting: [[0, 'asc']]
+       searching: true,
+       aaSorting: [[3, 'asc'],[1,'asc']]
     });    
     $('div.dataTables_filter input').addClass('form-control');
     // iChecks Functionality: http://icheck.fronteed.com
@@ -104,9 +104,11 @@
         
         $(".payment:checked").each(function() {
             var id = $(this).attr('id');
-            // alert($('#payment_'+id).val());
-            total += parseInt($('#payment_'+id).val());
+            // alert(parseFloat($('#payment_'+id).val()));
+            total += parseFloat($('#payment_'+id).val());
+
         });
+        // alert(total.toFixed(2));
         // $(".payment:not(:checked)").each(function() {
         //     var id = $(this).attr('id');
         //     // alert($('#payment_'+id).val());

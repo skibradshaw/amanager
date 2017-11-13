@@ -112,7 +112,7 @@
     $('#payments').DataTable({
        paging: false,
        searching: true,
-       aaSorting: [[0, 'asc']]
+       aaSorting: [[3, 'asc'],[1,'asc']]
     });    
     $('div.dataTables_filter input').addClass('form-control');
 

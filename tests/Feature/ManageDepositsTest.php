@@ -100,15 +100,16 @@ class ManageDepositsTest extends TestCase
 	function user_can_deposit_undeposited_rent_and_fee_payments()
 	{
 	    $this->disableExceptionHandling();
-
+	    $faker = Faker\Factory::create();;
 	    $user = factory(App\User::class)->create(['is_admin' => 1]);
 	    $lease = $this->getLease();
 		$undeposited = factory(App\Payment::class,10)
 			->states('undeposited')
 			->create([
 				'lease_id' => $lease->id,
-				'amount' => 10000
+				'amount' => $faker->randomNumber(4),
 				]);
+		$undepositedTotal = $undeposited->sum('amount');
 		$bankAccount = factory(App\BankAccount::class)->create(['property_id' => $lease->apartment->property_id]);	
 
 		$response = $this->actingAs($user)->post('/reports/undeposited/'.$bankAccount->property_id.'/confirm',[
@@ -138,7 +139,7 @@ class ManageDepositsTest extends TestCase
 
 		//Assert that all payments were deposited.
 		$this->assertEquals(10,$deposit->payments->count());
-		$this->assertEquals(100000,$deposit->amount);
+		$this->assertEquals($undepositedTotal,$deposit->amount);
 		$response->assertStatus(302);
 		$response->assertRedirect('/admin/bank_accounts/'.$bankAccount->id);
 		$response->assertSessionHas('status','Deposit Added!');	    
