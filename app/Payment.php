@@ -28,18 +28,17 @@ class Payment extends Model
 
     public function tenant()
     {
-    	return $this->belongsTo(Tenant::class);
+        return $this->belongsTo(Tenant::class);
     }
 
     public function getAmountInDollarsAttribute()
     {
-        return money_format('%.2n',$this->amount/100);
-
+        return money_format('%.2n', $this->amount/100);
     }
 
     public function scopeUndeposited($query)
     {
-    	return $query->whereNull('bank_deposit_id');
+        return $query->whereNull('bank_deposit_id');
     }
 
     public function scopeDeposited($query)
@@ -49,10 +48,9 @@ class Payment extends Model
 
     public function scopeRentsAndFees($query)
     {
-        $query->where(function($q){
-            $q->where('payment_type','Rent')
-                ->orWhere('payment_type','Fee');
+        $query->where(function ($q) {
+            $q->where('payment_type', 'Rent')
+                ->orWhere('payment_type', 'Fee');
         });
     }
-
 }

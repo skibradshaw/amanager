@@ -16,22 +16,21 @@ class Tenant extends User
 
     public function getFullNameAttribute()
     {
-    	return $this->firstname . " " . $this->lastname;
+        return $this->firstname . " " . $this->lastname;
     }
 
     // Get and Set Phone Fields as presentable and numbers only
-    public function getPhoneAttribute($value) 
+    public function getPhoneAttribute($value)
     {
-        if(!empty($value))
-        {
-            return "(".substr($value, 0, 3).") ".substr($value, 3, 3)."-".substr($value,6);
+        if (!empty($value)) {
+            return "(".substr($value, 0, 3).") ".substr($value, 3, 3)."-".substr($value, 6);
         }
         return null;
     }
-    public function setPhoneAttribute($value) 
+    public function setPhoneAttribute($value)
     {
         $this->attributes['phone'] = preg_replace('/[^0-9]/i', '', trim($value));
-    }    
+    }
 
     public function setFirstnameAttribute($value)
     {
@@ -45,23 +44,23 @@ class Tenant extends User
 
     public function leases()
     {
-    	return $this->belongsToMany(Lease::class,'lease_tenants');
+        return $this->belongsToMany(Lease::class, 'lease_tenants');
     }
 
     public function scopeActive($query)
     {
-        return $query->whereHas('leases',function($q){
-            $q->where('end','>=',Carbon::now());
+        return $query->whereHas('leases', function ($q) {
+            $q->where('end', '>=', Carbon::now());
         });
     }
 
-    public function scopeActiveProperty($query,$property_id)
+    public function scopeActiveProperty($query, $property_id)
     {
-        return $query->whereHas('leases',function($q) use ($property_id){
-                $q->where('end','>=',Carbon::now());
-            })->whereHas('leases.apartment',function($q) use ($property_id){
-                $q->where('property_id',$property_id);
-            });
+        return $query->whereHas('leases', function ($q) use ($property_id) {
+                $q->where('end', '>=', Carbon::now());
+        })->whereHas('leases.apartment', function ($q) use ($property_id) {
+            $q->where('property_id', $property_id);
+        });
     }
 
     public function getActiveLeaseAttribute()
@@ -69,6 +68,4 @@ class Tenant extends User
         // return $this->leases()->where('end','>=',Carbon::now())->orderby('end','desc')->first();
         return $this->leases->last();
     }
-
-
 }

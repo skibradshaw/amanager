@@ -21,11 +21,11 @@ class Apartment extends Model
 
     public function leases()
     {
-    	return $this->hasMany(Lease::class,'apartment_id');
+        return $this->hasMany(Lease::class, 'apartment_id');
     }
     public function property()
     {
-    	return $this->belongsTo(Property::class);
+        return $this->belongsTo(Property::class);
     }
 
     public function scopeVacant($query)
@@ -39,6 +39,7 @@ class Apartment extends Model
     }
 
     public function checkAvailability($start,$end, $lease = null)
+
     {
         // \DB::connection()->enableQueryLog();
         $return = false;
@@ -62,22 +63,23 @@ class Apartment extends Model
         (count($leases) == 0) ? $return = true : $return = false;
         // dd($this->leases);
         return $return;
-        
     }
 
-    public function currentLease() {
+    public function currentLease()
+    {
         $lease = $this->leases()->whereRaw("DATE('".Carbon::now()."') BETWEEN start AND end")->first();
         // (empty($lease)) ? $lease = $this->leases()->whereRaw("DATE('".Carbon::now()."') <= start")->first() : null;
         return $lease;
     }
-    public function nextLease() {
-        $lease = $this->leases()->where('end','>',Carbon::now())->orderBy('end','desc')->first();
+    public function nextLease()
+    {
+        $lease = $this->leases()->where('end', '>', Carbon::now())->orderBy('end', 'desc')->first();
         return $lease;
     }
 
     public function pastLeases()
     {
-        $lease = $this->leases()->where('end','<',Carbon::now())->orderBy('end','desc')->get();
+        $lease = $this->leases()->where('end', '<', Carbon::now())->orderBy('end', 'desc')->get();
         return $lease;
     }
 }

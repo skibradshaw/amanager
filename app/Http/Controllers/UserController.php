@@ -17,7 +17,7 @@ class UserController extends Controller
         //
         $users = User::all();
         // return $users;
-        return view('users.index',[
+        return view('users.index', [
           'title' => 'Manage Users',
           'users' => $users
           ]);
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
                 'firstname' => 'required',
                 'lastname' => 'required',
                 'email' => 'required | email | unique:users',
@@ -76,7 +76,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         // return $user;
-        return view('users.partials.edit',[
+        return view('users.partials.edit', [
           'title' => 'Manage Users',
           'user' => $user
           ]);
@@ -96,7 +96,7 @@ class UserController extends Controller
         (!empty($input['active']))?: $input['active'] = 0;
         $user->update($input);
         // return $user;
-        return redirect()->back()->with('status','User Updated!');
+        return redirect()->back()->with('status', 'User Updated!');
     }
 
     /**
@@ -110,6 +110,5 @@ class UserController extends Controller
         $user->update(['active' => 0]);
         $user->delete();
         return 'Success!';
-        
     }
 }

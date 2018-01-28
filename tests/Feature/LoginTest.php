@@ -19,7 +19,7 @@ class LoginTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(302);
-        $response->assertRedirect('/login');        
+        $response->assertRedirect('/login');
     }
 
 
@@ -37,14 +37,13 @@ class LoginTest extends TestCase
         $user = factory(User::class)->create();
         // $user = User::find(3);
         // $user = User::find(1);
-        $response = $this->post('/login',[
+        $response = $this->post('/login', [
                 'email' => $user->email,
                 'password' => \Hash::make($user->password)
             ]);
 
         $response->assertStatus(302);
         $response->assertRedirect('/');
-
     }
 
     /** @test */
@@ -52,14 +51,14 @@ class LoginTest extends TestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->post('/login',[
+        $response = $this->post('/login', [
                 'email' => $user->email,
                 'password' => \Hash::make($user->password)
             ]);
         // dd($this->app['session.store']);
         // dd($response->getContent());
         // $response->assertRedirect('/login');
-        $response->assertSessionHasErrors('email','These credentials do not match our records.');
+        $response->assertSessionHasErrors('email', 'These credentials do not match our records.');
     }
 
     /** @test */
@@ -74,11 +73,9 @@ class LoginTest extends TestCase
 
         $response->assertStatus(200);
         // $response->assertSee('A-Manager');
-        $response->assertViewHas(\Auth::user(),function() use ($user){
+        $response->assertViewHas(\Auth::user(), function () use ($user) {
             return \Auth::user()->id === $user->id;
         });
-
-        
     }
 
     /** @test */
@@ -90,7 +87,5 @@ class LoginTest extends TestCase
 
         $response->assertStatus(302);
         $response->assertRedirect('/');
-
     }
-
 }

@@ -20,7 +20,7 @@ class CreateBankDepositsTable extends Migration
             $table->dateTime('deposit_date')->nullable();
             $table->string('deposit_type')->nullable();
             $table->string('transaction_id')->nullable();
-            $table->integer('amount')->nullable();            
+            $table->integer('amount')->nullable();
             $table->timestamps();
         });
     }

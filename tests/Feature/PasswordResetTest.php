@@ -19,9 +19,9 @@ class PasswordResetTest extends TestCase
     {
         Notification::fake();
 
-        $reset = $this->call('POST', '/password/email',[
+        $reset = $this->call('POST', '/password/email', [
                 'email' => $user->email,
-            ],[], [], ['HTTP_REFERER' => '/password/email']);
+            ], [], [], ['HTTP_REFERER' => '/password/email']);
 
         $token = '';
 
@@ -32,7 +32,8 @@ class PasswordResetTest extends TestCase
                 $token = $notification->token;
 
                 return true;
-            });
+            }
+        );
 
         return $token;
     }
@@ -41,9 +42,9 @@ class PasswordResetTest extends TestCase
     /** @test */
     public function user_can_view_send_password_reset_link_form()
     {
-        $response = $this->call('GET','/password/reset');
+        $response = $this->call('GET', '/password/reset');
 
-        $response->assertSee('Reset Password');        
+        $response->assertSee('Reset Password');
     }
 
     /** @test */
@@ -56,18 +57,16 @@ class PasswordResetTest extends TestCase
 
         // Notification::fake();
 
-        $response = $this->call('POST', '/password/email',[
+        $response = $this->call('POST', '/password/email', [
                 'email' => $user->email,
-            ],[], [], ['HTTP_REFERER' => '/password/email']);
+            ], [], [], ['HTTP_REFERER' => '/password/email']);
         // dd($response);
         // dd($this->app['session.store']);
         // Notification::assertSentTo($user, ResetPasswordNotification::class);
         $response->assertStatus(302);
         $response->assertRedirect('/password/email');
         // $response->assertSessionHasErrors('email');
-        $response->assertSessionHas('status','We have e-mailed your password reset link!');
-        
-        
+        $response->assertSessionHas('status', 'We have e-mailed your password reset link!');
     }
 
     /** @test */
@@ -84,8 +83,6 @@ class PasswordResetTest extends TestCase
         $response = $this->get('/password/reset/'.$token);
         $response->assertStatus(200);
         // $response->assertSee('')
-
-        
     }
 
     /** @test */
@@ -103,7 +100,7 @@ class PasswordResetTest extends TestCase
         
         $new_password = 'testingpassword';
         // dd($user);
-        $response = $this->post('/password/reset',[
+        $response = $this->post('/password/reset', [
                 'email' => $user->email,
                 'token' => $token,
                 'password' => $new_password,
@@ -112,7 +109,7 @@ class PasswordResetTest extends TestCase
             ]);
 
         // $response->dump();
-        $response->assertSessionHas('status','Your password has been reset!');
+        $response->assertSessionHas('status', 'Your password has been reset!');
         $response->assertStatus(302);
         $response->assertRedirect('/');
         // dd($response);
@@ -123,7 +120,5 @@ class PasswordResetTest extends TestCase
         // $response->assertStatus(302);
         // // $response->assertEqual(\Hash::make($new_password),$refresh_user->password);
         // $response->assertRedirect('/');
-
-    }    
-
+    }
 }

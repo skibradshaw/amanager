@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class PropertyController extends Controller
 {
     //
-	public function show($property_id)
-	{
-		$property = Property::find($property_id);
-		return view('properties.show',['property' => $property]);
-	}
-
+    public function show($property_id)
+    {
+        $property = Property::find($property_id);
+        return view('properties.show', ['property' => $property]);
+    }
 }

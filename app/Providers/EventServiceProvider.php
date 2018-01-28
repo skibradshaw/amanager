@@ -18,7 +18,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         'Illuminate\Auth\Events\Login' => [
         'App\Listeners\LogLoginActivity@handle',
-    ]
+        ]
     ];
 
     /**

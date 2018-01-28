@@ -15,42 +15,42 @@ class LeaseDetail extends Model
 
     public function lease()
     {
-    	return $this->belongsTo(Lease::class);
+        return $this->belongsTo(Lease::class);
     }
 
     public function getMonthlyRentInDollarsAttribute()
     {
-        return money_format('%.2n',$this->monthly_rent/100);
+        return money_format('%.2n', $this->monthly_rent/100);
     }
 
     public function getMonthlyPetRentInDollarsAttribute()
     {
-        return money_format('%.2n',$this->monthly_pet_rent/100);
+        return money_format('%.2n', $this->monthly_pet_rent/100);
     }
 
     public function getMonthlyDueInDollarsAttribute()
     {
-        return money_format('%.2n',$this->monthDue()/100);
+        return money_format('%.2n', $this->monthDue()/100);
     }
 
     public function getMonthlyPaymentsInDollarsAttribute()
     {
-        return money_format('%.2n',$this->rentPayments()/100);
+        return money_format('%.2n', $this->rentPayments()/100);
     }
 
     public function getMonthDueInDollarsAttribute()
     {
-        return money_format('%.2n',$this->monthDue()/100);
+        return money_format('%.2n', $this->monthDue()/100);
     }
 
     public function getMonthBalanceInDollarsAttribute()
     {
-        return money_format('%.2n',$this->monthBalance()/100);
+        return money_format('%.2n', $this->monthBalance()/100);
     }
 
     public function getNameAttribute()
     {
-    	return ucwords($this->end->format('M y'));
+        return ucwords($this->end->format('M y'));
     }
 
     /**
@@ -80,7 +80,7 @@ class LeaseDetail extends Model
     }
 
     /**
-     * Retrieves a collection of payments during time period of the lease detail.  
+     * Retrieves a collection of payments during time period of the lease detail.
      * @param  [type] $tenant_id [description]
      * @return [type]            [description]
      */
@@ -88,20 +88,20 @@ class LeaseDetail extends Model
     {
         $query = $this->lease->payments()->rentsAndFees();
 
-        if(!is_null($tenant_id))
-        {
-            $query = $query->where('tenant_id',$tenant_id);
+        if (!is_null($tenant_id)) {
+            $query = $query->where('tenant_id', $tenant_id);
         }
         //BUSINESS RULE: Any rent payments recieved outside of the Lease dates should be applied to the first month.
-        if($this->start->eq($this->lease->start))
-        {
-            $query = $query->where(function($q){
-                $q->whereBetween('paid_date',[$this->start,$this->end])
-                    ->orwhere('paid_date','<',$this->lease->start)
-                    ->orWhere('paid_date','>',$this->lease->end);
+        if ($this->start->eq($this->lease->start)) {
+            $query = $query->where(function ($q) {
+                $q->whereBetween('paid_date', [$this->start,$this->end])
+                    ->orwhere('paid_date', '<', $this->lease->start)
+                    ->orWhere('paid_date', '>', $this->lease->end);
             });
             // $query = $query->where('paid_date',Carbon::now());
-        } else $query = $query->whereBetween('paid_date',[$this->start,$this->end]);
+        } else {
+            $query = $query->whereBetween('paid_date', [$this->start,$this->end]);
+        }
 
         return $query->get();
     }
@@ -109,24 +109,24 @@ class LeaseDetail extends Model
 
     public function monthBalance()
     {
-    	$balance = 0;
-    	$amount_due = ($this->monthly_rent + $this->monthly_pet_rent) + $this->lease->fees()->whereBetween('due_date', [$this->start,$this->end])->sum('amount');
-    	$balance = $amount_due-$this->rentPayments();
-    	return $balance;
+        $balance = 0;
+        $amount_due = ($this->monthly_rent + $this->monthly_pet_rent) + $this->lease->fees()->whereBetween('due_date', [$this->start,$this->end])->sum('amount');
+        $balance = $amount_due-$this->rentPayments();
+        return $balance;
     }
 
     public function monthDue()
     {
-	 	$d_start = $this->start;
-	 	$d_end = $this->end;
+        $d_start = $this->start;
+        $d_end = $this->end;
 
-	 	$amount_due = ($this->monthly_rent + $this->monthly_pet_rent) + $this->lease->fees()->whereBetween('due_date', [$d_start,$d_end])->sum('amount');
-	 	//$paid_to_date = $this->payments()->whereBetween('paid_date',[$d_start,$d_end])->sum('amount');
-	 	// $paid_to_date = $this->lease->payments()->where('payment_type','<>', 'Deposit')->sum('amount');
-	 	// foreach ($this->lease->tenants as $t) {
-	 	// 	$paid_to_date += $this->monthAllocation($t->id);
-	 	// }
-	 	// $balance = $amount_due-$paid_to_date;
-	 	return $amount_due;    	
+        $amount_due = ($this->monthly_rent + $this->monthly_pet_rent) + $this->lease->fees()->whereBetween('due_date', [$d_start,$d_end])->sum('amount');
+        //$paid_to_date = $this->payments()->whereBetween('paid_date',[$d_start,$d_end])->sum('amount');
+        // $paid_to_date = $this->lease->payments()->where('payment_type','<>', 'Deposit')->sum('amount');
+        // foreach ($this->lease->tenants as $t) {
+        // 	$paid_to_date += $this->monthAllocation($t->id);
+        // }
+        // $balance = $amount_due-$paid_to_date;
+        return $amount_due;
     }
 }

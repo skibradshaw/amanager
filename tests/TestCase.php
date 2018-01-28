@@ -16,27 +16,29 @@ abstract class TestCase extends BaseTestCase
         return factory(User::class)->create(['is_admin' => 1]);
     }
 
-    function createLease($apartment,$params)
+    function createLease($apartment, $params)
     {
         
         $admin = $this->getAdminUser();
-        $this->response = $this->actingAs($admin)->json('POST','/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases',$params);
+        $this->response = $this->actingAs($admin)->json('POST', '/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases', $params);
     }
 
     protected function disableExceptionHandling()
     {
         $this->app->instance(ExceptionHandler::class, new class extends Handler {
-            public function __construct() {}
+            public function __construct()
+            {
+            }
             
             public function report(\Exception $e)
             {
                 // no-op
             }
             
-            public function render($request, \Exception $e) {
+            public function render($request, \Exception $e)
+            {
                 throw $e;
             }
         });
     }
-
 }
