@@ -68,6 +68,16 @@ class LeaseController extends Controller
     	return redirect()->route('leases.show',[$property,$apartment,$lease]);
     }
 
+    public function edit(Property $property, Apartment $apartment, Lease $lease)
+    {
+
+    }
+
+    public function update(Property $property, Apartment $apartment, Lease $lease, Request $request)
+    {
+        
+    }
+
     public function show(Property $property, Apartment $apartment, Lease $lease)
     {
         $tenants = Tenant::all();
