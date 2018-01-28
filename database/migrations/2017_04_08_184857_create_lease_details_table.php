@@ -19,7 +19,7 @@ class CreateLeaseDetailsTable extends Migration
             $table->dateTime('start');
             $table->dateTime('end');
             $table->integer('month')->nullable();
-            $table->integer('year')->nullable();            
+            $table->integer('year')->nullable();
             $table->integer('monthly_rent')->default(0);
             $table->integer('monthly_pet_rent')->default(0);
             $table->decimal('multiplier');

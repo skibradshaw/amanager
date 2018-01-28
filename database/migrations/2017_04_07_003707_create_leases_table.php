@@ -21,7 +21,7 @@ class CreateLeasesTable extends Migration
             $table->integer('monthly_rent')->default(0);
             $table->integer('pet_rent')->default(0);
             $table->integer('deposit')->default(0);
-            $table->integer('pet_deposit')->default(0);            
+            $table->integer('pet_deposit')->default(0);
             $table->timestamps();
         });
     }

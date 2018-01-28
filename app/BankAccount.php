@@ -5,27 +5,25 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-
 class BankAccount extends Model
 {
-	use LogsActivity;
+    use LogsActivity;
 
-	protected $guarded = [];
-	protected $logOnlyDirty = true;
+    protected $guarded = [];
+    protected $logOnlyDirty = true;
 
-	public function setNameAttribute($value)
-	{
-		$this->attributes['name'] = ucwords($value);
-	}
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords($value);
+    }
 
-	public function property()
-	{
-		return $this->belongsTo(Property::class);
-	}
+    public function property()
+    {
+        return $this->belongsTo(Property::class);
+    }
 
-	public function deposits()
-	{
-		return $this->hasMany(BankDeposit::class)->orderby('deposit_date','desc');
-	}
-
+    public function deposits()
+    {
+        return $this->hasMany(BankDeposit::class)->orderby('deposit_date', 'desc');
+    }
 }

@@ -10,11 +10,12 @@ class Lease extends Model
 {
     use LogsActivity;
 
-    public static function boot() {
+    public static function boot()
+    {
             parent::boot();
 
             // create a event to happen on saving
-            static::saving(function($table)  {
+            static::saving(function ($table) {
                 $table->created_by = \Auth::user()->id;
             });
     }
@@ -28,37 +29,37 @@ class Lease extends Model
 
     public function getMonthlyRentInDollarsAttribute()
     {
-        return money_format('%.2n',$this->monthly_rent/100);
+        return money_format('%.2n', $this->monthly_rent/100);
     }
 
     public function getPetRentInDollarsAttribute()
     {
-        return money_format('%.2n',$this->pet_rent/100);
+        return money_format('%.2n', $this->pet_rent/100);
     }
 
     public function getDepositInDollarsAttribute()
     {
-        return money_format('%.2n',$this->deposit/100);
+        return money_format('%.2n', $this->deposit/100);
     }
 
     public function getDepositDueInDollarsAttribute()
     {
-        return money_format('%.2n',($this->deposit+$this->pet_deposit)/100);
+        return money_format('%.2n', ($this->deposit+$this->pet_deposit)/100);
     }
 
     public function getPetDepositInDollarsAttribute()
     {
-        return money_format('%.2n',$this->pet_deposit/100);
+        return money_format('%.2n', $this->pet_deposit/100);
     }
 
     public function getRentTotalInDollarsAttribute()
     {
-        return money_format('%.2n',$this->rent_total/100);
+        return money_format('%.2n', $this->rent_total/100);
     }
 
     public function getPetRentTotalInDollarsAttribute()
     {
-        return money_format('%.2n',$this->petrent_total/100);
+        return money_format('%.2n', $this->petrent_total/100);
     }
 
     public function getRentTotalAttribute()
@@ -73,18 +74,18 @@ class Lease extends Model
 
     public function getRentBalanceInDollarsAttribute()
     {
-        return money_format('%.2n',$this->rentBalance()/100);
+        return money_format('%.2n', $this->rentBalance()/100);
     }
 
     public function getDepositBalanceInDollarsAttribute()
     {
-        return money_format('%.2n',$this->depositBalance()/100);
+        return money_format('%.2n', $this->depositBalance()/100);
     }
 
     //Relationships
     public function creator()
     {
-        return $this->belongsTo(User::class,'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function apartment()
@@ -94,17 +95,17 @@ class Lease extends Model
 
     public function tenants()
     {
-    	return $this->belongsToMany(Tenant::class,'lease_tenants');
+        return $this->belongsToMany(Tenant::class, 'lease_tenants');
     }
 
     public function details()
     {
-    	return $this->hasMany(LeaseDetail::class);
+        return $this->hasMany(LeaseDetail::class);
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class)->orderBy('paid_date','desc');
+        return $this->hasMany(Payment::class)->orderBy('paid_date', 'desc');
     }
 
     public function fees()
@@ -119,42 +120,39 @@ class Lease extends Model
     public function rentBalance($tenant_id = null)
     {
         $amount_due = 0;
-        foreach($this->details as $m)
-        {
+        foreach ($this->details as $m) {
             $lease_mo = Carbon::parse('first day of ' . $m->start->format("F") . ' ' . $m->start->year);
             $current_mo = Carbon::parse('last day of ' . Carbon::now());
-            if($lease_mo->lt($current_mo))
-            {
-                $amount_due += $m->monthdue();             
+            if ($lease_mo->lt($current_mo)) {
+                $amount_due += $m->monthdue();
             }
         }
         $balance = $amount_due-$this->payments()->rentsAndFees()->sum('amount');
         return $balance;
-
     }
 
     public function depositBalance()
     {
         // $deposit_amount = $this->leaseDeposits()->sum('amount');
-        $deposit_payments = $this->payments()->where('payment_type','Security Deposit')->sum('amount');
+        $deposit_payments = $this->payments()->where('payment_type', 'Security Deposit')->sum('amount');
         $deposit_amount = $this->deposit+$this->pet_deposit;
         $deposit_balance = $deposit_amount - $deposit_payments;
         // dd($deposit_balance);
         return $deposit_balance;
-    }    
-
-    public function monthFees($month,$year)
-    {
-        $start = Carbon::parse($month . '/1/'.$year);
-        $end = Carbon::parse('last day of ' . $start->format('F') . " " . $year);
-        return $this->fees()->whereBetween('due_date',[$start,$end])->sum('amount');
     }
 
-    public function monthFeesDetails($month,$year)
+    public function monthFees($month, $year)
     {
         $start = Carbon::parse($month . '/1/'.$year);
         $end = Carbon::parse('last day of ' . $start->format('F') . " " . $year);
-        return $this->fees()->whereBetween('due_date',[$start,$end])->orderBy('due_date')->get();        
+        return $this->fees()->whereBetween('due_date', [$start,$end])->sum('amount');
+    }
+
+    public function monthFeesDetails($month, $year)
+    {
+        $start = Carbon::parse($month . '/1/'.$year);
+        $end = Carbon::parse('last day of ' . $start->format('F') . " " . $year);
+        return $this->fees()->whereBetween('due_date', [$start,$end])->orderBy('due_date')->get();
     }
 
     /**

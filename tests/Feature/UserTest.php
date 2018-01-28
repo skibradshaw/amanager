@@ -22,8 +22,6 @@ class UserTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertViewHas('users');
-        
-        
     }
 
     /** @test */
@@ -33,7 +31,7 @@ class UserTest extends TestCase
         $this->disableExceptionHandling();
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->post('/users',[
+        $response = $this->actingAs($user)->post('/users', [
                 'firstname' => 'Tim',
                 'lastname' => 'Bradshaw',
                 'email' => 'john@johndoe.com',
@@ -42,10 +40,10 @@ class UserTest extends TestCase
             ]);
 
         //Assert that a new user was created with given form fields
-        $new_user = User::where('email','john@johndoe.com')->first();
-        $this->assertNotNull($new_user);        
-        $this->assertEquals('Tim',$new_user->firstname);
-        $this->assertEquals('Bradshaw',$new_user->lastname);
+        $new_user = User::where('email', 'john@johndoe.com')->first();
+        $this->assertNotNull($new_user);
+        $this->assertEquals('Tim', $new_user->firstname);
+        $this->assertEquals('Bradshaw', $new_user->lastname);
     }
 
     /** @test */
@@ -56,21 +54,19 @@ class UserTest extends TestCase
 
         $userToEdit = factory(User::class)->create(['active' => 1]);
 
-        $this->assertEquals(1,$userToEdit->active);
+        $this->assertEquals(1, $userToEdit->active);
 
         //Change Password and Active Status
-        $response = $this->actingAs($authenticatedUser)->put('/users/'.$userToEdit->id,[
+        $response = $this->actingAs($authenticatedUser)->put('/users/'.$userToEdit->id, [
                 'email' => 'johndoe@doe.com',
                 'active' => 0
             ]);
         // dd($this->app['session.store']);
         $newUser = User::find($userToEdit->id);
         // dd($response);
-        $this->assertEquals('johndoe@doe.com',$newUser->email);
-        $this->assertEquals(0,$newUser->active);
-        $response->assertSessionHas('status','User Updated!');
-        
-
+        $this->assertEquals('johndoe@doe.com', $newUser->email);
+        $this->assertEquals(0, $newUser->active);
+        $response->assertSessionHas('status', 'User Updated!');
     }
 
     /** @test */
@@ -89,8 +85,5 @@ class UserTest extends TestCase
         // $this->assertNotNull($deletedUser);
         $this->assertNull($newUser);
         $response->assertStatus(200);
-
     }
-
-
 }
