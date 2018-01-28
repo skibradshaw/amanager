@@ -43,7 +43,7 @@ class TenantTest extends TestCase
             'phone' => '(307) 690-4269'
         ]);
 
-        $formatted_phone = $tenant['attributes']['phone'];
+        $formatted_phone = $tenant->getAttributes()['phone'];
         
         $this->assertEquals('3076904269', $formatted_phone);
     }

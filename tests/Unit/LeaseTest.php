@@ -172,7 +172,7 @@ class LeaseTest extends TestCase
         // dd($this->dump());
 
         //http://stackoverflow.com/questions/35025347/phpunit-test-returns-302-for-bad-validation-why-not-422
-        $this->assertArrayHasKey('start', $data);
+        $this->assertArrayHasKey('start', $data['errors']);
         $this->response->assertStatus(422);
     }
 
@@ -202,7 +202,7 @@ class LeaseTest extends TestCase
         // dd($this->dump());
 
         //http://stackoverflow.com/questions/35025347/phpunit-test-returns-302-for-bad-validation-why-not-422
-        $this->assertArrayHasKey('start', $data);
+        $this->assertArrayHasKey('start', $data['errors']);
         $this->response->assertStatus(422);
     }
 

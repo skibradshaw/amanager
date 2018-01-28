@@ -53,7 +53,7 @@ class FeeTest extends TestCase
 
         $fee = $lease->fees()->where('amount', 5000)->where('due_date', Carbon::parse('5/1/17'))->first();
         
-        $this->assertArrayHasKey('amount', $data);
+        $this->assertArrayHasKey('amount', $data['errors']);
         $this->assertNull($fee);
         $this->response->assertStatus(422);
     }
@@ -79,7 +79,7 @@ class FeeTest extends TestCase
 
         $fee = $lease->fees()->where('amount', 5000)->where('due_date', Carbon::parse('5/1/17'))->first();
         
-        $this->assertArrayHasKey('due_date', $data);
+        $this->assertArrayHasKey('due_date', $data['errors']);
         $this->assertNull($fee);
         $this->response->assertStatus(422);
     }

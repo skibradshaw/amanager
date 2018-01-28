@@ -50,7 +50,7 @@ class PaymentsTest extends TestCase
             ->first();
 
         $this->assertNull($payment);
-        $this->assertArrayHasKey('amount', $data);
+        $this->assertArrayHasKey('amount', $data['errors']);
         $this->response->assertStatus(422);
     }
 
