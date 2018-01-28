@@ -10,6 +10,7 @@ class LeaseDetail extends Model
     // use LogsActivity;
 
     protected $dates = ['start','end'];
+    protected $guarded = [];
     protected $logOnlyDirty = true;
 
     public function lease()

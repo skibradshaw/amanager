@@ -26,6 +26,11 @@ class Lease extends Model
     protected $dates = ['start','end'];
     protected $logOnlyDirty = true;
 
+    // public function getStartAttribute($value)
+    // {
+    //     return $value->format('n/j/Y');
+    // }
+
     public function getMonthlyRentInDollarsAttribute()
     {
         return money_format('%.2n',$this->monthly_rent/100);
@@ -99,7 +104,7 @@ class Lease extends Model
 
     public function details()
     {
-    	return $this->hasMany(LeaseDetail::class);
+    	return $this->hasMany(LeaseDetail::class)->orderBy('start');
     }
 
     public function payments()

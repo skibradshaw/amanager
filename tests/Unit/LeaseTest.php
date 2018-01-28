@@ -43,8 +43,8 @@ class LeaseTest extends TestCase
 	    
 	    //Assert the number of days on the lease matches the number of days in the lease details
 	    $daysOnLease = $newLease->end->diff($newLease->start)->days;
-
-	    $daysOnDetails = $newLease->details()->orderby('end','desc')->first()->end->diff($newLease->details()->orderby('start')->first()->start)->days;
+	    // dd($newLease->details->max('end'));
+	    $daysOnDetails = $newLease->details->max('end')->diff($newLease->details->min('start'))->days;
 	    $this->assertEquals($daysOnLease,$daysOnDetails);	    
 
 	}

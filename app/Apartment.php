@@ -38,7 +38,7 @@ class Apartment extends Model
         return $query->whereRaw("(SELECT COUNT(id) FROM leases WHERE apartment_id = apartments.id AND  end >= now()) > 0");
     }
 
-    public function checkAvailability($start,$end)
+    public function checkAvailability($start,$end, $lease = null)
     {
         // \DB::connection()->enableQueryLog();
         $return = false;
@@ -48,12 +48,17 @@ class Apartment extends Model
         //     $q->whereBetween('start',[$start,$end])
 
         // })
-        $leases = \App\Lease::where('apartment_id',$this->id)->where(function($q) use ($start,$end) {
+        $query = \App\Lease::where('apartment_id',$this->id)->where(function($q) use ($start,$end) {
                         $q->whereRaw('"' . $start . '" <= end');
                         $q->WhereRaw('"' . $end . '" >= start');
                     })
-                    ->get();
-        
+                    ->select();
+
+        if(!is_null($lease))
+        {
+            $query = $query->where('id','!=',$lease->id);
+        }        
+        $leases = $query->get();
         (count($leases) == 0) ? $return = true : $return = false;
         // dd($this->leases);
         return $return;

@@ -57,6 +57,76 @@ class ManageLeaseTest extends TestCase
 	    // dd($admin->activity);
 	    
 	}
+	/** @test */
+	function user_can_view_form_to_edit_lease()
+	{
+		$this->disableExceptionHandling();
+		$admin = $this->getAdminUser();
+		$apartment = factory(Apartment::class)->create(); 
+		$tenant = factory(Tenant::class)->create();
+		
+		
+		$start = Carbon::parse('first day of next month')->format('n/j/Y');
+		$end = Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 100000,
+                'pet_rent' => 15000,
+                'deposit' => 200000,
+                'pet_deposit' => 15000	    		
+	    	]);
+
+		$lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();	    
+
+		$response = $this->actingAs($admin)->get('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/' . $lease->id . '/edit');
+
+		$response->assertViewHas('lease');
+		$response->assertStatus(200);
+	}
+
+	/** @test */
+	function user_can_update_dates_and_rent_on_lease()
+	{
+		$this->disableExceptionHandling();
+		$admin = $this->getAdminUser();
+		$apartment = factory(Apartment::class)->create(); 
+		$tenant = factory(Tenant::class)->create();
+		
+		
+		$start = Carbon::parse('first day of next month')->format('n/j/Y');
+		$end = Carbon::parse('first day of next month')->addYear()->subDay()->format('n/j/Y');
+	    $this->createLease($apartment,[
+	    		'start' => $start,
+	    		'end' => $end,
+	    		'apartment_id' => $apartment->id,
+                'monthly_rent' => 100000,
+                'pet_rent' => 15000,
+                'deposit' => 200000,
+                'pet_deposit' => 15000	    		
+	    	]);	  
+	    $lease = $apartment->leases()->where('start',Carbon::parse($start))->where('end',Carbon::parse($end))->first();
+
+		$newStart = Carbon::parse('first day of next month')->addMonth()->format('n/j/Y');
+		$newEnd = Carbon::parse('first day of next month')->addYear()->subDay()->addMonth()->format('n/j/Y');
+
+	    $response = $this->actingAs($admin)->put('/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/' . $lease->id, [
+    		'start' => $newStart,
+    		'end' => $newEnd,
+            'monthly_rent' => 2000.00,
+            'pet_rent' => 150.00,
+            'deposit' => 4000.00,
+            'pet_deposit' => 150.00		    	
+	    ]);  
+
+		$newLease = $apartment->leases()->where('start',Carbon::parse($newStart))->where('end',Carbon::parse($newEnd))->first();
+
+		$this->assertNotEquals(100000,$newLease->monthly_rent);
+		$this->assertEquals(200000, $newLease->monthly_rent);
+		$response->assertStatus(302);
+
+	}
 
 	/** @test */
 	function user_cannot_create_a_lease_that_overlaps_another_lease_dates()

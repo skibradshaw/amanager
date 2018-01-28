@@ -72,6 +72,7 @@
                             <!-- <button type="submit" class="btn btn-default btn-outline btn-xs pull-right" style="display: inline;"><i class="fa fa-trash text-danger fa-1x"></i></button>  -->
                              {!! Form::close() !!}   
                     @endif                 
+                        
                         <i class="fa fa-calendar-o fa-fw"></i> Lease Details
                     </div>
                     <div class="panel-body">
@@ -85,7 +86,10 @@
                             <strong>Deposit Balance:</strong> <span class="@if($lease->depositBalance()>0) label label-danger @endif">{{$lease->deposit_balance_in_dollars}}</span><br>
                         </p>
                         <!-- <a href="{{route('leases.terminate',[$property,$apartment,$lease])}}" data-toggle="modal" data-target="#largeModal" class="btn btn-default btn-block">End Lease</a> -->
-                        <a href="{{route('properties.apartments.leases.statement',[$property,$apartment,$lease])}}" target="_blank" class="btn btn-default btn-block">Print Statement</a>
+                        <div class="row">
+                            <div class="col-sm-6"><a href="{{route('properties.apartments.leases.statement',[$property,$apartment,$lease])}}" target="_blank" class="btn btn-default btn-block">Print Statement</a></div>
+                            <div class="col-sm-6"><a href="{{route('leases.edit',[$property,$apartment,$lease])}}" class="btn btn-success btn-block">Edit</a></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -70,12 +70,53 @@ class LeaseController extends Controller
 
     public function edit(Property $property, Apartment $apartment, Lease $lease)
     {
-
+        return view('leases.edit',[
+            'title' => 'Edit Lease: Apartment ' . $apartment->name, 
+            'apartment' => $apartment,
+            'property' => $property,
+            'lease' => $lease,
+            ]);
     }
 
     public function update(Property $property, Apartment $apartment, Lease $lease, Request $request)
     {
+        $this->validate($request,[
+                'start' => 'required | date',
+                'end' => 'required | date',
+                'monthly_rent' => 'required|numeric',
+                'pet_rent' => 'nullable | numeric',
+                'deposit' => 'numeric',
+                'pet_deposit' => 'nullable | numeric'
+            ]);
+
+        $input = $request->all();
+        $input['start'] = Carbon::parse($input['start']);
+        $input['end'] = Carbon::parse($input['end']);
+        if(!$apartment->checkAvailability($input['start'],$input['end'],$lease)) return redirect()->back()->with('error', 'These dates are not available!')->withInput($request->all());        
+
+        //Convert Dollars to Cents for DB Storage
+        $input['monthly_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['monthly_rent'])*100,0);
+        if(!empty($input['pet_rent']))
+        {
+            $input['pet_rent'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_rent'])*100,0);
+        } else $input['pet_rent'] = 0;
         
+        if(!empty($input['deposit']))
+        {
+            $input['deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['deposit'])*100,0);
+        } else $input['deposit'] = 0;
+
+        if(!empty($input['pet_deposit']))
+        {
+            $input['pet_deposit'] = round(preg_replace('/[^0-9\.\-]/i','', $input['pet_deposit'])*100,0);
+        } else $input['pet_deposit'] = 0;
+
+        $lease->fill($input);
+        $lease->save();
+
+        $this->createLeaseDetails($lease);
+
+        return redirect()->route('leases.show',[$property,$apartment,$lease])->with('status','Lease Updated!');
     }
 
     public function show(Property $property, Apartment $apartment, Lease $lease)
@@ -121,14 +162,17 @@ class LeaseController extends Controller
         $end = $lease->end;
         $inc = \DateInterval::createFromDateString('first day of next month');
         $p = new \DatePeriod($start,$inc,$end);
-        
+        // dd($p);
         foreach($p as $d)
         {
             // echo $p . " - " . $d . "<br>";
             // dd($p);
             $helper = new HelperRepository;
             $d = Carbon::instance($d);
-            $lease_detail = new LeaseDetail;
+            $lease_detail = LeaseDetail::firstOrNew([
+                'lease_id' => $lease->id,
+                'start' => $d
+            ]);
             $lease_detail->month = $d->format('n');
             $lease_detail->year = $d->format('Y');
             // echo $end->month . " " . $end->year . " + " . $d->format('n') . " " . $d->format('Y');
@@ -163,6 +207,8 @@ class LeaseController extends Controller
 
             $lease->details()->save($lease_detail);
         }
+        $lease->details()->whereNotBetween('start',[$lease->start,$lease->end])->orWhereNotBetween('end',[$lease->start,$lease->end])->delete();
+        // dd($lease->details);
 
     }
 
