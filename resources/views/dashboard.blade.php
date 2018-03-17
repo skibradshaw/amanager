@@ -157,7 +157,7 @@
                                 <div class="row">
                                 
                                     <div class="col-sm-12">
-                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id')->prepend('Choose Apartment...'), null, ['class' => 'form-control apt_choice','onclick' => "var apartment = $(this).val(); window.location = '/properties/'+".$property->id ."+'/apartments/'+apartment+'/leases/create'"]) !!}
+                                    {!! Form::select('apartment_id', $property->apartments->pluck('name','id')->prepend('Choose Apartment...'), null, ['class' => 'form-control apt_choice','onchange' => "var apartment = $(this).val(); window.location = '/properties/'+".$property->id ."+'/apartments/'+apartment+'/leases/create'"]) !!}
                                     </div>
                                 </div>
                             </div>
