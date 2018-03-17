@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"btn-",
+				"btn-block"
+			],
+			[
+				"ex",
+				"excludeDetails"
+			],
+			[
 				"text",
 				"text-center\t(statement.blade.php)"
 			],
@@ -234,10 +242,6 @@
 			[
 				"ep",
 				"expectedRentTotal"
-			],
-			[
-				"ex",
-				"expectedMonths"
 			],
 			[
 				"fra",
@@ -510,10 +514,6 @@
 			[
 				"str_re",
 				"str_replace"
-			],
-			[
-				"contenti",
-				"contentid"
 			]
 		]
 	},
@@ -523,44 +523,26 @@
 			"file": "routes/web.php",
 			"settings":
 			{
-				"buffer_size": 4241,
+				"buffer_size": 4447,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": ".env",
+			"contents": "Searching 21 files for \"HTTP_REFERER\" (case sensitive)\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/ManageBankAccountsTest.php:\n   53                  'name' => 'Bank Account 1',\n   54                  'property_id' => $property->id,\n   55:             ], ['HTTP_REFERER' => '/admin/bank_accounts']);\n   56          \n   57          // dd($response);\n   ..\n  119                  'bank_account_id' => $bankAccount->id\n  120              ]);\n  121:         $response = $this->actingAs($admin)->json(\"DELETE\", '/admin/bank_accounts/'.$bankAccount->id, [], ['HTTP_REFERER' => 'admin/bank_accounts']);\n  122  \n  123          $newBankAccount = BankAccount::find($bankAccount->id);\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/ManageLeaseTest.php:\n   78                  'deposit' => 200000,\n   79                  'pet_deposit' => 15000\n   80:             ], ['HTTP_REFERER' => '/properties/'.$apartment->property_id.'/apartments/'.$apartment->id.'/leases/create']);\n   81  \n   82          $newLease = Lease::where('apartment_id', $apartment->id)->where('start', Carbon::parse('2017-05-01'))->where('end', Carbon::parse('2017-10-01'))->first();\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/ManagePetRentTest.php:\n   69                  'pet_rent' => 100,\n   70                  'pet_deposit' => 500\n   71:             ], ['HTTP_REFERER' => '/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id]);\n   72          // dd($response);\n   73          \n   ..\n   96                  'monthly_pet_rent' => 50000,\n   97                  'pet_deposit' => 25000,\n   98:             ], ['HTTP_REFERER' => '/properties/'.$lease->apartment->property_id.'/apartments/'.$lease->apartment_id.'/leases/'.$lease->id]);\n   99  \n  100          $newDetail = LeaseDetail::find($detail->id);\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/PasswordResetTest.php:\n   22          $reset = $this->call('POST', '/password/email', [\n   23                  'email' => $user->email,\n   24:             ], [], [], ['HTTP_REFERER' => '/password/email']);\n   25  \n   26          $token = '';\n   ..\n   60          $response = $this->call('POST', '/password/email', [\n   61                  'email' => $user->email,\n   62:             ], [], [], ['HTTP_REFERER' => '/password/email']);\n   63          // dd($response);\n   64          // dd($this->app['session.store']);\n\n7 matches across 4 files\n\n\nSearching 21 files for \"session\" (case sensitive)\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/LoginTest.php:\n   56                  'password' => \\Hash::make($user->password)\n   57              ]);\n   58:         // dd($this->app['session.store']);\n   59          // dd($response->getContent());\n   60          // $response->assertRedirect('/login');\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/ManageApartments.php:\n  109                  'number' => '5000'\n  110              ]);\n  111:         // dd($this->app['session.store']);\n  112          // dd($response);\n  113          $newApartment = Apartment::find($apartment->id);\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/ManageTenantsTest.php:\n   80          // dd($response);\n   81          $newTenant = Tenant::find($tenant->id);\n   82:         // dd($this->app['session.store']);\n   83          $this->assertEquals('(307) 733-5681', $newTenant->phone);\n   84          $response->assertStatus(302);\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/PasswordResetTest.php:\n   62              ], [], [], ['HTTP_REFERER' => '/password/email']);\n   63          // dd($response);\n   64:         // dd($this->app['session.store']);\n   65          // Notification::assertSentTo($user, ResetPasswordNotification::class);\n   66          $response->assertStatus(302);\n   ..\n  114          $response->assertRedirect('/');\n  115          // dd($response);\n  116:         // dd($this->app['session.store']);\n  117          // $this->assertTrue(true);\n  118          // $refresh_user = User::where('email',$user->email)->first();\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/UserTest.php:\n   62                  'active' => 0\n   63              ]);\n   64:         // dd($this->app['session.store']);\n   65          $newUser = User::find($userToEdit->id);\n   66          // dd($response);\n\n/Users/timbradshaw/Documents/Sites/amanager/tests/Unit/LeaseTest.php:\n   35  \n   36          // dd($this->response);\n   37:         // dd($this->app['session.store']);\n   38          // dd($apartment->leases);\n   39          $newLease = $apartment->leases()->where('start', Carbon::parse($start))->where('end', Carbon::parse($end))->first();\n   ..\n   70  \n   71          // dd($this->response);\n   72:         // dd($this->app['session.store']);\n   73          // dd($apartment->leases);\n   74          $newLease = $apartment->leases()->where('start', Carbon::parse($start))->where('end', Carbon::parse($end))->first();\n   ..\n  139      // \t// dd($data);\n  140      // \t// dd($this->response->getContent());\n  141:     // \t// dd($this->app['session.store']);\n  142      // \t// dd($this->dump());\n  143  \n  ...\n  168          // dd($data);\n  169          // dd($this->response->getContent());\n  170:         // dd($this->app['session.store']);\n  171          // dd($this->dump());\n  172  \n  ...\n  198          // dd($data);\n  199          // dd($this->response->getContent());\n  200:         // dd($this->app['session.store']);\n  201          // dd($this->dump());\n  202  \n\n11 matches across 6 files\n",
 			"settings":
 			{
-				"buffer_size": 599,
-				"encoding": "UTF-8",
-				"line_ending": "Unix",
-				"name": "APP_ENV=local"
-			}
-		},
-		{
-			"contents": "Searching 44 files for \"money_format\" (case sensitive)\n\n/Users/timbradshaw/Documents/Sites/amanager/app/BankDeposit.php:\n   17  \tpublic function getAmountInDollarsAttribute()\n   18  \t{\n   19: \t\treturn money_format('%.2n',$this->amount/100);\n   20  \t}\n   21  \n\n/Users/timbradshaw/Documents/Sites/amanager/app/Fee.php:\n   17      public function getAmountInDollarsAttribute()\n   18      {\n   19:         return money_format('%.2n',$this->amount/100);\n   20      }\n   21  \n\n/Users/timbradshaw/Documents/Sites/amanager/app/Lease.php:\n   29      public function getMonthlyRentInDollarsAttribute()\n   30      {\n   31:         return money_format('%.2n',$this->monthly_rent/100);\n   32      }\n   33  \n   34      public function getPetRentInDollarsAttribute()\n   35      {\n   36:         return money_format('%.2n',$this->pet_rent/100);\n   37      }\n   38  \n   39      public function getDepositInDollarsAttribute()\n   40      {\n   41:         return money_format('%.2n',$this->deposit/100);\n   42      }\n   43  \n   44      public function getDepositDueInDollarsAttribute()\n   45      {\n   46:         return money_format('%.2n',($this->deposit+$this->pet_deposit)/100);\n   47      }\n   48  \n   49      public function getPetDepositInDollarsAttribute()\n   50      {\n   51:         return money_format('%.2n',$this->pet_deposit/100);\n   52      }\n   53  \n   54      public function getRentTotalInDollarsAttribute()\n   55      {\n   56:         return money_format('%.2n',$this->rent_total/100);\n   57      }\n   58  \n   59      public function getPetRentTotalInDollarsAttribute()\n   60      {\n   61:         return money_format('%.2n',$this->petrent_total/100);\n   62      }\n   63  \n   ..\n   74      public function getRentBalanceInDollarsAttribute()\n   75      {\n   76:         return money_format('%.2n',$this->rentBalance()/100);\n   77      }\n   78  \n   79      public function getDepositBalanceInDollarsAttribute()\n   80      {\n   81:         return money_format('%.2n',$this->depositBalance()/100);\n   82      }\n   83  \n\n/Users/timbradshaw/Documents/Sites/amanager/app/LeaseDetail.php:\n   20      public function getMonthlyRentInDollarsAttribute()\n   21      {\n   22:         return money_format('%.2n',$this->monthly_rent/100);\n   23      }\n   24  \n   25      public function getMonthlyPetRentInDollarsAttribute()\n   26      {\n   27:         return money_format('%.2n',$this->monthly_pet_rent/100);\n   28      }\n   29  \n   30      public function getMonthlyDueInDollarsAttribute()\n   31      {\n   32:         return money_format('%.2n',$this->monthDue()/100);\n   33      }\n   34  \n   35      public function getMonthlyPaymentsInDollarsAttribute()\n   36      {\n   37:         return money_format('%.2n',$this->rentPayments()/100);\n   38      }\n   39  \n   40      public function getMonthDueInDollarsAttribute()\n   41      {\n   42:         return money_format('%.2n',$this->monthDue()/100);\n   43      }\n   44  \n   45      public function getMonthBalanceInDollarsAttribute()\n   46      {\n   47:         return money_format('%.2n',$this->monthBalance()/100);\n   48      }\n   49  \n\n/Users/timbradshaw/Documents/Sites/amanager/app/Payment.php:\n   34      public function getAmountInDollarsAttribute()\n   35      {\n   36:         return money_format('%.2n',$this->amount/100);\n   37  \n   38      }\n\n/Users/timbradshaw/Documents/Sites/amanager/app/Property.php:\n   16      public function getUnpaidRentInDollarsAttribute()\n   17      {\n   18:         return money_format('%.2n',$this->unpaidRent()/100);\n   19      }\n   20      public function getUnpaidDepositsInDollarsAttribute()\n   21      {\n   22:         return money_format('%.2n',$this->unpaidDeposits()/100);\n   23      }\n   24  \n   25      public function getUndepositedFundsInDollarsAttribute()\n   26      {\n   27:         return money_format('%.2n',$this->undepositedFunds()/100);\n   28      }\n   29  \n\n21 matches across 6 files\n",
-			"settings":
-			{
-				"buffer_size": 3878,
+				"buffer_size": 5555,
 				"line_ending": "Unix",
 				"name": "Find Results",
 				"scratch": true
 			}
 		},
 		{
-			"file": "app/Providers/AppServiceProvider.php",
+			"file": "tests/Feature/ManageBankAccountsTest.php",
 			"settings":
 			{
-				"buffer_size": 841,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "resources/views/payments/edit.blade.php",
-			"settings":
-			{
-				"buffer_size": 2466,
+				"buffer_size": 5118,
 				"line_ending": "Unix"
 			}
 		}
@@ -572,10 +554,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 354.0,
-		"last_filter": "phpu",
+		"height": 212.0,
+		"last_filter": "Snippet: tes",
 		"selected_items":
 		[
+			[
+				"Snippet: tes",
+				"Snippet: test"
+			],
 			[
 				"phpu",
 				"Sublime PHPUnit: Run All Tests"
@@ -645,7 +631,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 944.0
+		"width": 464.0
 	},
 	"console":
 	{
@@ -667,11 +653,34 @@
 	"expanded_folders":
 	[
 		"/Users/timbradshaw/Documents/Sites/amanager",
-		"/Users/timbradshaw/Documents/Sites/amanager/app",
-		"/Users/timbradshaw/Documents/Sites/amanager/app/Providers"
+		"/Users/timbradshaw/Documents/Sites/amanager/tests",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Feature",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Unit"
 	],
 	"file_history":
 	[
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Apartment.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Http/Controllers/LeaseController.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Lease.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Providers/AppServiceProvider.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Feature/ManageLeaseTest.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Unit/LeaseTest.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/composer.json",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Console/Kernel.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Http/Controllers/FeeController.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Tenant.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Unit/PaymentsTest.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Unit/TenantTest.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Http/Controllers/TenantController.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/Unit/FeeTest.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/phpunit.xml",
+		"/Users/timbradshaw/Documents/Sites/amanager/tests/TestCase.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/resources/views/leases/edit.blade.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/LeaseDetail.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/resources/views/leases/show.blade.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/app/Http/Controllers/LeaseDetailController.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/resources/views/payments/edit.blade.php",
+		"/Users/timbradshaw/Documents/Sites/amanager/.env",
 		"/Users/timbradshaw/Documents/Sites/amanager/resources/views/leases/partials/payments_panel.blade.php",
 		"/Users/timbradshaw/Documents/Sites/amanager/app/Payment.php",
 		"/Users/timbradshaw/Documents/Sites/amanager/resources/views/payments/partials/edit.blade.php",
@@ -777,29 +786,7 @@
 		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_09_042002_create_bank_deposits_table.php",
 		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/b31b95c0699362e94591bf84ead18e008804dd06.php",
 		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/MakePaymentTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/payments_panel.php",
-		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/7db0388b0eae5cedfc48f9ec1ad51387d6fc6b38.php",
-		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/bdae4a2b266aed8f5ec6f9dba8240fa6f8cda228.php",
-		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/320dc94b4df9e91cc04c443db6fcf22fd1a5928a.php",
-		"/Users/tbradshaw/Sites/amanager_v2/storage/framework/views/3526608b233e84c7fc5f3ec724d6528c7ec2e699.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/search_tenant.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ManageApartmentsTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Unit/ApartmentTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/database/seeds/PropertiesTableSeeder.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/UserController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/auth/passwords/reset.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/auth/passwords/email.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/database/seeds/DatabaseSeeder.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/UserTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/users/index.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/Auth/ResetPasswordController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Http/Controllers/Auth/RegisterController.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/ExampleTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/pet_rent.blade.php",
-		"/Users/tbradshaw/Sites/amanager_v2/tests/Feature/MakePaymentsTest.php",
-		"/Users/tbradshaw/Sites/amanager_v2/database/migrations/2017_04_09_151830_create_bank_accounts_table.php",
-		"/Users/tbradshaw/Sites/amanager_v2/app/Providers/RouteServiceProvider.php",
-		"/Users/tbradshaw/Sites/amanager_v2/resources/views/new_page.blade.php"
+		"/Users/tbradshaw/Sites/amanager_v2/resources/views/leases/partials/payments_panel.php"
 	],
 	"find":
 	{
@@ -810,6 +797,7 @@
 		"height": 158.0,
 		"where_history":
 		[
+			"/Users/timbradshaw/Documents/Sites/amanager/tests",
 			"/Users/timbradshaw/Documents/Sites/amanager/app",
 			"/Users/tbradshaw/Sites/amanager_v2/tests",
 			"/Users/tbradshaw/Sites/amanager_v2/resources/views",
@@ -936,8 +924,7 @@
 			"/Users/tbradshaw/Dropbox/Development/at_apps/app",
 			"/Users/tbradshaw/Dropbox/Development/at_apps/resources/views/sales",
 			"/Users/tbradshaw/Dropbox/Development/at_apps/app/Http/Controllers",
-			"/Users/tbradshaw/Dropbox/Development/at_apps/app/Http/Controllers/Sales",
-			"/Users/tbradshaw/Dropbox/Development/at_apps/app/Http/Controllers"
+			"/Users/tbradshaw/Dropbox/Development/at_apps/app/Http/Controllers/Sales"
 		]
 	},
 	"find_state":
@@ -945,6 +932,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"session",
+			"HTTP_REFERER",
 			"money_format",
 			"HEAD",
 			"datata",
@@ -1070,9 +1059,7 @@
 			"Start",
 			"start",
 			"url",
-			"'id' => 'datepicker'",
-			"deposit",
-			"Deposit"
+			"'id' => 'datepicker'"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1108,7 +1095,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1117,7 +1104,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4241,
+						"buffer_size": 4447,
 						"regions":
 						{
 						},
@@ -1130,50 +1117,23 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 157.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": ".env",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 599,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								185,
-								185
-							]
-						],
-						"settings":
-						{
-							"auto_name": "APP_ENV=local",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1113.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3878,
+						"buffer_size": 5555,
 						"regions":
 						{
 							"match":
@@ -1182,88 +1142,76 @@
 								"regions":
 								[
 									[
-										201,
-										213
+										272,
+										284
 									],
 									[
-										409,
-										421
+										569,
+										581
 									],
 									[
-										627,
-										639
+										883,
+										895
 									],
 									[
-										787,
-										799
+										1359,
+										1371
 									],
 									[
-										943,
-										955
+										1661,
+										1673
 									],
 									[
-										1101,
-										1113
+										2080,
+										2092
 									],
 									[
-										1280,
-										1292
+										2308,
+										2320
 									],
 									[
-										1441,
-										1453
-									],
-									[
-										1604,
-										1616
-									],
-									[
-										1775,
-										1787
-									],
-									[
-										1943,
-										1955
-									],
-									[
-										2177,
-										2189
-									],
-									[
-										2344,
-										2356
-									],
-									[
-										2511,
-										2523
-									],
-									[
-										2677,
-										2689
-									],
-									[
-										2840,
-										2852
+										2704,
+										2711
 									],
 									[
 										3003,
-										3015
+										3010
 									],
 									[
-										3226,
-										3238
+										3321,
+										3328
 									],
 									[
-										3446,
-										3458
+										3675,
+										3682
 									],
 									[
-										3605,
-										3617
+										3944,
+										3951
 									],
 									[
-										3778,
-										3790
+										4249,
+										4256
+									],
+									[
+										4506,
+										4513
+									],
+									[
+										4784,
+										4791
+									],
+									[
+										5097,
+										5104
+									],
+									[
+										5281,
+										5288
+									],
+									[
+										5465,
+										5472
 									]
 								],
 								"scope": ""
@@ -1272,15 +1220,15 @@
 						"selection":
 						[
 							[
-								640,
-								646
+								2458,
+								2458
 							]
 						],
 						"settings":
 						{
 							"detect_indentation": false,
 							"line_numbers": false,
-							"output_tag": 1,
+							"output_tag": 2,
 							"result_base_dir": "",
 							"result_file_regex": "^([^ \t].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1288,27 +1236,27 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1539.0,
+						"translation.y": 2929.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "app/Providers/AppServiceProvider.php",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "tests/Feature/ManageBankAccountsTest.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 841,
+						"buffer_size": 5118,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								344,
-								306
+								1966,
+								2016
 							]
 						],
 						"settings":
@@ -1318,40 +1266,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 974.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "resources/views/payments/edit.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2466,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								674,
-								702
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 579.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1410,16 +1328,76 @@
 		"selected_items":
 		[
 			[
+				"leaset",
+				"tests/Unit/LeaseTest.php"
+			],
+			[
+				"apart",
+				"app/Apartment.php"
+			],
+			[
+				"leasec",
+				"app/Http/Controllers/LeaseController.php"
+			],
+			[
+				"lease.p",
+				"app/Lease.php"
+			],
+			[
+				"appser",
+				"app/Providers/AppServiceProvider.php"
+			],
+			[
+				"managelea",
+				"tests/Feature/ManageLeaseTest.php"
+			],
+			[
+				"comp",
+				"composer.json"
+			],
+			[
+				"tenant",
+				"app/Tenant.php"
+			],
+			[
+				"feeco",
+				"app/Http/Controllers/FeeController.php"
+			],
+			[
+				"com",
+				"composer.json"
+			],
+			[
+				"leased",
+				"app/LeaseDetail.php"
+			],
+			[
+				"lea",
+				"app/Lease.php"
+			],
+			[
+				"feecon",
+				"app/Http/Controllers/FeeController.php"
+			],
+			[
+				"apar",
+				"app/Apartment.php"
+			],
+			[
+				"leasescre",
+				"resources/views/leases/create.blade.php"
+			],
+			[
+				"",
+				"app/Http/Controllers/LeaseController.php"
+			],
+			[
 				"pay",
 				"app/Payment.php"
 			],
 			[
 				"partials/pay",
 				"resources/views/leases/partials/payments_panel.blade.php"
-			],
-			[
-				"apart",
-				"app/Apartment.php"
 			],
 			[
 				"apartments/in",
@@ -1446,10 +1424,6 @@
 				"resources/views/reports/unpaid_balances.blade.php"
 			],
 			[
-				"com",
-				"composer.json"
-			],
-			[
 				"web",
 				"webpack.mix.js"
 			],
@@ -1470,16 +1444,8 @@
 				"app/Fee.php"
 			],
 			[
-				"lea",
-				"app/Lease.php"
-			],
-			[
 				"leas",
 				"app/Lease.php"
-			],
-			[
-				"leasec",
-				"app/Http/Controllers/LeaseController.php"
 			],
 			[
 				"lease",
@@ -1488,10 +1454,6 @@
 			[
 				"ten",
 				"app/Tenant.php"
-			],
-			[
-				"tenant",
-				"app/Http/Controllers/TenantController.php"
 			],
 			[
 				"tenan",
@@ -1562,10 +1524,6 @@
 				"app/Http/Controllers/BankDepositController.php"
 			],
 			[
-				"leased",
-				"app/Http/Controllers/LeaseDetailController.php"
-			],
-			[
 				"led",
 				"resources/views/leases/partials/ledger.blade.php"
 			],
@@ -1584,10 +1542,6 @@
 			[
 				"depo",
 				"app/Http/Controllers/BankDepositController.php"
-			],
-			[
-				"apar",
-				"app/Apartment.php"
 			],
 			[
 				"depositc",
@@ -1634,10 +1588,6 @@
 				"tests/Unit/LeaseTest.php"
 			],
 			[
-				"",
-				"tests/Feature/ManageDepositsTest.php"
-			],
-			[
 				"le",
 				"app/Lease.php"
 			],
@@ -1666,10 +1616,6 @@
 				"resources/assets/sass/app.scss"
 			],
 			[
-				"leaset",
-				"tests/Unit/LeaseTest.php"
-			],
-			[
 				"repo",
 				"app/Http/Controllers/ReportController.php"
 			],
@@ -1688,10 +1634,6 @@
 			[
 				"helperre",
 				"app/Repositories/HelperRepository.php"
-			],
-			[
-				"managelea",
-				"tests/Feature/ManageLeaseTest.php"
 			],
 			[
 				"payment.",
@@ -1810,10 +1752,6 @@
 				"app/Http/Controllers/FeeController.php"
 			],
 			[
-				"feecon",
-				"app/Http/Controllers/FeeController.php"
-			],
-			[
 				"makepy",
 				"tests/Feature/MakePaymentsTest.php"
 			],
@@ -1900,26 +1838,6 @@
 			[
 				"contract",
 				"app/Repositories/ContractRepository.php"
-			],
-			[
-				"invoi",
-				"app/Http/Controllers/Sales/InvoiceController.php"
-			],
-			[
-				"inv",
-				"app/Invoice.php"
-			],
-			[
-				"cart",
-				"app/Http/Controllers/Sales/CartController.php"
-			],
-			[
-				"pubpag",
-				"app/Http/Controllers/Publication/PubPageController.php"
-			],
-			[
-				"ed",
-				"app/EditDetail.php"
 			]
 		],
 		"width": 0.0

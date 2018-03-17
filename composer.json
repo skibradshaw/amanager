@@ -11,9 +11,9 @@
         "php": ">=7.0.0",
         "bugsnag/bugsnag-laravel": "^2.0",
         "doctrine/dbal": "~2.3",
-        "fideloper/proxy": "~3.3",
+        "fideloper/proxy": "~4.0",
         "itsgoingd/clockwork": "^1.14",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
         "spatie/laravel-activitylog": "^2.4"
@@ -51,10 +51,7 @@
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
-        "platform": {
-            "php": "7.1"
-        }
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
