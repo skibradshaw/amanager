@@ -24,7 +24,12 @@
                                 <tr>
                                     <td><a href="{{ route('apartments.show',[$property, $a]) }}">{{ $a->property->name }} {{$a->name}}</a></td>
                                     <td class="text-center">{{$a->number}}</td> 
-                                    <td>{{$a->leases->last()}} </td>                           
+                                    <td>
+                                        <a href="{{ route('leases.show',[$property,$a,$a->leases->last()]) }} ">
+                                            Last Lease Ended: {{$a->leases->last()->end->format('n/j/Y')}} 
+                                        </a>
+                                        
+                                    </td>                           
                                     <td align="center" class="text-center">
                                             <a href="{{ route('leases.create',[$property,$a]) }}" class="btn btn-default btn-sm">Create Lease</a>
                                     </td>
