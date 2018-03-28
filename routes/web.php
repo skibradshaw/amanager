@@ -57,6 +57,8 @@
         Route::get('reports/undeposited/{property?}', ['as' => 'undeposited','uses' => 'BankDepositController@undeposited']);
         Route::get('properties/{property}/apartments/{apartment}/leases/{lease}/statement', ['as' => 'properties.apartments.leases.statement','uses' => 'ReportController@statement']);
         
+        // Admin
+        Route::get('admin/activity',['as' => 'admin.activity','uses' => 'ActivityController@index']);
 
         //Resource Routes
         Route::resource('users', 'UserController');
