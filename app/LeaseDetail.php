@@ -7,7 +7,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class LeaseDetail extends Model
 {
-    // use LogsActivity;
+    use LogsActivity;
 
     protected $dates = ['start','end'];
     protected $guarded = [];
