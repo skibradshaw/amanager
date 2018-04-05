@@ -211,7 +211,10 @@ class LeaseController extends Controller
             $lease->details()->save($lease_detail);
         }
         // dd($lease->details()->whereNotBetween('start',[$lease->start,$lease->end])->whereNotBetween('end',[$lease->start,$lease->end])->get());
-        $lease->details()->whereNotBetween('start',[$lease->start,$lease->end])->whereNotBetween('end',[$lease->start,$lease->end])->delete();
+        $lease->details()->where(function($q) use ($lease) {
+            $q->whereNotBetween('start',[$lease->start,$lease->end])
+            ->orWhereNotBetween('end',[$lease->start,$lease->end]);
+        })->delete();
         // dd($lease->details);
 
     }
