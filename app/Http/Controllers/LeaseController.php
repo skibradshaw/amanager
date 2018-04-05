@@ -63,7 +63,7 @@ class LeaseController extends Controller
         }
         
         $lease = $apartment->leases()->create($input);
-        $apartment->leases()->save($lease);
+        // $apartment->leases()->save($lease);
         $this->createLeaseDetails($lease);
 
         //Add Tenants @TODO: Move to Separate Method
@@ -210,7 +210,8 @@ class LeaseController extends Controller
 
             $lease->details()->save($lease_detail);
         }
-        $lease->details()->whereNotBetween('start',[$lease->start,$lease->end])->orWhereNotBetween('end',[$lease->start,$lease->end])->delete();
+        // dd($lease->details()->whereNotBetween('start',[$lease->start,$lease->end])->whereNotBetween('end',[$lease->start,$lease->end])->get());
+        $lease->details()->whereNotBetween('start',[$lease->start,$lease->end])->whereNotBetween('end',[$lease->start,$lease->end])->delete();
         // dd($lease->details);
 
     }
