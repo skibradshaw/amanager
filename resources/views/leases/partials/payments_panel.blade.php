@@ -17,9 +17,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($lease->payments as $p)
+                                    @forelse($lease->payments->sortByDesc('paid_date') as $p)
                                         <tr>
                                             <td>
+                                                 <span class="hidden" style="display:none">{{$p->paid_date->format('Ymd')}}</span>
                                                 @if($p->deposited)
                                                     {{$p->paid_date->format('n/j/Y') }}
                                                 @else
