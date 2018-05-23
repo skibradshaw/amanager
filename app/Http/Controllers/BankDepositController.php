@@ -87,11 +87,13 @@ class BankDepositController extends Controller
         // return $request->all();
         $input = $request->except(['payment_id','all','payment_amount','type']);
         $payments = Payment::whereIn('id', $request->input('payment_id'))->get();
+        
         $bank = BankAccount::find($request->input('bank_account_id'));
         $input['user_id'] = \Auth::user()->id;
         $input['deposit_date'] = Carbon::parse($input['deposit_date']);
         $input['deposit_type'] = BankDeposit::$types[$request->input('type')];
-        $input['amount'] = ($input['amount']*100);
+        $input['amount'] = round($input['amount']*100,2);
+        // dd($input['amount'] . " " . $payments->sum('amount'));
         // $input['deposit_type'] = $request->input('type');
         // $input['user_id'] = \Auth::user()->id;
         // return $input['amount'] . " " . $payments->sum('amount');
