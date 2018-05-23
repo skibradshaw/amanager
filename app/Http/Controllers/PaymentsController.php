@@ -132,6 +132,7 @@ class PaymentsController extends Controller
      */
     public function destroy(Property $property, Apartment $apartment, Lease $lease, Payment $payment)
     {
+        // dd($payment);
         //Business Rule - Do not allow delete of Payment that has been deposited
         if (!empty($payment->bank_deposit_id)) {
             return redirect()->back()->with('alert', 'This payment cannot be deleted.  It has already been deposited.');
