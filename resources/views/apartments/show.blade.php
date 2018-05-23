@@ -57,9 +57,9 @@
             </div>
             <div class="row"><div class="col-lg-12"><hr></div></div>
             <div class="col-lg-12">
-                    <h3>Past Leases</h3>
+                    <h3>Leases</h3>
                     <div class="list-group">
-                        @foreach($apartment->pastLeases() as $l)
+                        @foreach($apartment->leases->sortByDesc('start') as $l)
                         <span class="list-group-item">
                             <h4 class="list-group-item-heading"><a href="{{ route('leases.show',[$property,$apartment,$l]) }}"> {{$l->start->format('n/j/y')}} - {{$l->end->format('n/j/y')}}</a></h4>
                             <p class="list-group-item-text">
